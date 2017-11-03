@@ -2,17 +2,121 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>学业规划-高考圈</title>
+    <title>图片切换</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link rel="icon" type="image/x-icon" href="http://static.gaokaoq.com/favicon/favicon.ico" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://static.gaokaoq.com/favicon/favicon.ico" />
-    <meta name="author" content="高考圈" />
+    <meta name="author" content="" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <style type="text/css">
+    #content{
+
+    	border:1px solid #ccc;
+    	width:400px;
+    	height:400px;
+    	position: relative;
+    }
+    #content a{
+    	position:absolute;
+    	top:50%;
+    	margin-top:-25px;
+    }
+    #content a:hover{
+
+    }
+    #next,#prev{
+    	background:#ccc;
+    	text-align: center;
+    	width:50px;
+    	height: 50px;
+    	line-height: 50px;
+    	position: absolute;
+
+    }
+    #next{
+    	right: 0px;
+    }
+    #text{
+    	background:rgba(0,0,0,0.7);
+    	position: absolute;
+    	bottom:0;
+    	margin:0;
+    	display: block;
+   		text-align: center;
+   		width:100%;
+   		color:#fff;
+    }
+    #span1{
+    	background:rgba(0,0,0,0.7);
+    	position: absolute;
+    	top: 0;
+    	left:0;
+    	text-align: center;
+    	display: block;
+    	width: 100%;
+    	color:#fff;
+    }
+    #img1{
+    	width:400px;
+    	height:400px;
+    }
+    </style>
+    <script type="text/javascript">
+    	window.onload=function(){
+    		var oPrev=document.getElementById("prev");
+    		var pNext=document.getElementById("next");
+    		var oImg=document.getElementById("img1");
+    		var oText=document.getElementById("text");
+    		var oSpan=document.getElementById("span1");
+    		var arrUrl=['public/img/1.jpg','public/img/2.jpg','public/img/3.jpg','public/img/4.jpg'];
+    		var arrText=['游戏mm','人造动物园','性感美女','古装美女'];
+    		var num=0;
+			//初始化
+			fnTab();
+			function fnTab(){
+				oSpan.innerHTML=num+1+' / '+arrUrl.length;  
+				oText.innerHTML=arrText[num];
+				oImg.src=arrUrl[num];
+			}
+			
+    		oPrev.onclick=function(){
+    			num--;
+    			if(num<0){
+    				num=3;
+    			}
+    			fnTab();
+    		}
+    		pNext.onclick=function(){
+    			num++;
+    			if(num == arrUrl.length){
+    				num=0;
+    			}
+    			fnTab();
+    		}
+    	}
+    </script>
 </head>
 
 <body>
     <h4>新生活，新开始</h4>
+    <a href="https://qqmd.github.io/ChiChimall/">集智商城</a>
+    <h5>数组</h5>
+    <h5>图片切换</h5>
+    <div id="content">
+    	<a id="prev" href="javascript:;"><</a>
+    	<p id="text">图片正在加载中...</p>
+    	<span id="span1">数量正在计算中...</span>
+    	<a id="next" href="javascript:;">></a>
+    	<img id="img1">
+    </div>
+    <script type="text/javascript">
+    	var arr=["这是第一句话","这是第二句话","这是第三句话"];
+    	// alert(arr.length);
+    	// alert(arr[0]);
+    	// alert(arr[arr.length-1]);
+    	// arr.push("我是最后一位内容");
+    	// alert(arr);
+
+    </script>
 
 </body>
 </html>
