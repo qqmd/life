@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh" class="app">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>数组</title>
+	<!-- Bootstrap -->
+	<style type="text/css">
+		#list{
+			list-style: none;
+			position: relative;
+		}
+		#list li,.d1{
+			background: red;
+			width:50px;
+			height:50px;
+			position: absolute;
+			top:0;
+			text-align: center;
+			line-height: 50px;
+			color:#fff;
+		}
+
+		#content{
+			position: relative;
+		}
+	</style>
+</head>
+<body>
+<h5>逢十进一</h5>
+<script type="text/javascript">
+	window.onload=function(){
+		var oList=document.getElementById("list");
+		var oLi=oList.getElementsByTagName("li");
+		var oDiv=document.getElementById("content");
+		var oDiv1=oDiv.getElementsByTagName("div");
+		// var oDiv=oList.getElementsByTagName("li");
+		var arr = ['red','blue','black','green'];
+		// 生成100个li
+		// for(var i=0; i<100; i++){
+		// 	oList.innerHTML+="<li>"+i+"</li>";
+		// 	oLi[i].style.left=i*60+"px";
+		// }
+		// 每隔10个换行 第一种
+		// for(var i=0;i<100;i+=10){
+		// 	for(var j=0;j<10;j++){
+		// 		oLi[i+j].style.left=10+(j*60)+'px';
+		// 		oLi[i+j].style.top=10+(i*6)+"px";
+		// 	}
+		// }
+		// 每隔10个换行 第二种
+		// for(var i=0;i<100;i++){
+		// 	oList.innerHTML+="<li style='left:"+(i%10)*60+"px; top:"+Math.floor(i/10)*60+"px; background:"+arr[i%4]+"'>"+i+"</li>";
+		// }
+		// v字型的
+
+
+		// Math.ceil：如果参数是小数，则求最小的整数但不小于本身.
+		// Math.floor：如果参数是小数，则求最大的整数但不大于本身.
+		var len=5;
+		var cen=Math.ceil(len/2);
+		// console.log(cen);
+		for(var i=0; i<len;i++){
+			oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+			
+			if(i<cen){
+				oDiv1[i].style.left=(i*60)+"px";
+				oDiv1[i].style.top=(i*60)+"px";
+			}
+			else{
+				oDiv1[i].style.left=(i*60)+"px";
+				// oDiv1[i].style.top=((cen-1)-(i%(cen+1)))*60+"px";
+				oDiv1[i].style.top=(len-i-1)*60+"px";
+			}
+		}
+		// 11-6        6  4 3 2 1 0
+		// 0 1 2 3 4   5  6 7 8 9 10
+
+		// 0 1 2 3 4 5 6
+		// 0 60 120 240 120 60 0
+		// left: 0 0 
+				// 60 60
+
+
+		//生成V字DIV
+            // $('DivV').onclick = function () {
+            //     $('content').innerHTML = '';
+            //     for(var i=0; i<11; i++){
+            //         $('content').innerHTML += '<div class="d2">'+i+'</div>';
+            //         if(i<6){
+            //             d2[i].style.left = 10+(i*60)+'px';
+            //             d2[i].style.top = 40+(i*60)+'px';
+            //         }else{
+            //             d2[i].style.left = 10+(i*60)+'px';
+            //             d2[i].style.top = 400-((i-4)*60)+'px';
+            //         }
+            //     }
+            // }
+	}
+
+	// var onOff = true;
+ //    //获取body里面的所有div
+ //    var d2 = $('content').getElementsByTagName('div');
+ //    var arr = ['red','blue','black','green'];
+ //    //生成100个div事件
+ //    $('Div100').onclick = function(){
+ //        $('content').innerHTML = '';
+ //        if(onOff){
+ //            for(var i=0; i<100; i++){
+ //                $('content').innerHTML += '<div class="d2">'+i+'</div>';
+ //                d2[i].style.left = 10+(i*60)+'px';
+ //            }
+ //            onOff = true;
+ //        }
+ //    }
+ //    //每隔10个换行
+ //    $('Div10').onclick = function(){
+ //        for(var i=0; i<100; i+=10){
+ //            for(var j=0; j<10; j++){
+ //                d2[i+j].style.left = 10+(j*60)+'px';
+ //                d2[i+j].style.top = 40+(i*6)+'px';
+ //            }
+ //        }
+ //    }
+ //    //每隔一个换色,4个换一次
+ //    $('DivCol').onclick = function () {
+ //        for(var i=0; i<100; i+=4){
+ //            for(var j=0; j<4; j++){
+ //                d2[i+j].style.background = arr[j];
+ //            }
+ //        }
+ //    }
+
+ 
+// left 0 0  60 120 
+// top  60  
+</script>
+<ul id="list">
+	
+</ul>
+<div id="content">
+	
+</div>
+</body>
+</html>
