@@ -22,7 +22,7 @@
 			line-height: 50px;
 			color:#fff;
 		}
-
+		
 		#content{
 			position: relative;
 		}
@@ -32,7 +32,9 @@
 			height: 545px;
 			position: relative;
 		}
-
+		.arrBox span{
+			background: #ccc;
+		}
 	</style>
 </head>
 <body>
@@ -43,7 +45,6 @@
 		var oLi=oList.getElementsByTagName("li");
 		var oDiv=document.getElementById("content");
 		var oDiv1=oDiv.getElementsByTagName("div");
-		// var oDiv=oList.getElementsByTagName("li");
 		var arr = ['red','blue','black','green'];
 		var funArr=[funDown,funRight,funLeft,funUp];
 		var oBtn=document.getElementById("btn");
@@ -190,13 +191,19 @@
             // }
        	var oArrBox=document.getElementById("arrBox");
        	var oArrList=oArrBox.getElementsByTagName('span');
-       	var len=100;
+       	var lenImg=66;
        	var str='';
-       	for(var i=0;i<len;i++){
-       		str+="<span></span>";
-       		oArrList[i].style.left=
+
+       	for(var i=0;i<lenImg;i++){
+       		oArrBox.innerHTML += '<span></span>';
+       		oArrList[i].style.left=(i%6)*52+"px";
+       		oArrList[i].style.top=Math.floor(i/6)*52+"px";
        	}
-       	oArrBox.innerHTML=str;
+       	for(var i=0; i<lenImg;i++){
+	       	oArrList[i].onmouseover=function(){
+	       		this.style.display="none";
+	       	}
+        }
 	}
 
 	// var onOff = true;
@@ -241,9 +248,9 @@
 <ul id="list" style="height:600px; width:1000px;">
 	
 </ul>
-<p><input type="button" id="btn" value="生成v字形" style=""/></p>
+<p><input type="button" id="btn" value="生成v字形" style=""/>四中类型</p>
 
-<div id="content" style="float: left;">
+<div id="content" style="height:300px;">
 	
 </div>
 <div class="arrBox" id="arrBox">
