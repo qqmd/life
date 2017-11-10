@@ -12,7 +12,7 @@
 			list-style: none;
 			position: relative;
 		}
-		#list li,.d1{
+		#list li,.d1,.arrBox span{
 			background: red;
 			width:50px;
 			height:50px;
@@ -26,6 +26,13 @@
 		#content{
 			position: relative;
 		}
+		.arrBox{
+			background: url(public/img/3.jpg) no-repeat center center;
+			width:310px;
+			height: 545px;
+			position: relative;
+		}
+
 	</style>
 </head>
 <body>
@@ -38,43 +45,126 @@
 		var oDiv1=oDiv.getElementsByTagName("div");
 		// var oDiv=oList.getElementsByTagName("li");
 		var arr = ['red','blue','black','green'];
+		var funArr=[funDown,funRight,funLeft,funUp];
+		var oBtn=document.getElementById("btn");
 		// 生成100个li
 		// for(var i=0; i<100; i++){
 		// 	oList.innerHTML+="<li>"+i+"</li>";
 		// 	oLi[i].style.left=i*60+"px";
 		// }
-		// 每隔10个换行 第一种
+		//每隔10个换行 第一种
 		// for(var i=0;i<100;i+=10){
 		// 	for(var j=0;j<10;j++){
 		// 		oLi[i+j].style.left=10+(j*60)+'px';
 		// 		oLi[i+j].style.top=10+(i*6)+"px";
 		// 	}
 		// }
-		// 每隔10个换行 第二种
-		// for(var i=0;i<100;i++){
-		// 	oList.innerHTML+="<li style='left:"+(i%10)*60+"px; top:"+Math.floor(i/10)*60+"px; background:"+arr[i%4]+"'>"+i+"</li>";
-		// }
+		//每隔10个换行 第二种
+		for(var i=0;i<100;i++){
+			oList.innerHTML+="<li style='left:"+(i%10)*60+"px; top:"+Math.floor(i/10)*60+"px; background:"+arr[i%4]+"'>"+i+"</li>";
+		}
 		// v字型的
-
-
+		var num=0;
+		oBtn.onclick=function(){
+			
+			funArr[num]();
+			num++;
+			num %= arr.length;
+		}
 		// Math.ceil：如果参数是小数，则求最小的整数但不小于本身.
 		// Math.floor：如果参数是小数，则求最大的整数但不大于本身.
 		var len=5;
 		var cen=Math.ceil(len/2);
-		// console.log(cen);
-		for(var i=0; i<len;i++){
-			oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
-			
-			if(i<cen){
-				oDiv1[i].style.left=(i*60)+"px";
-				oDiv1[i].style.top=(i*60)+"px";
-			}
-			else{
-				oDiv1[i].style.left=(i*60)+"px";
-				// oDiv1[i].style.top=((cen-1)-(i%(cen+1)))*60+"px";
-				oDiv1[i].style.top=(len-i-1)*60+"px";
+		// 下箭头
+		function funDown(){
+			oDiv.innerHTML=" ";
+			for(var i=0; i<len;i++){
+				oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+				if(i<cen){
+					oDiv1[i].style.left=(i*60)+"px";
+					oDiv1[i].style.top=(i*60)+"px";
+				}
+				else{
+					oDiv1[i].style.left=(i*60)+"px";
+					oDiv1[i].style.top=(len-i-1)*60+"px";
+				}
 			}
 		}
+		
+
+		// 右箭头
+		
+		function funRight(){
+			oDiv.innerHTML=" ";
+			for(var i=0; i<len;i++){
+				oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+				
+				if(i<cen){
+					oDiv1[i].style.left=(i*60)+"px";
+					oDiv1[i].style.top=(i*60)+"px";
+				}
+				else{
+					oDiv1[i].style.left=(i*60)+"px";
+					oDiv1[i].style.left=(len-i-1)*60+"px";
+					oDiv1[i].style.top=(i*60)+"px";
+				}
+			}
+		}
+		
+		//左箭头
+
+		function funLeft(){
+			oDiv.innerHTML=" ";
+			for(var i=0; i<len;i++){
+				oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+				
+				if(i<cen){
+					oDiv1[i].style.top=(i*60)+"px";
+					oDiv1[i].style.left=(cen-i-1)*60+"px";
+				}
+				else{
+					oDiv1[i].style.left=(i-cen+1)*60+"px";
+					oDiv1[i].style.top=(i*60)+"px";
+				}
+			}
+		}
+		
+		// 上箭头
+
+		function funUp(){
+			oDiv.innerHTML=" ";
+			var cen=Math.ceil(len/2);
+			for(var i=0; i<len;i++){
+				oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+				
+				if(i<cen){
+					oDiv1[i].style.left=(i*60)+"px";
+					oDiv1[i].style.top=(cen-i-1)*60+"px";
+				}
+				else{
+					oDiv1[i].style.top=(i-cen+1)*60+"px";
+					oDiv1[i].style.left=(i*60)+"px";
+				}
+			}			
+		}
+
+
+
+		// var len=5;
+		// var cen=Math.ceil(len/2);
+		// for(var i=0; i<len;i++){
+		// 	oDiv.innerHTML+="<div class='d1'>"+i+"</div>";
+			
+		// 	if(i<cen){
+		// 		oDiv1[i].style.top=(i*60)+"px";
+		// 		oDiv1[i].style.left=(cen-i-1)*60+"px";
+		// 	}
+		// 	else{
+		// 		oDiv1[i].style.left=(i-cen+1)*60+"px";
+		// 		oDiv1[i].style.top=(i*60)+"px";
+		// 	}
+		// }
+
 		// 11-6        6  4 3 2 1 0
 		// 0 1 2 3 4   5  6 7 8 9 10
 
@@ -98,6 +188,15 @@
             //         }
             //     }
             // }
+       	var oArrBox=document.getElementById("arrBox");
+       	var oArrList=oArrBox.getElementsByTagName('span');
+       	var len=100;
+       	var str='';
+       	for(var i=0;i<len;i++){
+       		str+="<span></span>";
+       		oArrList[i].style.left=
+       	}
+       	oArrBox.innerHTML=str;
 	}
 
 	// var onOff = true;
@@ -136,11 +235,18 @@
  
 // left 0 0  60 120 
 // top  60  
+// 图片
+
 </script>
-<ul id="list">
+<ul id="list" style="height:600px; width:1000px;">
 	
 </ul>
-<div id="content">
+<p><input type="button" id="btn" value="生成v字形" style=""/></p>
+
+<div id="content" style="float: left;">
+	
+</div>
+<div class="arrBox" id="arrBox">
 	
 </div>
 </body>
