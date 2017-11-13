@@ -14,6 +14,7 @@
     	width:400px;
     	height:400px;
     	position: relative;
+        float:left;
     }
     #content a{
     	position:absolute;
@@ -59,6 +60,20 @@
     	width:400px;
     	height:400px;
     }
+    #tab{
+        padding-left: 0;
+        list-style: none;
+        float: left;
+    }
+    #tab li{
+        width:40px;
+        height: 40px;
+        background: #ccc;
+        margin-bottom: 5px;
+    }
+    #tab li.active{
+        background: red;
+    }
 	</style>
 	<script type="text/javascript" src="public/ts/playTs.ts"></script>
     <script type="text/javascript">
@@ -68,31 +83,49 @@
     		var oImg=document.getElementById("img1");
     		var oText=document.getElementById("text");
     		var oSpan=document.getElementById("span1");
+            var oUl=document.getElementById("tab");
+            var oList=oUl.getElementsByTagName("li");
     		var arrUrl=['public/img/1.jpg','public/img/2.jpg','public/img/3.jpg','public/img/4.jpg'];
     		var arrText=['游戏mm','人造动物园','性感美女','古装美女'];
     		var num=0;
 			//初始化
-			fnTab();
-			function fnTab(){
-				oSpan.innerHTML=num+1+' / '+arrUrl.length;  
-				oText.innerHTML=arrText[num];
-				oImg.src=arrUrl[num];
-			}
-			
     		oPrev.onclick=function(){
     			num--;
     			if(num<0){
     				num=3;
     			}
+
     			fnTab();
     		}
     		pNext.onclick=function(){
     			num++;
     			if(num == arrUrl.length){
     				num=0;
-    			}
+                }
     			fnTab();
     		}
+            for(var i=0; i<arrUrl.length;i++){
+                oUl.innerHTML+="<li></li>";
+            }
+            for(var i=0; i<arrUrl.length;i++){
+                oList[i].index=i;
+                oList.className=" ";
+                oList[i].onclick=function(){
+                    num=this.index;
+                    fnTab();
+                }
+            }
+            function fnTab(){
+                for(var j=0; j<arrUrl.length;j++){
+                    oList[j].className=" ";
+                }
+                oSpan.innerHTML=num+1+' / '+arrUrl.length;  
+                oText.innerHTML=arrText[num];
+                oImg.src=arrUrl[num];
+                oList[num].className="active";
+            }
+            fnTab();
+
     	}
     </script>
 </head>
@@ -104,8 +137,9 @@
     <a href="arr.html">v字形系列</a>
     <h5>罗列招聘需求</h5>
     <a href="article.html">生活乱比</a>
-
+    <a href="">模拟短信发送</a>
     <h5>图片切换</h5>
+
     <div id="content">
     	<a id="prev" href="javascript:;"><</a>
     	<p id="text">图片正在加载中...</p>
@@ -114,6 +148,12 @@
         <a href=""></a>
     	<img id="img1">
     </div>
+    <ul id="tab"> 
+<!--         <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li> -->
+    </ul>
     <script type="text/javascript">
     	var arr=["这是第一句话","这是第二句话","这是第三句话"];
     	// alert(arr.length);

@@ -27,13 +27,15 @@
 			position: relative;
 		}
 		.arrBox{
-			background: url(public/img/3.jpg) no-repeat center center;
 			width:310px;
 			height: 545px;
 			position: relative;
+			background: #ccc;
 		}
 		.arrBox span{
-			background: #ccc;
+			
+			background: url(public/img/3.jpg) no-repeat;
+
 		}
 	</style>
 </head>
@@ -195,7 +197,8 @@
        	var str='';
 
        	for(var i=0;i<lenImg;i++){
-       		oArrBox.innerHTML += '<span></span>';
+       		oArrBox.innerHTML += '<span style="background-position:'+(i%6)*52+'" "'+Math.floor(i/6)*52+'"></span>';
+       		oArrList[i].style.backgroundPosition=(i%6)*52+Math.floor(i/6)*52;
        		oArrList[i].style.left=(i%6)*52+"px";
        		oArrList[i].style.top=Math.floor(i/6)*52+"px";
        	}
