@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body>
+<script>
+  //url:http://upload-images.jianshu.io/upload_images/2956919-2c89d2dde2a7ee0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1536/q/50
+  
+  var p = new Promise(function(resolve,reject){
+       
+    var img=new Image();
+    img.src='http://upload-images.jianshu.io/upload_images/2956919-2c89d2dde2a7ee0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1536/q/50';
+    // img.src='aaaaaa'
+    img.onload=function(){
+      resolve();
+    }
+    img.onerror = function(){
+      reject();
+    }
+  }).then( 
+    ()=> console.log('图片加载成功')
+  ).catch(
+    ()=> console.log('图片加载失败')
+  )
+  
+  
+  var m = new Promise((resolve,reject)=>{
+    setTimeout( resolve , 100)
+    console.log(34);
+  }).then(()=>setTimeout(function(){
+    console.log(100);
+  }, 5000)).then(()=>setTimeout(function(){
+    console.log(11)
+  },10000)).then(()=>setTimeout(function(){
+    console.log(12);
+  },20000))
+
+
+  var a = Promise.resolve('xx')
+// Promise {[[PromiseStatus]]: "resolved", [[PromiseValue]]: "xx"}
+  a.then(function (re) { console.log(re) });
+</script>
+</body>
+</html>

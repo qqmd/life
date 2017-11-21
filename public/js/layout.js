@@ -3,10 +3,11 @@ function Barrel(ct,imgNum,height){
 	this.imgHeight=height;
 	this.imgNum=imgNum;
 	this.imgWidth=parseInt(window.getComputedStyle(ct,null).getPropertyValue("width"));//获取当前元素的宽度
+	this.imgArr=[];
 	this.loadImg();
 }
 Barrel.prototype = {
-	getImgUrls:function(){
+	getImgUrls:function(imgNum){
 		let imgUrls=[];
 		let colorUrls=[1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
 		
@@ -19,6 +20,7 @@ Barrel.prototype = {
 				textColor+=colorUrls[Math.floor(Math.random()*16)];
 			}
 			let imgUrl="http://via.placeholder.com/"+imgWidth+"x"+imgHeight+"/"+bgColor+"/"+textColor;
+			
 			imgUrls.push(imgUrl);
 		}
 		return imgUrls;
@@ -46,7 +48,33 @@ Barrel.prototype = {
 	render:function(imgInfo){
 		// let lastImg=imgInfo.pop();
 		let wholeWidth=0;
+		this.imgArr.push(imgInfo);
+		for(let i=0;i<this.imgArr.length;i++){
+			wholeWidth+=this.imgArr[i].width;
+			if(wholeWidth>this.imgWidth){
+				let lastImg=this.imgArr.pop();
+				wholeWidth-=lastImg.width;
+				//利用面积相等原则，来计算新的高度
+				let newHeight=this.imgWidth*this.imgHeight/wholeWidth;
+				this.layout(newHeight);
+			}
+		}
+		
 
+	},
+	layout:function(newHeight){
+		let imgRow=document.createElement("div"); /* 行容器 */
+		imgRow.classList.add("img-row");
+		for(let i=0;i<this.imgArr.length;i++){
+			let imgBox=document.createElement("div");
+			imgBox.classList.add("img-box");
+			let img=this.imgArr[i].target;
+			//改变了高度之后宽度也会自己跟着改变
+			img.style.height=newHeight;
+			imgBox.appendChild(img);
+			imgRow.appendChild(imgBox);
+		}
+		this.ct.appendChild(imgRow);
 	}
 };
 let ct=document.querySelector(".ct");
