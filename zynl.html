@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>正序跟倒序</title>
+    <meta name="author" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-style.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-media.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/style.css?v=1.0.3" />
+    <link href="http://sy.gaokaoq.com/public/home/css/holland.css?v=1.0.1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="content">
+    <div class="container-fluid">
+        <div class="container clearfix">
+            <div class="sec">
+                <div class="mbti_conts time_conts">
+                    <table id="table">
+                        <tr style="background: #00a2e9; color:#fff;">
+                            <td width="20%" style="text-align: center; border:1px solid #80d1f5;">智能名称</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">得分</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">适合职业</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">语言智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">45</td>
+                            <td style="border:1px solid #80d1f5">主持人、律师、演说家、编辑、作家、记者、教师等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">数学逻辑智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">49</td>
+                            <td style="border:1px solid #80d1f5">科学家、会计师、统计学家、工程师、计算机软件开发人员等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">空间智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">10</td>
+                            <td style="border:1px solid #80d1f5">室内设计师、建筑师、摄影师、画家、飞行员等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">身体运动智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">55</td>
+                            <td style="border:1px solid #80d1f5">运动员、演员、舞蹈家、外科医生、发明家等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">音乐智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">19</td>
+                            <td style="border:1px solid #80d1f5">歌唱家、作曲家、指挥家、乐器制作者等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">人际关系智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">55</td>
+                            <td style="border:1px solid #80d1f5">政治家、外交家、领导者、心理咨询师、公关人员、销售等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">自我认知智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">54</td>
+                            <td style="border:1px solid #80d1f5">哲学家、政治家、思想家、心理学家等</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border:1px solid #80d1f5;">自然觉察智能</td>
+                            <td style="text-align: center; border:1px solid #80d1f5;">53</td>
+                            <td style="border:1px solid #80d1f5">天文学家、生物学家、地质学家、考古学家、兽医等</td>
+                        </tr>
+                    </table>
+                    <p class="center">
+                        <input type="button" value="正序" id="sort" style="height:30px; line-height: 30px; padding:0px 10px;"/>
+                        <input type="button" value="倒序" id="reser" style="height:30px; line-height: 30px; padding:0px 10px;"/>
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var arr=[];
+    var table=document.getElementById("table");
+    for(var i=0; i<table.rows.length; i++){
+        arr[i]=table.rows[i];
+    }
+    arr.splice(0,1);
+    
+    
+    function gzSort(a,b){
+        var n1=a.cells[1].innerHTML;
+        var n2=b.cells[1].innerHTML;
+        return n1-n2;
+    }
+    arr.sort(gzSort);
+    var oSort=document.getElementById("sort");
+    var oReser=document.getElementById("reser");
+    ySort.onclick=function(){
+        
+        for(var i=arr.length;i>=1; i--){
+            table.appendChild(arr[i-1]);
+        }
+    }
+    function ySort(){
+        for(var i=arr.length;i>=1; i--){
+            table.appendChild(arr[i-1]);
+        }
+    }
+    function nSort(){
+        for(var i=1;i<=arr.length; i++){
+            table.appendChild(arr[i-1]);
+        }
+    }
+    oSort.onclick=function(){
+        ySort();
+    }
+    oReser.onclick=function(){
+        nSort();
+    }
+</script>
+</body>
+</html>
