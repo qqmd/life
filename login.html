@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>登录校验</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--ajaxUtils是使用AJAX来异步发送请求的文件-->
+    <script type="text/javascript" src="public/js/ajaxUtils.js"></script>
+	<!--checkMessage是用来验证输入的js文件-->
+    <script src="public/js/checkMessage.js"></script>
+	<!--utils是将验证的抽象方法将它抽取出来另外置于一个文件-->
+	<script type="text/javascript" src="public/js/utils.js"></script></head>
+
+</head>
+<body>
+	<!--添加onblur事件当监听鼠标是否移出  并传入当前对象--> 
+	<input type="text" name="username" onblur="checkUsername(this)"/><span id="usernameMsg" class="error"></span><br/>
+	<input type="password" name="password" onblur="checkPassword(this)"/><span id="passwordMsg" class="error"></span><br/>
+</body>
+</html>

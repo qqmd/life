@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>正则表达式</title>
+	<title></title>
+</head>
+<body>
+<p>^  ^The匹配以The开头的</p>
+<p>$  $匹配以of despair$</p>
+<p>*  ab*匹配字符串a和0个或者更多b组成的字符串</p>
+<p>+  a+b匹配至少一个a</p>
+<p>?  ab?匹配0个或者1个b</p>
+<p>"a?b+$": 匹配以一个或者0个a再加上一个以上的b结尾的字符串</p>
+<p>{num}  大括号里面限制字符出现的个数</p>
+<p>{m,n}  大括号里面限制字符出现的在m-n之间的个数，包括m跟n</p>
+<p>() "a(bc)*": 匹配 a 后面跟0个或者一个"bc";</p>
+<p>|  相当于or</p>
+<p>[] 中括号括住的内容只匹配一个 单一的字符</p>
+<p>.  一个点('.')可以代表所有的 单一字符:</p>
+<!-- RegExp.exec()在全局检索模式下,提供与子表达式匹配的文本的信息，声明每个匹配子串的位置。 -->
+<p>RegExp有g的时候代表的是全局搜索</p>
+<script type="text/javascript">
+	str="abcfdaf";
+	str1="aab abb abbb abbbb abbbb abbbbb";
+	str2="abcbcbcffff";
+	str3="abcbcbc";
+	str4="ddd";
+	str5="ddagnvng vbdgajg";
+	str6="1%15121 2%444 4445%333";
+	str7="fdagdg,a";
+	document.write(str.match("^a")+"</br>");
+	// document.write(str1.match("a{2}b")+"</br>");   
+	// document.write(str1.match("ab{2,5}")+"</br>");  
+	// document.write(str2.match("a(bc)*")+"</br>");      //abc,bc
+	document.write(str3.match(/a(bc)*/g)+"</br>");      //a.
+	// document.write(str4.match("a*")+"</br>");  
+	document.write(str5.match(/[ab]/g)+"</br>");
+	document.write(str6.match(/[0-9]%/g)+"</br>"); 
+	document.write(str7.match(/,[a-zA-Z0-9]$/));
+	// document.write(str5.match(^[a-zA-Z]))    
+	// var str="Is this all there is?";
+	// var patt1=/[a-h]/g;
+	// document.write(str.match(/[a-h]/));
+</script>
+</body>
+</html>
