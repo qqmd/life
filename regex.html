@@ -29,19 +29,27 @@
 	str5="ddagnvng vbdgajg";
 	str6="1%15121 2%444 4445%333";
 	str7="fdagdg,a";
+	str8="9000";
+	str9="099 -099";
+	str10="0";
+	str11=111.00;
 	document.write(str.match("^a")+"</br>");
 	// document.write(str1.match("a{2}b")+"</br>");   
 	// document.write(str1.match("ab{2,5}")+"</br>");  
 	// document.write(str2.match("a(bc)*")+"</br>");      //abc,bc
-	document.write(str3.match(/a(bc)*/g)+"</br>");      //a.
+	//document.write(str3.match(/a(bc)*/g)+"</br>");      //a.
 	// document.write(str4.match("a*")+"</br>");  
-	document.write(str5.match(/[ab]/g)+"</br>");
-	document.write(str6.match(/[0-9]%/g)+"</br>"); 
-	document.write(str7.match(/,[a-zA-Z0-9]$/));
+	//document.write(str5.match(/[ab]/g)+"</br>");
+	//document.write(str6.match(/[0-9]%/g)+"</br>"); 
+	//document.write(str7.match(/,[a-zA-Z0-9]$/));
 	// document.write(str5.match(^[a-zA-Z]))    
 	// var str="Is this all there is?";
 	// var patt1=/[a-h]/g;
 	// document.write(str.match(/[a-h]/));
+	document.write(str8.match(/^[1-9][0-9]*$/g)+"</br>");
+	document.write(str9.match(/(0|-?[0-9][0-9]*)/g)+"</br>");
+	document.write(str10.match(/^(0|[1-9][0-9]*)$/g));
+	document.write(str11.match(/^[0-9]+(/.[0-9]+)?$/g);
 </script>
 </body>
 </html>

@@ -9,11 +9,12 @@ function $(e){
  * nullMsg输入如果为空的消息 
  * errorMsg输入信息错误的消息 
 */  
-function checkField(fieldObj,msgObj,re,nullMsg,errorMsg){  
+function checkField(fieldObj,msgObj,re,nullMsg,errorMsg){
+	console.log("4趣凤凤");  
 	msgObj.innerHTML="";  
 	var v=fieldObj.value.replace(/(^\s+)|(\s+$)/g,"");    //replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-	console.log(v);
-	console.log(fieldObj.value);
+	// console.log(v);
+	// console.log(fieldObj.value);
 	var flag=true;  
 	if(v.length==0){  
 	    msgObj.innerHTML=nullMsg;  

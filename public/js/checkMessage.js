@@ -5,6 +5,7 @@ var nameOnly_ok=false;
  *2.验证用户名输入是否唯一（ajax）  
  */  
 function checkUsername(username){  
+    // console.log(username);   //
         //alert(nameOnly_ok);  
         //验证用户名的输入格式  
         var username_ok=checkField(username, $("usernameMsg"), /^[a-zA-Z0-9_]{1,20}$/, "对不起用户名不能为空！", "对不起用户名不能是字母，数字，下划线以外的数！");  
@@ -35,4 +36,22 @@ function nameOnly(username){
 function checkPassword(password){  
     var password_ok=checkField(password,$("passwordMsg"),/^[a-zA-Z0-9]{6,20}$/,"对不起密码不能为空！","对不起密码只能由字母、数字组成且必须六位及六位以上！");  
     return password_ok;  
+}  
+
+function checkField(fieldObj,msgObj,re,nullMsg,errorMsg){  
+	msgObj.innerHTML="";      // /s是空格符
+	var v=fieldObj.value.replace(/(^\s+)|(\s+$)/g,"");    //replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+	console.log(v);
+	console.log(fieldObj.value);
+	var flag=true;  
+	if(v.length==0){  
+	    msgObj.innerHTML=nullMsg;  
+	    flag=false;  
+	}else{  
+	    if(!re.test(v)){  
+	        msgObj.innerHTML=errorMsg;  
+	        flag=false;  
+	    }  
+	}  
+	return flag;  
 }  
