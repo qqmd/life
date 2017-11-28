@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>登录校验</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<body>
+   <input type="text" name="username" id="username" onblur="checkUserName(this)" /><span id="usernameMsg" class="error"></span></br>
+   <input typa="password" name="password" id="password" onblur="checkPassWord(this)"><span id="passwordMsg" class="error"></span>
+   <script type="text/javascript">
+        function $(e){
+            return document.getElementById(e);
+        }
+        // 1.获取到的值先要进行判断是否为空
+     
+        function checkPassWord(password){
+            // var pw=password.value;
+            // var pw1=pw.replace(/(^\s+)|(\s+$)/g,"");
+            // var pre=;
+            // if(pw.length==0){
+            //     $("passwordMsg").innerHTML="";
+            // }
+            // else{
+            //     if(!pre.test(pw)){
+            //         $("passwordMsg").innerHTML="";
+            //     }
+            //     else{
+            //         $("passwordMsg").innerHTML="恭喜您，当前用户名可用";
+            //     }
+            // }
+            checkUtil(password,/^[0-9A-Za-z_]{6,16}$/,"passwordMsg","对不起，密码不能为空","对不起，密码必须为6-16位且必须为字母，数字跟_","恭喜您，当前用户名可用");
+        }
+
+        function checkUserName(username){
+            // var v=username.value;
+            checkUtil(username,/^[0-9A-Za-z_]{1,20}$/,"usernameMsg","当前账号不能为空","对不起，请输入1-20位数字，字母，下划线等","恭喜您，当前用户名可用");
+        }
+        // 验证方法
+        function checkUtil(obj,re,usernameMsg,nullMsg,errorMsg,successMsg){
+            var v=obj.value.replace(/(^\s+)|(\s+$)/g,"");
+            console.log(v);
+            if(v.length==0){
+                $(usernameMsg).innerHTML=nullMsg;
+            }
+            else{
+                if(!re.test(v)){
+                    $(usernameMsg).innerHTML=errorMsg;
+                }
+                else{
+                    $(usernameMsg).innerHTML=successMsg;
+                }
+            }
+        }
+   </script>
+</body> 
+</html>

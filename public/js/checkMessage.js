@@ -8,8 +8,7 @@ function checkUsername(username){
     // console.log(username);   //
         //alert(nameOnly_ok);  
         //验证用户名的输入格式  
-        var username_ok=checkField(username, $("usernameMsg"), /^[a-zA-Z0-9_]{1,20}$/, "对不起用户名不能为空！", "对不起用户名不能是字母，数字，下划线以外的数！");  
-        //alert(nameOnly(username));  
+        var username_ok=checkField(username, $("usernameMsg"), /^[a-zA-Z0-9_]{1,20}$/, "对不起用户名不能为空！", "对不起用户名不能是字母，数字，下划线以外的数！");    
         //用户名的格式正确的条件成立则验证用户名是否唯一  
         if(username_ok){  
             nameOnly(username);  
@@ -18,9 +17,9 @@ function checkUsername(username){
     }  
 //验证用户名是否唯一  
 function nameOnly(username){  
-              //ajaxUtils.js验证工具中的方法  
-        sendAjaxRequest("get","user","method=nameOnly&username="+username.value,true,function(data){  
-             if(data=="true"){  
+        //ajaxUtils.js验证工具中的方法  
+        sendAjaxRequest("get","user","method=sendAjaxRequest&username="+username.value,true,function(data){
+             if(data=="true"){
                  $("usernameMsg").innerHTML="恭喜你！当前输入的用户名可用！"  
                      //nameOnly_ok=true;  
                      return true;  
@@ -38,20 +37,5 @@ function checkPassword(password){
     return password_ok;  
 }  
 
-function checkField(fieldObj,msgObj,re,nullMsg,errorMsg){  
-	msgObj.innerHTML="";      // /s是空格符
-	var v=fieldObj.value.replace(/(^\s+)|(\s+$)/g,"");    //replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-	console.log(v);
-	console.log(fieldObj.value);
-	var flag=true;  
-	if(v.length==0){  
-	    msgObj.innerHTML=nullMsg;  
-	    flag=false;  
-	}else{  
-	    if(!re.test(v)){  
-	        msgObj.innerHTML=errorMsg;  
-	        flag=false;  
-	    }  
-	}  
-	return flag;  
-}  
+
+

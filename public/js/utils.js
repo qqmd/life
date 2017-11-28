@@ -10,17 +10,16 @@ function $(e){
  * errorMsg输入信息错误的消息 
 */  
 function checkField(fieldObj,msgObj,re,nullMsg,errorMsg){
-	console.log("4趣凤凤");  
 	msgObj.innerHTML="";  
-	var v=fieldObj.value.replace(/(^\s+)|(\s+$)/g,"");    //replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-	// console.log(v);
-	// console.log(fieldObj.value);
+	var v=fieldObj.value.replace(/(^\s+)|(\s+$)/g,"");    //replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。  这是在去掉首尾空格
 	var flag=true;  
 	if(v.length==0){  
+		//如果为空则报空
 	    msgObj.innerHTML=nullMsg;  
 	    flag=false;  
 	}else{  
-	    if(!re.test(v)){  
+		//
+	    if(!re.test(v)){    //test() 方法用于检测一个字符串是否匹配某个模式.返回一个 Boolean 值，它指出在被查找的字符串中是否匹配给出的正则表达式。
 	        msgObj.innerHTML=errorMsg;  
 	        flag=false;  
 	    }  
