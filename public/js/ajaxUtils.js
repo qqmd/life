@@ -50,6 +50,18 @@ function sendAjaxRequest(method,url,param,asyn,handle200,loading,handle404,handl
        req.send(param);  
    }  
 }  
+
+xhr.open("POST",url,true);  
+xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
+xhr.onreadystatechange=stateChangeHandler;  
+xhr.send();  //var name="clf";   xhr.send(name);  
+function stateChangeHandler(){  
+      if(xhr.readystate==4&&xhr.status==200){  
+            var obj = document.getElementById("targetDiv");  
+        obj.innerHTML = xhr.responseText;  
+      }  
+}  
+
 //受用xml格式发送请求  
 function sendAjaxReqGetXML(method,url,param,asyn,handle200,loading,handle404,handle500){  
     var req=createAjax();  
