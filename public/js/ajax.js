@@ -1,21 +1,54 @@
+function hint(hintOpt){
+	var options={
+		"text":text,
 
-function ajax(url,data,type,success,dataType,async,cache,error,complate){
-	var cache=cache || false;
-	var async=async || false;
-	var type=type || "post";
-	var dataType=dataType || "json";
-	var success=success || function(data){
+	}
+}
+var hint = function(text, time) {
+		text = text || '出错了';
+		time = time || 1000;
+		if($('.hintBox').length == 0) {
+			var div = '<div class="hintBox">' + text + '</div>';
+			$('body').append(div);
+			$('.hintBox').css({
+				'position': 'fixed',
+				'top': '50%',
+				'left': '50%',
+				'padding': '10px 18px',
+				'background': 'rgba(0,0,0,0.6)',
+				'font-size': '16px',
+				'font-family': '微软雅黑',
+				'color': '#fff',
+				'display': 'none'
+			}).fadeIn()
+			setTimeout(function() {
+				$('.hintBox').fadeOut(300, function() {
+					$(this).remove()
+				})
+			}, time)
+		} else {
+			return false;
+		}
+	}
+function ajax(options){
+	var cache=options.cache || false;
+	var async=options.async || false;
+	var type=options.type || "post";
+	var dataType=options.dataType || "json";
+	var data=options.data || {};
+	// var success=options.success || function(data){
 		
-	};
-	var error=error || function(data){
-		
-	};
-	var complate=complate || function(){
+	// };
+	var complete=function(){
         if(data.readyState==4 || data.status==1){
         	$(".loading").html(data.msg);
 			setTimeout(function () {
 	        	$(".loading").html(" ");
 	        },500);
+	        if(options.success){
+	        	options.success;
+	        }
+	       	
         }
 		if(data.status==404){
 			$(".loading").html("请求失败，请求未找到");
@@ -39,8 +72,6 @@ function ajax(url,data,type,success,dataType,async,cache,error,complate){
 	       	$(".loading").css({"position":"absolute","top":"50%","left":"0","text-align":"center","display":"block","width":"100%"});
 	       	$(".loading").html("正在加载中...");
 	    },
-	    success:success,
-	    error: error,
 	    complate:complate
 	});
 }

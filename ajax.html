@@ -2,16 +2,84 @@
 <html>
 <head>
     <title>ajax封装</title>
+    <link rel="stylesheet" type="text/css" href="public/css/alert.css">
     <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="public/js/ajax.js"></script>
+    <script type="text/javascript" src="public/js/alert.js"></script>
 </head>
 <body>
-    <div class="content">
+<!--     <div class="content">
         
-    </div>
+    </div> -->
     <script type="text/javascript">
-        var url="public/json/list.json";
-        ajax(url,{});
+        // var url="public/json/list.json";
+        // ajax(url,{});
+
+  //       function add(a,b)  
+		// {  
+		//     alert(a+b);  
+		// }  
+		// function sub(a,b)  
+		// {  
+		//     alert(a-b);  
+		// }  
+		// function Animal(){    
+		//     this.name = "Animal";    
+		//     this.showName = function(){    
+		//         alert(this.name);    
+		//     }    
+		// }    
+		// function Cat(){    
+		//     this.name = "Cat";    
+		// }    
+		// var animal = new Animal();    
+		// var cat = new Cat();    
+		    
+		//通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。    
+		//输入结果为"Cat"    
+		// animal.showName.call(cat);    
+		//animal.showName.apply(cat,[]);  
+				// add.call(sub);   
+
+		// function Class10()  
+		// {  
+		//     this.showSub = function(a,b)  
+		//     {  
+		//         alert(a-b);  
+		//     }  
+		// }  
+		  
+		// function Class11()  
+		// {  
+		//     this.showAdd = function(a,b)  
+		//     {  
+		//         alert(a+b);  
+		//     }  
+		// }  
+		  
+		function Class2()  
+		{  
+		    Class10.call(this);  
+		    Class11.call(this);  
+		}  
+
+		function Animal(name){      
+	    	this.name = name;      
+	    	this.showName = function(){      
+	        	alert(this.name);      
+    		}      
+		}      
+		function Cat(name){    
+			// alert(4);
+		    Animal.call(this, name);    
+		}      
+		var cat = new Cat("Black Cat");  
+		console.log(cat);  
+		// Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么 Cat中不就有Animal的所有属性和方法了吗，Cat对象就能够直接调用Animal的方法以及属性了. 
+		cat.showName(); 
+		opt={
+			title:"当前是alert"
+		};
+		$.alert(opt);
     </script>
 </body>
 </html>
