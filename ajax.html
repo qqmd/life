@@ -56,30 +56,34 @@
 		//     }  
 		// }  
 		  
-		function Class2()  
-		{  
-		    Class10.call(this);  
-		    Class11.call(this);  
-		}  
+		// function Class2()  
+		// {  
+		//     Class10.call(this);  
+		//     Class11.call(this);  
+		// }  
 
-		function Animal(name){      
-	    	this.name = name;      
-	    	this.showName = function(){      
-	        	alert(this.name);      
-    		}      
-		}      
-		function Cat(name){    
-			// alert(4);
-		    Animal.call(this, name);    
-		}      
-		var cat = new Cat("Black Cat");  
-		console.log(cat);  
+		// function Animal(name){      
+	    // 	this.name = name;      
+	    // 	this.showName = function(){      
+	    //     	alert(this.name);      
+    	// 	}      
+		// }      
+		// function Cat(name){    
+		// 	// alert(4);
+		//     Animal.call(this, name);    
+		// }      
+		// var cat = new Cat("Black Cat");  
+		// console.log(cat);  
 		// Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么 Cat中不就有Animal的所有属性和方法了吗，Cat对象就能够直接调用Animal的方法以及属性了. 
-		cat.showName(); 
+		// cat.showName(); 
 		opt={
-			title:"当前是alert"
+			title:"当前是alert",
+			delayTime:30,
+			content:"这是我的内容呢",
+			blankclose:true
 		};
 		$.alert(opt);
+		        //数组赋值是按照键值还是按照值；
     </script>
 </body>
 </html>

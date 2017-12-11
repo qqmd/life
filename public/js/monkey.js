@@ -83,9 +83,6 @@ define(['jquery'], function($) {
 				} else {
 				}
 			},	*/
-			success:function(){
-
-			},
 			complete: function(xhr) {
 				if(xhr.readyState == 4 && xhr.status == 200) {
 

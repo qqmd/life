@@ -1,8 +1,15 @@
-function hint(hintOpt){
+function hint(options){
 	var options={
 		"text":text,
-
+		"content":content,
+		"time":time,
+		ok:'确认',
+		onCallback:function(){},//确认回调
+		cancel:'取消',
+		cancelCallback:function(){},//取消回调
+		
 	}
+	
 }
 var hint = function(text, time) {
 		text = text || '出错了';

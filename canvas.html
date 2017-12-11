@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>正序跟倒序</title>
+    <meta name="author" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-style.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-media.css" />
+    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/style.css?v=1.0.3" />
+    <link href="http://sy.gaokaoq.com/public/home/css/holland.css?v=1.0.1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvasDom=document.getElementById("canvas");
+        var canvas=canvasDom.getContext("2d");
+        canvas.strokeStyle="red";
+        canvas.strokeRect(10,10,190,100);//绘制矩形
+        canvas.strokeRect(10,10,190,100);
+        canvas.fillStyle="blue";
+        canvas.fillRect(20,20,160,80);
+
+        canvas.beginPath();//开始路径绘制
+        canvas.moveTo(20,20);//设置路径起点，坐标为（20，20）
+        canvas.lineTo(200,200); //绘制一条到（200，20）的直线
+        canvas.lineTo(400,20);
+        canvas.lineWidth=2.0; //设置
+        canvas.closePath();
+        convas.lineWidth=2;
+        canvas.strokeStyle="#ccc000";  //设置线的颜色
+        canvas.stroke();//进行线的着色，这时整条线才变得可见
+    </script>
+</body>
+</html>
