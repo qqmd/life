@@ -18,6 +18,7 @@
                 autoTime: 2000, //自动关闭时间默认2s
                 autoEffect: 'default',//关闭效果
                 ok: '确定',
+                icon:'',
                 okCallback: function(){},//确定回调
                 cancel: '取消',
                 cancelCallback: function(){},//取消回调
@@ -29,7 +30,7 @@
                 },
                 blankclose: false//空白处点击关闭
             }
-// 遍历参数来给参数赋值
+        // 遍历参数来给参数赋值
         for (i in defaultOpts) {
             if (opts[i] === undefined) {
                 opts[i] = defaultOpts[i];

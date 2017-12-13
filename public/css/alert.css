@@ -981,3 +981,17 @@ button {
   100% {
     opacity: 0;
     /*结尾状态 透明度为0*/ } }
+
+
+
+
+#hintBox{
+  background: #ccc;
+  border-radius: 3px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  padding:20px 10px;
+}
+.hintContent{
+  text-align: center;
+}
