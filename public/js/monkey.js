@@ -115,7 +115,7 @@ define(['jquery'], function($) {
 					}
 					if(500 <= xhr.status && xhr.status < 600) {
 						if(xhr.status == 500) {
-							var text = "返回数据出错，请联系管理员"
+							var <th colspan="6"> = "返回数据出错，请联系管理员"
 							hint(text)
 						} else if(xhr.status == 502) {
 							var text = "返回状态出错，请联系管理员"

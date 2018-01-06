@@ -1,37 +1,141 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>正序跟倒序</title>
-    <meta name="author" content="" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-style.css" />
-    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/matrix-media.css" />
-    <link rel="stylesheet" href="http://sy.gaokaoq.com/public/home/css/style.css?v=1.0.3" />
-    <link href="http://sy.gaokaoq.com/public/home/css/holland.css?v=1.0.1" rel="stylesheet" type="text/css" />
+    <title>canvas绘制</title>
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid #ccc;"></canvas>
+    <input type="range" id="range">
     <script>
-        var canvasDom=document.getElementById("canvas");
-        var canvas=canvasDom.getContext("2d");
-        canvas.strokeStyle="red";
-        canvas.strokeRect(10,10,190,100);//绘制矩形
-        canvas.strokeRect(10,10,190,100);
-        canvas.fillStyle="blue";
-        canvas.fillRect(20,20,160,80);
+        // 长方形绘制
+        // var canvasDom=document.getElementById("canvas");
+        // var canvas=canvasDom.getContext("2d");
+        // canvas.strokeStyle="red";
+        // canvas.strokeRect(10,10,190,100);//绘制矩形
+        // canvas.strokeRect(10,10,190,100);
+        // canvas.fillStyle="blue";
+        // canvas.fillRect(20,20,160,80);
 
-        canvas.beginPath();//开始路径绘制
-        canvas.moveTo(20,20);//设置路径起点，坐标为（20，20）
-        canvas.lineTo(200,200); //绘制一条到（200，20）的直线
-        canvas.lineTo(400,20);
-        canvas.lineWidth=2.0; //设置
-        canvas.closePath();
-        convas.lineWidth=2;
-        canvas.strokeStyle="#ccc000";  //设置线的颜色
-        canvas.stroke();//进行线的着色，这时整条线才变得可见
+        // canvas.beginPath();//开始路径绘制
+        // canvas.moveTo(20,20);//设置路径起点，坐标为（20，20）
+        // canvas.lineTo(200,200); //绘制一条到（200，20）的直线
+        // canvas.lineTo(400,20);
+        // canvas.lineWidth=2.0; //设置
+        // canvas.closePath();
+        // canvas.lineWidth=2;
+        // canvas.strokeStyle="#ccc000";  //设置线的颜色
+        // canvas.stroke();//进行线的着色，这时整条线才变得可见
+
+        window.onload=function(){
+            // 进度条绘制
+            var circleD=document.getElementById("myCanvas");
+            // 设置横坐标
+            console.log(circleD.width);
+            const X = circleD.width / 2;
+            // 设置纵坐标    
+            const Y = circleD.height / 2;
+            // 设置半径
+            const r = 75;
+            // 设置圆形的生成方向，false为顺时针
+            const COUNTER_CLOCKWISE = false;
+            // 设置绘制进度条圆形的宽度
+            const PROGRESS_LINE_WIDTH = 6;
+            // 设置边界圆形的宽度
+            const COMMON_LINE_WIDTH = 1;
+            // 设置开始的角度
+            const START_ANGLE = 0;
+            // 设置结束的角度 math.pi(相当于 π)
+            const END_ANGLE = Math.PI * 2;
+            // 开始绘制        
+            // let cycle = circleD.getContext("2d");
+            // lineWidth 属性设置或返回当前线条的宽度，以像素计。
+            // console.log(cycle);
+            // cycle.lineWidth = COMMON_LINE_WIDTH; 
+            //开始路径绘制
+            // cycle.beginPath();
+            // arc() 方法创建弧/曲线（用于创建圆或部分圆）  x 圆的中心的 x 坐标。y   圆的中心的 y 坐标。r   圆的半径。sAngle  起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。eAngle  结束角，以弧度计。counterclockwise    可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+
+            // 内边框
+            drawCycle(X,Y,r + PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+            // 外边框
+            drawCycle(X,Y,r - PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+
+            // 设置 input 的属性
+            const rangeElem = document.getElementById('range');
+            // 最大值
+            rangeElem.setAttribute('max', '' + 2 * Math.PI);
+            // 最小值
+            rangeElem.setAttribute('min', '0');
+            // 初始值
+            rangeElem.setAttribute('value', 0);
+            // 移动控制条一次改变的值
+            rangeElem.setAttribute('step', '0.0000000001');
+
+
+
+            // 开始绘制进度条
+            function drawCycle(positionX, positionY, radius, startAngle, endAngle, couterClockwise, lineWidth) {
+                let cycle = circleD.getContext('2d');
+                cycle.lineWidth = lineWidth;
+                cycle.strokeStyle="#ccc000";  //设置线的颜色
+                cycle.beginPath();
+                cycle.arc(positionX, positionY, radius, startAngle, endAngle, couterClockwise);
+                cycle.stroke();
+            }
+
+            // degrees = radians * 180/Math.PI 
+            // 角度等于弧度乘于180再除于PI
+            // radians = degrees * Math.PI/180
+            // 弧度等于角度度乘于PI再除于180
+            let n=0;
+            let time=setInterval(function(){
+                n++;
+                //实时清空旧的图形
+                let clearRECT = circleD.getContext('2d');
+                clearRECT.clearRect(X - r - PROGRESS_LINE_WIDTH, Y - r - PROGRESS_LINE_WIDTH, r * 2 + PROGRESS_LINE_WIDTH * 2, r * 2 + PROGRESS_LINE_WIDTH * 2);
+                // 绘制文字
+                let textCycle=circleD.getContext('2d');
+                textCycle.font='lighter 38px normal';
+                textCycle.textAlign='center';
+                textCycle.textBaseline='middle';
+                textCycle.strokeText((Math.ceil(n/360*100)+' %'), X, Y);
+                // 内边框
+                drawCycle(X,Y,r + PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+                // 外边框
+                drawCycle(X,Y,r - PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+                // 进度条绘制
+                // drawCycle(X,Y,r,START_ANGLE - Math.PI/2,this.value - Math.PI/2,COUNTER_CLOCKWISE,PROGRESS_LINE_WIDTH);
+                
+                drawCycle(X,Y,r,START_ANGLE - Math.PI/2, n*Math.PI / 180 - Math.PI/2,COUNTER_CLOCKWISE,PROGRESS_LINE_WIDTH);
+                if(n>=360){
+                    n=360;
+                    clearInterval(time);
+                }
+　　　　    },10);
+                
+            rangeElem.oninput=function(){
+                // let textCycle=circleD.getContext('2d');
+                // textCycle.font="30px Arial";
+                // //context.strokeText(text,x,y,maxWidth);
+                //  // text  规定在画布上输出的文本。x   开始绘制文本的 x 坐标位置（相对于画布）。y   开始绘制文本的 y 坐标位置（相对于画布）。maxWidth    可选。允许的最大文本宽度，以像素计
+                // textCycle.fillStyle = '#f30';
+                // textCycle.textBaseline = 'middle';
+                // //ctx.textAlign = 'center';
+                // textCycle.strokeText(this.value,10,50);
+                let contextLetter = circleD.getContext('2d');
+                contextLetter.font = '48px serif';
+                contextLetter.textAlign = 'center';
+                contextLetter.textBaseline = 'middle';
+                contextLetter.strokeText((this.value / (2 * Math.PI) * 360 + '').split('.')[0], X, Y);
+            }
+
+        }
     </script>
+    
 </body>
 </html>

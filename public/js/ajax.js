@@ -1,11 +1,12 @@
 function hint(opt){
+	$("#hintBox").remove();
 	var options={
 		"title":'',
 		"content":'',
 		"time":'',
 		"ok":'',
 		width:'200',
-		height:'50',
+		height:'auto',
 		onCallback:function(){},//确认回调
 		cancel:'取消',
 		cancelCallback:function(){},//取消回调
@@ -25,97 +26,112 @@ function hint(opt){
 				+"</div>";
 	$("body").append(hintHtml);
 	var $content=$("#hintBox");
-	console.log(opt.width);
+	console.log($content.height());
 	$content.css({
 		width:opt.width+"px",
-		height:opt.height+"px",
+		height:$content.height()+"px",
 		top:"50%",
 		left:"50%",
 		position:"absolute",
 		marginLeft:-(opt.width/2),
-		marginTop:-(opt.height/2),
+		marginTop:-(($content.height()+40)/2)
 	})
-
 }	
-options={
-	content:"请求失败服务器未找到",
-}
-hint(options);
-// var hint = function(text, time) {
-// 		text = text || '出错了';
-// 		time = time || 1000;
-// 		if($('.hintBox').length == 0) {
-// 			var div = '<div class="hintBox">' + text + '</div>';
-// 			$('body').append(div);
-// 			$('.hintBox').css({
-// 				'position': 'fixed',
-// 				'top': '50%',
-// 				'left': '50%',
-// 				'padding': '10px 18px',
-// 				'background': 'rgba(0,0,0,0.6)',
-// 				'font-size': '16px',
-// 				'font-family': '微软雅黑',
-// 				'color': '#fff',
-// 				'display': 'none'
-// 			}).fadeIn()
-// 			setTimeout(function() {
-// 				$('.hintBox').fadeOut(300, function() {
-// 					$(this).remove()
-// 				})
-// 			}, time)
-// 		} else {
-// 			return false;
-// 		}
-// 	}
 function ajax(options){
 	var cache=options.cache || false;
 	var async=options.async || false;
 	var type=options.type || "post";
 	var dataType=options.dataType || "json";
 	var data=options.data || {};
-	var complete=function(){
-        if(data.readyState==4 || data.status==1){
-        	$(".loading").html(data.msg);
-			setTimeout(function () {
-	        	$(".loading").html(" ");
-	        },500);
+	var time=options.time || 5000;
+	var success=options.success?options.success:{};
+	var complete=function(xhr){
+        if(xhr.status==200){
+        	$("#hintBox").remove();
 	        if(options.success){
 	        	options.success;
 	        }
+        }else{
+        	if(xhr.statusText == 'timeout') {
+				options={
+					content:"网络连接超时，请重试"
+				}
+				hint(options);
+				if(options.error) {
+					options.error;
+				};
+				return false
+			}
+			if(xhr.statusText == 'abort') {
+				if(options.error) {
+					options.error;
+				};
+				return false;
+			}
+        	if(xhr.status>=400&&xhr.status<500){
+				options={
+					content:"请求失败，文件未找到"
+				}
+				hint(options);
+				return false;
+			}
+			else if(xhr.status>=500&&xhr.status<600){
+				options={
+					content:"服务器错误，请重新请求"
+				}
+				hint(options);
+				return false;
+			}
+			else{
+				options={
+					content:"请求失败,网络连接超时"
+				}
+				hint(options);
+				return false;
+			}
         }
-		if(data.status==404){
-			options={
-				content:"请求失败，请求未找到"
-			}
-			hint(options);
-		}
-		else if(data.status==503){
-			options={
-				content:"请求失败，请求未找到"
-			}
-			hint(options);
-		}
-		else{
-			options={
-				content:"请求失败,网络连接超时"
-				icon:
-			}
-			hint(options);
-		}
 	}
 	$.ajax({
-		url: url,
+		url: options.url,
 	    type: type,
 	    data: data,
 	    async:async,
 	    dataType:dataType,
 	    cache:cache,
+	    timeout:time,
+	    jsonp:'callback',
 	    beforeSend: function () {
-	    	options={
-	    		content:正在加载中...,
-	    		icon:"loading"
-	    	}
+			showLoad();
 	    },
-	    complate:complate
+	    success:success,
+	    complete:complete
 	});
 }
+
+function showLoad(){
+	var loadIcon='<div class="spinner">'
+		+'<div class="spinner-container container1">'
+			+'<div class="circle1"></div>'
+			+'<div class="circle2"></div>'
+			+'<div class="circle3"></div>'
+			+'<div class="circle4"></div>'
+		+'</div>'
+	  	+'<div class="spinner-container container2">'
+		    +'<div class="circle1"></div>'
+		    +'<div class="circle2"></div>'
+		    +'<div class="circle3"></div>'
+		    +'<div class="circle4"></div>'
+	  	+'</div>'
+	  	+'<div class="spinner-container container3">'
+		    +'<div class="circle1"></div>'
+		    +'<div class="circle2"></div>'
+		    +'<div class="circle3"></div>'
+		    +'<div class="circle4"></div>'
+	  	+'</div>'
+	+'</div>';
+	opt={
+		content:loadIcon+"正在加载中..."
+	}
+	hint(opt);
+}
+    

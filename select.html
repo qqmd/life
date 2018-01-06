@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>select利用ajax取值的封装</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="public/js/select1.js"></script>
+</head>
+<body>
+	<select id="sel_search_plant" class="form-control"></select>
+	<script type="text/javascript">
+
+	$(function(){
+	   $('#sel_search_plant').combobox({
+	      	url: 'http://www.gaokaoq.com/city/getcity.html',
+	      	valueField: 'id',
+	      	textField: 'name',
+	      	data: [
+	      			{
+					"id": "44",
+					"pid": "1",
+					"name": "房山区"
+					},
+					{
+					"id": "45",
+					"pid": "1",
+					"name": "通州区"
+					},
+					{
+					"id": "46",
+					"pid": "1",
+					"name": "顺义区"
+					}
+				],
+	      	param: {pid:1},
+	      	onChange:function(val){
+	      		console.log(val);
+	      	}
+	   });
+	})	
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>扩展</title>
+</head>
+<body>
+	<p>jQuery.extend( target [, object1 ] [, objectN ] )</p>
+	<p>target是目标对象</p>
+	<div id="log"></div>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		// jQuery.extend( target [, object1 ] [, objectN ] ) 替换target 合并两个对象，并修改第一个对象
+		// var object1 = {
+		//   	apple: 0,
+		//   	banana: { weight: 52, price: 100 },
+		//   	cherry: 97
+		// };
+		// var object2 = {
+		//   	banana: { price: 200 },
+		//   	durian: 100
+		// };
+		// var object3 = {
+		//   	banana: { price: 200, weight: 65 },
+		//   	durian: 111
+		// };
+		// // Merge object2 into object1
+		// $.extend( object1, object2, object3 );
+		 
+		// // Assuming JSON.stringify - not available in IE<8
+		// $( "#log" ).append( JSON.stringify( object1 ) );
+
+
+		// {"apple":0,"banana":{"price":200},"cherry":97,"durian":100}
+
+		//采用递归方式合并两个对象，并修改第一个对象。  递归方式指的是已存在的替换，不存在的添加到第一个
+		var object1 = {
+		  apple: 0,
+		  banana: { weight: 52, price: 100 },
+		  cherry: 97
+		};
+		var object2 = {
+		  banana: { price: 200 },
+		  durian: 100
+		};
+		 
+		// Merge object2 into object1, recursively
+		$.extend( true, object1, object2 );
+		 
+		// Assuming JSON.stringify - not available in IE<8
+		$( "#log" ).append( JSON.stringify( object1 ) );
+		// 函数的递归就是在函数中调用自身
+		function iteration(x){
+   			var sum=1; 
+   			for(x; x>=1; x--){
+       			sum = sum*x;
+   			}
+   			return sum;
+		}
+		
+
+
+
+		function func( n )
+		{
+		    if (n == 0 || n == 1)
+		    {
+		        return 1;
+		    }
+		    return func(n-1) + func(n-2);
+		}
+
+		var a = func(22);
+		console.log(a);
+
+
+		function func(n)
+		{
+		    if (n == 1)
+		    {
+		        return 1;
+		    }
+
+		    // func(n-1) 因为传递的参数是 n-1,那么就是求 (n-1) 的阶乘
+		    return n * func(n-1);
+		}
+		console.log(func(5));
+	</script>
+</body>
+</html>
