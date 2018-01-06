@@ -6,7 +6,7 @@
 <body>
     <canvas id="canvas"></canvas>
     <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid #ccc;"></canvas>
-    <input type="range" id="range">
+    <!-- <input type="range" id="range"> -->
     <script>
         // 长方形绘制
         // var canvasDom=document.getElementById("canvas");
@@ -63,16 +63,16 @@
             drawCycle(X,Y,r - PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
 
 
-            // 设置 input 的属性
-            const rangeElem = document.getElementById('range');
-            // 最大值
-            rangeElem.setAttribute('max', '' + 2 * Math.PI);
-            // 最小值
-            rangeElem.setAttribute('min', '0');
-            // 初始值
-            rangeElem.setAttribute('value', 0);
-            // 移动控制条一次改变的值
-            rangeElem.setAttribute('step', '0.0000000001');
+            // // 设置 input 的属性
+            // const rangeElem = document.getElementById('range');
+            // // 最大值
+            // rangeElem.setAttribute('max', '' + 2 * Math.PI);
+            // // 最小值
+            // rangeElem.setAttribute('min', '0');
+            // // 初始值
+            // rangeElem.setAttribute('value', 0);
+            // // 移动控制条一次改变的值
+            // rangeElem.setAttribute('step', '0.0000000001');
 
 
 
@@ -99,9 +99,10 @@
                 // 绘制文字
                 let textCycle=circleD.getContext('2d');
                 textCycle.font='lighter 38px normal';
+                textCycle.fillStyle="#ccc000";
                 textCycle.textAlign='center';
                 textCycle.textBaseline='middle';
-                textCycle.strokeText((Math.ceil(n/360*100)+' %'), X, Y);
+                textCycle.fillText((Math.ceil(n/360*100)+'%'), X, Y);
                 // 内边框
                 drawCycle(X,Y,r + PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
 
@@ -118,21 +119,21 @@
                 }
 　　　　    },10);
                 
-            rangeElem.oninput=function(){
-                // let textCycle=circleD.getContext('2d');
-                // textCycle.font="30px Arial";
-                // //context.strokeText(text,x,y,maxWidth);
-                //  // text  规定在画布上输出的文本。x   开始绘制文本的 x 坐标位置（相对于画布）。y   开始绘制文本的 y 坐标位置（相对于画布）。maxWidth    可选。允许的最大文本宽度，以像素计
-                // textCycle.fillStyle = '#f30';
-                // textCycle.textBaseline = 'middle';
-                // //ctx.textAlign = 'center';
-                // textCycle.strokeText(this.value,10,50);
-                let contextLetter = circleD.getContext('2d');
-                contextLetter.font = '48px serif';
-                contextLetter.textAlign = 'center';
-                contextLetter.textBaseline = 'middle';
-                contextLetter.strokeText((this.value / (2 * Math.PI) * 360 + '').split('.')[0], X, Y);
-            }
+            // rangeElem.oninput=function(){
+            //     // let textCycle=circleD.getContext('2d');
+            //     // textCycle.font="30px Arial";
+            //     // //context.strokeText(text,x,y,maxWidth);
+            //     //  // text  规定在画布上输出的文本。x   开始绘制文本的 x 坐标位置（相对于画布）。y   开始绘制文本的 y 坐标位置（相对于画布）。maxWidth    可选。允许的最大文本宽度，以像素计
+            //     // textCycle.fillStyle = '#f30';
+            //     // textCycle.textBaseline = 'middle';
+            //     // //ctx.textAlign = 'center';
+            //     // textCycle.strokeText(this.value,10,50);
+            //     let contextLetter = circleD.getContext('2d');
+            //     contextLetter.font = '48px serif';
+            //     contextLetter.textAlign = 'center';
+            //     contextLetter.textBaseline = 'middle';
+            //     contextLetter.strokeText((this.value / (2 * Math.PI) * 360 + '').split('.')[0], X, Y);
+            // }
 
         }
     </script>
