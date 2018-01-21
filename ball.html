@@ -91,8 +91,8 @@
 			this.ele.style.top = getRandom(document.documentElement.clientHeight,document.documentElement.clientHeight+50) + 'px';
 			// console.log(document.documentElement.clientWidth);
 			//根据分数进行设置
-			// 随机选中[1,8]之间的一个分数
-			this.mark = getRandom( 1,8 );
+			// 随机选中[1,12]之间的一个分数
+			this.mark = getRandom( 1,12 );
 			this.speed = this.mark;
 			// 随机选中不同分数的气球
 			this.ele.style.backgroundPosition = (this.mark-1)%4*(-this.ele.offsetWidth) + 'px '+ (Math.ceil(this.mark/4)-1)*(-this.ele.offsetHeight) +'px';
@@ -101,7 +101,7 @@
 		Balloon.prototype.godie = function(){
 			this.ele.classList.add('bomb');
 			//获取爆炸气球的分数
-			// score.getScore(this.mark);
+			 score.getScore(this.mark);
 			/********************当动画结束后气球立即重生，且去除bomb类**************************************/ 
 			var that = this;
 			this.ele.addEventListener( 'animationend',function(){
@@ -148,18 +148,8 @@
 		Cloud.prototype.move = function(){
 			// 每次调用该方法时，获取一次云朵距离左侧边缘的距离，
 			var oldLeft = this.ele.offsetLeft;
-			/******************************移动样式一：云朵始终向左移动*******************************************/
-			/*
-			if( oldLeft <= -this.ele.width){ // 当云朵到达左边缘，并完全消失时
-				//重置云朵的left，使该云朵出现在右侧边缘
-				this.ele.style.left = document.documentElement.clientWidth + 'px';
-			}else{ 						// 当云朵未到达左边缘时，始终向左移动
-				//然后减去this.speed，不断把left变小（向左移）
-				this.ele.style.left = oldLeft - this.speed + 'px'
-			}
-			*/
 			
-			/******************************移动样式二：云朵左右反弹移动*******************************************/
+			/*云朵左右反弹移动*/
 			if( oldLeft <= 0 || oldLeft >= document.documentElement.clientWidth-this.ele.width ){ 
 			// 当云朵到达左边缘或右边缘时，转向移动
 				this.speed *= -1 ;
@@ -167,61 +157,78 @@
 			// 云朵移动
 			this.ele.style.left = oldLeft - this.speed + 'px'
 		}
-		/***********************云朵对象结束*****************************************/
+		/*云朵对象结束*/
 
 		/***********************枪对象结束*****************************************/
 		// 设置枪对象,只有这一个枪对象，直接使用字面量的形式创建
-		// var gun = {
-		// 	ele : document.createElement( 'div' ),    //创建dom元素
-		// 	// 枪的初始化方法
-		// 	initialism:function(){
-		// 		// 设置dom元素
-		// 		this.ele.style.width = '96px';
-		// 		this.ele.style.height = '96px';
-		// 		this.ele.style.background = 'url(public/img/gun.png) no-repeat center center';
-		// 		this.ele.style.position = 'absolute';
-		// 		this.ele.style.zIndex = 10;
+		 var gun = {
+		 	ele : document.createElement( 'div' ),    //创建dom元素
+		 	// 枪的初始化方法
+		 	initialism:function(){
+		 		// 设置dom元素
+		 		this.ele.style.width = '96px';
+		 		this.ele.style.height = '96px';
+		 		this.ele.style.background = 'url(public/img/gun.png) no-repeat center center';
+		 		this.ele.style.position = 'absolute';
+		 		this.ele.style.zIndex = 10;
 
-		// 		// 将dom元素插入body
-		// 		document.body.appendChild( this.ele );
+		 		// 将dom元素插入body
+		 		document.body.appendChild( this.ele );
 
-		// 		var that = this;   //防止事件响应中的this丢失
-		// 		// 当鼠标移动时，枪会跟随鼠标移动
-		// 		document.addEventListener( 'mousemove', function( e ){
-		// 			// 根据移动事件对象，获取鼠标的坐标位置，并使枪跟随移动
-		// 			// console.log(e,e);
-		// 			that.move( e.x,e.y );
-		// 		} );
-		// 	},
-		// 	//枪的移动方法
-		// 	move:function(gunX,gunY){
-		// 		gunX = gunX - this.ele.offsetWidth/2;
-		// 		gunY = gunY - this.ele.offsetHeight/2;
-		// 		this.ele.style.left = gunX + 'px';
-		// 		this.ele.style.top = gunY + 'px';
-		// 	}
-		// }
+		 		var that = this;   //防止事件响应中的this丢失
+		 		// 当鼠标移动时，枪会跟随鼠标移动
+		 		document.addEventListener( 'mousemove', function( e ){
+		 			// 根据移动事件对象，获取鼠标的坐标位置，并使枪跟随移动
+		 			// console.log(e,e);
+		 			that.move( e.x,e.y );
+		 		} );
+		 	},
+		 	//枪的移动方法
+		 	move:function(gunX,gunY){
+		 		gunX = gunX - this.ele.offsetWidth/2;
+		 		gunY = gunY - this.ele.offsetHeight/2;
+		 		this.ele.style.left = gunX + 'px';
+		 		this.ele.style.top = gunY + 'px';
+			}
+		 }
 		/***********************枪对象结束*****************************************/
 
 		/***********************左上角分数对象开始*****************************************/
 		// 设置左上角分数对象,只有这一个左上角分数对象，直接使用字面量的形式创建
-		// var score = {
-		// 	ele : document.createElement('div'),    //创建dom元素
-		// 	grade:0,								//初始分数
-		// 	initialism:function(){
-		// 		this.ele.style.position = 'absolute';    //dom元素绝对定位
-		// 		this.getScore(0);                      //初始化
-		// 		// 将dom元素插入body中
-		// 		document.body.appendChild( this.ele );
-		// 	},
+		var score = {
+		 	ele : document.createElement('div'),    //创建dom元素
+		 	grade:0,								//初始分数
+		 	initialism:function(){
+		 		this.ele.style.position = 'absolute';    //dom元素绝对定位
+		 		this.getScore(0);                      //初始化
+		 		// 将dom元素插入body中
+		 		document.body.appendChild( this.ele );
+		 	},
 
-		// 	getScore:function(mark){
-		// 		this.grade += mark;   //加上传入的实参
+		 	getScore:function(mark){
 
-		// 		//将改变后的分数显示在dom元素中
-		// 		this.ele.innerHTML = this.grade;
-		// 	}
-		// }
+				switch(mark){
+					case 9:
+						this.grade=this.grade*2;
+						break;
+					case 10:
+						this.grade=Math.floor(this.grade/2);
+						break;
+					case 11:
+						this.grade=0;
+						break;
+					case 12:
+						this.grade=this.grade;
+						break;
+					default:
+						this.grade += mark; 
+						break;
+				}
+				console.log(mark);
+		 		//将改变后的分数显示在dom元素中
+		 		this.ele.innerHTML = this.grade;
+		 	}
+		 }
 		/***********************左上角分数对象结束*****************************************/
 
 		/***********************背景对象开始*****************************************/
@@ -233,9 +240,6 @@
 				document.body.style.backgroundImage = "url("+ newSrc + ")";
 			},
 			// 当需要调用背景的方法时，只需要为其添加move方法，并在game对象的actors数组中插入即可
-			/*move:function(){
-
-			}*/
 		}
 		/***********************背景对象结束*****************************************/
 
@@ -279,11 +283,10 @@
 					for( var i = 0; i < that.actors.length; i++ ){
 						that.actors[i].move();
 					}
-
 				},this.funInterval);
 				
 				// 调用枪的初始化方法
-				// gun.initialism();
+				gun.initialism();
 
 				// 创建鼠标点击事件，枪会射击--由于鼠标下始终跟随一个枪，因此不能直接为气球绑定点击事件，只能为body绑定
 				document.addEventListener( 'click',function(e){
@@ -316,7 +319,7 @@
 					}	
 				} );
 				// 调用score的初始化方法
-				// score.initialism();
+				score.initialism();
 			},
 		};
 		/***********************总控制对象结束*****************************************/

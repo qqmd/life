@@ -42,17 +42,26 @@
 		function getRandom(m,n){
 			return m+Math.floor(Math.random()*(n-m+1));
 		}
+		function Ballon(){
+			this.ele = document.createElement("div");
+			this.speed = getRandom( 1,8);
+			this.reorn();
+		}
+		Ballon.prototype.reorn=function(){
+			this.ele.classList.add("balloon");
+			document.body.appendChild(this.ele);
+			this.ele.style.left=(document.documentElement.clientWidth-this.ele.offsetWidth)*Math.random()+"px";	
+		    this.ele.style.top=(document.documentElement.clientHeight-this.ele.offsetHeight)+"px";
 
-		var div=document.createElement("div");
-		div.classList.add("balloon");
-		document.body.appendChild(div);
-		var speed=getRandom( 1,8);
+			this.ele.style.backgroundPosition="0 0";	
+		}
+		
+		var b1 = new Ballon();
 		// this.ele.style.left = (document.documentElement.clientWidth - this.ele.offsetWidth)*Math.random() + 'px';
 		// console.log(div.offsetWidth+" "+document.documentElement.clientWidth);
-		div.style.left=(document.documentElement.clientWidth-div.offsetWidth)+"px";	
-		div.style.top=(document.documentElement.clientHeight-div.offsetHeight)+"px";	
-		setInterval(function(){
-			div.style.top-=speed;
-		},speed)
+		
+		// setInterval(function(){
+		// 	div.style.top=parseInt(div.style.top)-speed+"px";
+		// },speed*100)
 	</script>
 </body>
