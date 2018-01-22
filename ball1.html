@@ -38,21 +38,211 @@
 	</style>
 </head>
 <body>
+	<audio src="public/media/gun.mp3" id="audio"></audio>
 	<script type="text/javascript">
+		var arr=[
+		]
 		function getRandom(m,n){
+			//Math.floor()是取整数部分
 			return m+Math.floor(Math.random()*(n-m+1));
 		}
+		function Balloon(){
+			this.ele=document.createElement("div");
+			this.speed=getRandom(1,8);
+			this.ele.classList.add("balloon");
+			document.body.appendChild(this.ele);
+			this.reborn();
+		}
+		// 创建气球
+		Balloon.prototype.reborn=function(){
+			this.ele.style.left=(document.documentElement.clientWidth-this.ele.offsetWidth)*Math.random()+"px";	
+			this.ele.style.top=getRandom(document.documentElement.clientHeight,document.documentElement.clientHeight-50)+"px";
+			this.mark = getRandom( 1,12 );
+			this.speed = this.mark;
+			this.ele.style.backgroundPosition=(this.mark-1)%4*(-this.ele.offsetWidth)+"px "+(Math.ceil(this.mark/4)-1)*(-this.ele.offsetHeight)+"px";
+		}
+		Balloon.prototype.move=function(){
+			// console.log(this.ele.offsetTop);
+			if(this.ele.offsetTop<=-this.ele.offsetHeight){
+				this.reborn();
+			}
+			else{
+				this.ele.style.top=(this.ele.offsetTop-this.speed)+"px";
+			}
+		}
+		Balloon.prototype.godie=function(){
+			this.ele.classList.add("bomb");
+			var that = this;
+			score.getScore(this.mark);
+			this.ele.addEventListener("animationend",function(){
+				that.ele.classList.remove("bomb");
+				that.reborn();
+			})
+		}
+		// 云彩
+		function Cloud(){
+			this.cloud=document.createElement("div");
+			this.cloud.style.background = "url(public/img/cloud.png) no-repeat";
+			this.height=getRandom(50,80);
+			this.ratio=395/200;
+			this.width=this.ratio*this.height;
+			this.cloud.style.width=this.width+"px";
+			this.cloud.style.height=this.height+"px";
+			this.cloud.style.backgroundSize="cover";
 
-		var div=document.createElement("div");
-		div.classList.add("balloon");
-		document.body.appendChild(div);
-		var speed=getRandom( 1,8);
-		// this.ele.style.left = (document.documentElement.clientWidth - this.ele.offsetWidth)*Math.random() + 'px';
-		// console.log(div.offsetWidth+" "+document.documentElement.clientWidth);
-		div.style.left=(document.documentElement.clientWidth-div.offsetWidth)+"px";	
-		div.style.top=(document.documentElement.clientHeight-div.offsetHeight)+"px";	
-		setInterval(function(){
-			div.style.top-=speed;
-		},speed)
+			this.cloud.style.position="absolute";
+			this.cloud.style.top = getRandom(0,100)+"px";
+			this.cloud.style.left = getRandom(0,document.documentElement.clientWidth-this.width)+"px";
+			this.speed=getRandom(2,5);
+			// 将新创建的dom元素插入body中
+			document.body.appendChild(this.cloud);
+		}
+		Cloud.prototype.move=function(){
+			var oldLeft=this.cloud.offsetLeft;
+			if(oldLeft <= 0 || oldLeft>= document.documentElement.clientWidth-this.width){
+				this.speed*=-1;
+			}
+			this.cloud.style.left=oldLeft+this.speed+"px";
+		}
+		// 背景
+		var bg = {
+			src:"public/img/bg.jpg",
+			setSrc:function(newImg){
+				newImg=newImg ? newImg: this.src;
+				document.body.style.backgroundImage="url("+newImg+")";
+			}	
+		}
+		// 设置左上角分数对象,只有这一个左上角分数对象，直接使用字面量的形式创建
+		var score = {
+			ele : document.createElement('div'),    //创建dom元素
+			grade:0,								//初始分数
+			initialism:function(){
+				this.ele.style.position = 'absolute';    //dom元素绝对定位
+				this.ele.classList.add("score");
+				this.getScore(0);                      //初始化
+				// 将dom元素插入body中
+				document.body.appendChild( this.ele );
+			},
+			getScore:function(mark){
+				switch(mark)
+				{
+				case 9:
+					this.grade*=2;
+					break;
+				case 10:
+				    this.grade=Math.floor(this.grade/2);				  
+				    break;
+				case 11:
+					this.grade=0;
+					break;
+				case 12:
+					this.grade=this.grade;
+					break;
+				default:
+				 	this.grade += mark;
+				 	break;
+				}
+				this.ele.innerHTML = this.grade;
+			}
+		}
+		var game = {
+			ballNum:5,                   //设置气球的数量
+			currentBallNumber:0,		 //当前气球数k
+			funInterval:50,
+			timeInterval:1,
+			count:0, 					 //计数器
+			cloudNumber:3,
+			actors:[],
+			date:20,     //游戏时间倒计时
+			start:function(){
+				bg.setSrc();
+				var that=this;
+				// 创建指定数量的云朵
+				for( var i = 0; i < this.cloudNumber; i++ ){
+					var cloud = new Cloud();     //新建指定数量的云朵
+					this.actors.push(cloud);
+					//将新建的云朵对象插入actors数组
+				}
+
+				//每隔1秒去检查，执行一次判断，是否需要产生一个气球
+				var timer=setInterval(function(){
+					that.count++;
+					if(that.count%(that.timeInterval*1000/that.funInterval)==0 && that.currentBallNumber<that.ballNum){
+						that.currentBallNumber++;
+						var b1 = new Balloon();
+						that.actors.push(b1);
+					}
+					for(var i=0,len=that.actors.length; i<len; i++){
+						that.actors[i].move();
+					}
+				},that.funInterval);
+				gun.initialism();
+
+				document.addEventListener("click",function(e){
+					// 音乐
+					that.audio = document.getElementById('audio')
+					that.audio.play();
+					setTimeout(function(){    //枪声响起50毫秒后停止
+						audio.currentTime = 0;
+					},50);
+					for(var i=0;i<that.actors.length;i++){
+						var obj=that.actors[i];
+						if(obj.constructor == Balloon){
+							// console.log( obj.constructor );
+							// 获取气球的中心点,统一设置气球中心点距离其边缘的距离均为obj.ele.offsetWidth/2;
+							var balloon_x = obj.ele.offsetLeft + obj.ele.offsetWidth/2;
+							var balloon_y = obj.ele.offsetTop + obj.ele.offsetWidth/2;
+
+							// 设定当点击处的坐标距离气球中心点的坐标<气球中心点距离边缘的距离
+							if( Math.pow(e.x-balloon_x,2)+Math.pow(e.y-balloon_y,2) <= Math.pow(obj.ele.offsetWidth/2,2) ){
+								obj.godie();
+							}
+						}
+					}
+				});
+				score.initialism();
+				var timer1=setInterval(function(){
+					that.date--;
+					if(that.date==0){
+						clearInterval(timer);
+						clearInterval(timer1);
+						document.body.innerHTML="<div style='text-align:center; color:#fff;'>游戏结束，当前得分是"+score.grade+"</div>";
+						that.audio.remove();
+					}
+				},1000)
+			}
+		}
+
+		// 设置枪对象,只有这一个枪对象，直接使用字面量的形式创建
+		var gun = {
+			ele : document.createElement( 'div' ),    //创建dom元素
+			// 枪的初始化方法
+			initialism:function(){
+				// 设置dom元素
+				this.ele.style.width = '96px';
+				this.ele.style.height = '96px';
+				this.ele.style.background = 'url(public/img/gun.png) no-repeat center center';
+				this.ele.style.position = 'absolute';
+				this.ele.style.zIndex = 10;
+
+				// 将dom元素插入body
+				document.body.appendChild( this.ele );
+
+				var that = this;   //防止事件响应中的this丢失
+				document.addEventListener( 'mousemove', function(e){
+				// 根据移动事件对象，获取鼠标的坐标位置，并使枪跟随移动
+					that.move(e.x,e.y);
+				});
+			},
+			move:function(x,y){
+				var gunX=this.ele.offsetWidth/2;
+				var gunY=this.ele.offsetHeight/2;
+				this.ele.style.left=x-gunX+"px";
+				this.ele.style.top = y-gunY+"px";
+			}
+		}
+		game.start();
+
+
 	</script>
 </body>
