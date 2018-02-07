@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>生成li</title>
+</head>
+<body>
+	<ul id="wrapper"></ul>
+	<script type="text/javascript">
+		var wrapper = document.getElementById("wrapper");
+
+		var fragment= document.createDocumentFragment();
+		for(var i=0;i<100;i++){
+			var item = document.createElement("li");
+			fragment.appendChild(item);
+
+		}
+		var indexOf=[].indexOf();
+		console.log(indexOf);
+		wrapper.appendChild(fragment);
+		var inArray=function(elem,arr,i){
+			var len,indexOf=[].indexOf();
+			console.log(indexOf);
+			if(arr){
+				if(indexOf){
+					return indexOf.call(arr,elem,i);
+				}
+				len=arr.length;
+				i ? i<0 ? Math.max(0,len+i) : i : 0;
+				for(;i<len;i++){
+					if(i in arr && arr[i]===elem){
+						return i;
+					}
+				}
+			}
+			return -1;
+			
+		}
+		var list = wrapper.getElementsByTagName("li");
+		wrapper.addEventListener('click',function(e){
+			var target = e.target;
+			if(target.nodeName === "LI"){
+				console.log(inArray(target,list));
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>捕获机制</title>
+</head>
+<body>
+	
+	<div id="container">
+	    <ul>
+	        <li><label>用 户 名:</label><input type="text" /></li>
+	        <li><label>密  码:</label><input type="password" /></li>
+	        <li><label>确认密码:</label><input type="password" /></li>
+	        <li><label>验 证 码:</label><input type="text" /></li>
+	    </ul>
+	</div>
+	<script type="text/javascript">
+		var wrap= document.getElementById('container');
+	    if(isIE){
+	        /*
+	        对于低版本的IE浏览器因为他们不支持事件捕获，而他们支持focusin、focusout事件
+	        使用该事件加事件委托能解决低版本IE的focus、blur事件委托的问题
+	         */
+	        addEvent(wrap,'focusout',handler);
+	    }else{
+	        /*
+	            高版本的IE浏览器以及主流标准浏览器则可以利用事件捕获机制来解决
+	         */
+	        addEvent(wrap,'blur',handler,true);
+	    }
+	 	wrap.addEventListener('blur',handler, true);
+	    function handler(event){
+	        var tar = event.target;
+	        if(tar.nodeName.toLowerCase()=='input'){
+	        	if(!tar.value){
+	        		tar.focus();
+	        		var txt=tar.
+	        		console.log(tar);
+	        	}
+	        	// if(!tar.value){
+	        	// 	console.log(tar.value);
+	        	// }
+	            // if(!tar.value){
+	            //     // var txt = _dom.getText(_dom.prevEle(tar)[0]);
+	            //     txt = txt.substr(0,txt.length-1);
+	            //     tar.focus();
+	            //     alert(txt+'不能为空!');
+	            // }
+	        }
+	    }
+
+
+	    (function (window,document) {
+		    "use strict";
+		    var jsonp = function (url,data,callback) {
+
+		        // 1.将传入的data数据转化为url字符串形式
+		        // {id:1,name:'zhangsan'} => id=1&name=zhangsan
+		        var dataString = url.indexof('?') == -1? '?': '&';
+		        for(var key in data){
+		            dataString += key + '=' + data[key] + '&';
+		        };
+
+		        // 2 处理url中的回调函数
+		        // cbFuncName回调函数的名字 ：my_json_cb_名字的前缀 + 随机数（把小数点去掉）
+		        var cbFuncName = 'my_json_cb_' + Math.random().toString().replace('.','');
+		        dataString += 'callback=' + cbFuncName;
+
+		        // 3.创建一个script标签并插入到页面中
+		        var scriptEle = document.createElement('script');
+		        scriptEle.src = url + dataString;
+
+		        // 4.挂载回调函数
+		        window[cbFuncName] = function (data) {
+		            callback(data);
+		            // 处理完回调函数的数据之后，删除jsonp的script标签
+		            document.body.removeChild(scriptEle);
+		        }
+
+		        // 5.append到页面中
+		        document.body.appendChild(scriptEle);
+		    }
+
+		    // 因为jsonp是一个私有函数外部不能调用，所有jsonp函数作文window对象的一个方法，供外部调用
+		    window.$jsonp = jsonp;
+
+		})(window,document)
+	</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>js获取地址栏参数</title>
+</head>
+<body>
+	<script type="text/javascript">
+		console.log({});
+		var url="http://www.meituan.com/index.html?id=11&data=3";
+		function B(url){
+			// var str=url.replace(/\?/);
+			var start=url.indexOf("?");
+			var str=url.substr(start+1);
+			var arr=str.split("&");
+			// var obj=arr.replace("=",":");
+			var obj={};
+			for(var i=0;i<arr.length;i++){
+				console.log(arr[i]);
+				var arr1=arr[i].replace("=",":");
+				console.log(arr1);
+			}
+			console.log(arr);
+			// document.write(obj);
+			// console.log(typeof(obj));
+			// console.log(arr);
+		}
+		B(url);
+	</script>
+</body>
+</html>
