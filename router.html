@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./public/js/router.js"></script>
+</head>
+
+<body>
+    <div id="nav">
+        <a href="#/page1">page1</a>
+        <a href="#/page2">page2</a>
+        <a href="#/page3">page3</a>
+    </div>
+    <div id="container"></div>
+    <script>
+        let router = new HashRouter();
+        let container = document.getElementById('container');
+
+        //注册首页回调函数
+        router.registerIndex(() => container.innerHTML = '我是首页');
+
+        //注册其他视图回到函数
+        router.register('/page1', () => container.innerHTML = '我是page1');
+        router.register('/page2', () => container.innerHTML = '我是page2');
+        router.register('/page3', () => container.innerHTML = '我是page3');
+
+        //加载视图
+        router.load();
+    </script>
+</body>
+
+</html>

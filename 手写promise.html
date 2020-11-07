@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 定义一个发布中心
+    let publishCenter = {
+      subscribeArrays: {}, // 定义一个订阅者回调函数callback
+      subscribe: function (key, callback) {
+        // 增加订阅者
+        if (!this.subscribeArrays[key]) {
+          this.subscribeArrays[key] = [];
+        }
+        this.subscribeArrays[key].push(callback)
+      },
+      publish: function () {
+        //发布 第一个参数是key
+        let params = [...arguments];
+        let key = params.shift();
+        let callbacks = this.subscribeArrays[key];
+        if (!callbacks || callbacks.length === 0) {
+          // 如果没人订阅 那么就返回
+          return false
+        }
+        for (let i = 0; i < callbacks.length; i++) {
+          callbacks[i].apply(this, params);
+        }
+      }
+    };
+
+    // 订阅 一个wantWatermelon事件
+    publishCenter.subscribe('wantWatermelon', function () {
+      console.log(this, '这是内容')
+    })
+
+    //触发wantWatermelon事件 好咯 可以看到 恰西瓜咯
+    publishCenter.publish('wantWatermelon')
+
+
+    new Promise(function (resolve, reject) {
+      reject(true);
+      window.setTimeout(function () {
+        resolve(false);
+      }, 0);
+    }).then(function () {
+      console.log(2);
+    }, function () {
+      console.log(3);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<p>return语句的返回值  如果没有return的话，则函数调用返回值为undefined,如果有return语句的话，函数执行到return后，后面的语句就不执行</p>
+	<script type="text/javascript">
+		var arr=[10,23];
+		var arr1=[111,1111];
+		function Run(){
+			for(i in arr){
+				console.log(i+":"+arr[i]);
+				return false;
+			}
+			console.log(3);
+			for(i in arr1){
+				console.log(arr1[i]);
+			}
+			return false;
+		}
+		console.log(Run());
+	</script>
+</body>
+</html>

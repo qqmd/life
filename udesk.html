@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+       (function(a, h, c, b, f, g) {
+        a["UdeskApiObject"] = f;
+        a[f] = a[f] || function() {
+            (a[f].d = a[f].d || []).push(arguments)
+        };
+        g = h.createElement(c);
+        g.async = 1;
+        g.src = b;
+        c = h.getElementsByTagName(c)[0];
+        c.parentNode.insertBefore(g, c)
+    })(window, document, "script", "https://assets-cli.udesk.cn/im_client/js/udeskApi.js", "ud");
+    ud({
+        "code": "d0b62",
+        "isInvite": true,
+        "link": "//udesk.udesk.cn/im_client",
+        "selector": ".udeskim",
+        "targetSelector": ".mobIm",
+        "pop": {
+            "direction": "left",
+            "offset": {
+                "top": "2"
+            }
+        }
+    });
+    </script>
+</body>
+</html>

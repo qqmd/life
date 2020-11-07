@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [2, 4, 6]
+        function Sum(arr) {
+            if (arr.length > 1) {
+                return arr.pop() + Sum(arr)
+                
+            } else {
+                return arr[arr.length - 1]
+            }
+        }
+        var sum = Sum(arr)
+        console.log(sum)
+    </script>
+</body>
+
+</html>

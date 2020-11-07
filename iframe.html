@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title></title>
 </head>
-<body style="width:500px;height: 500px; a">
-	<button>打开在父页面</button>
+
+<body style="width:500px;height: 500px;">
+	<button id="button">打开在父页面</button>
+	<iframe src="http://clink2.clink.cn/aliyun/index/home" id="" width="1400px" height="800" frameborder="0"></iframe>
+	<script>
+		document.getElementById('button').addEventListener('click',function(){
+			popup.postMessage("hello there!", "http://clink2.clink.cn/aliyun/index/home");
+		})
+		/*
+		 * A窗口的域名是<http://example.com:8080>，以下是A窗口的script标签下的代码：
+		 */
+		// 如果弹出框没有被阻止且加载完成
+		// 假设当前页面没有改变location，这条语句会成功添加message到发送队列中去（targetOrigin设置对了）
+		popup.postMessage("hello there!", "http://clink2.clink.cn/aliyun/index/home");
+
+		function receiveMessage(event) {
+			// 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).
+			if (event.origin !== "http://example.org")
+				return;
+
+			// event.source 是我们通过window.open打开的弹出页面 popup
+			// event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
+		}
+		window.addEventListener("message", receiveMessage, false);
+	</script>
 </body>
+
 </html>

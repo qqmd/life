@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // 简单实现
+        /*
+        function defineReactive(obj, key, val) {
+            Object.defineProperty(obj, key, {
+                set(newVal) {
+                    if (newVal !== val) {
+                        console.log(`set ${key}: ${newVal}`)
+                        val = newVal
+                    }
+                },
+                get() {
+                    console.log(`get ${key}: ${val}`)
+                    return val
+                }
+            })
+
+        }
+        const obj = {}
+        defineReactive(obj, 'foo', 'foo') //此时get跟set都不会触发
+        console.log('old', obj.foo) //此时只会触发get
+        obj.foo = 'f000000000' //此时触发set
+        console.log('new', obj.foo) //此时触发get
+        */
+        const obj = {}
+
+        function defineReactive(obj, key, val) {
+            Object.defineProperty(obj, key, {
+                get() {
+                    console.log(`get ${key}:${val}`);
+                    return val
+                },
+                set(newVal) {
+                    if (newVal !== val) {
+                        val = newVal
+                        update()
+                    }
+                }
+            })
+        }
+        defineReactive(obj, 'foo', '')
+        obj.foo = new Date().toLocaleTimeString()
+
+        function update() {
+            app.innerText = obj.foo
+        }
+        setInterval(() => {
+            obj.foo = new Date().toLocaleTimeString()
+            // app.innerText = obj.foo // 这里为什么不刷新了呢？
+        }, 1000);
+
+        function observe(obj) {
+            if (typeof obj !== 'object' || obj == null) {
+                return
+            }
+            Object.keys(obj).forEach(key => {
+                defineReactive(obj, key, obj[key])
+            })
+        }
+    </script>
+</body>
+
+</html>

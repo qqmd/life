@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function parsePrice(money) {
+      var n = 2;
+      money = parseFloat((money + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+      var l = money.split(".")[0].split("");
+      var r = money.split(".")[1];
+      var t = "";
+      for (i = 0; i < l.length; i++) {
+        t += l[i];
+      }
+      return '￥' + t + "." + r;
+    }
+    var money = 12345678;
+    console.log(parsePrice(money));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1b7d66dd2f649bb06ff284d5bd3fc21e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+<body>
+  accessId: <input type="text" id="switchAccessId"></br>
+  visitorId: <input type="text" id="switchVistorId"></br>
+  language: <input type="text" id="switchLanguage"></br>
+ <button id="btn">开放给外部打开窗口的接口</button>
+  <script>
+   (function (win, doc, src, opt) {
+      win[opt] = win[opt] || function () {
+        win[opt].options = arguments[0]
+      };
+      var script = doc.createElement("script");
+      script.async = 1;
+      script.src = src;
+      doc.body.appendChild(script);
+    })(window, document, "https://webchat-bj-test0.clink.cn/webchat.js?v=" + Date.now(), "clinkWebchatOptions");
+    clinkWebchatOptions({
+      accessId: "d97abdc9-433e-4862-9651-18c5d1b1be2f",
+      language: "zh_CN"
+    });
+    document.getElementById('btn').onclick=function(){
+      ClinkChatWeb.openSessionWindow()
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var publish = {}; // 发布者
+    publish.clientList = []; // 事件列表
+    // 订阅者往事件列表添加事件
+    publish.listen = function (type, fn) {
+      if(!publish.clientList[type]){
+        publish.clientList[type] = []
+        publish.clientList[type].push(fn)
+        return;
+      }
+      publish.clientList[type].push(fn)
+    }
+    // 发布者发布事件
+    publish.trigger = function (type, ...args) {
+      const fns = this.clientList[type]
+      if(!fns || fns.length === 0){
+        return false;
+      }
+      fns.forEach(event => {
+        event.apply(publish, args);
+      })
+    }
+    publish.listen('60', (price) => {
+      console.log(price); // 60 120
+    });
+    publish.listen('80', (price)=>{
+      console.log('price:' + price)
+    })
+    publish.trigger('60', '120');
+    publish.trigger('80', '这是80的');
+  </script>
+</body>
+
+</html>

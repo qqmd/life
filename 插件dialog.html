@@ -1,0 +1,12 @@
+var mydialog = new MyDialog({
+  tmpId: 'dialogTpl',
+  cancel: true,
+  content: 'hello world!'
+});
+mydialog.on('confirm',function(ev){
+  console.log('you click confirm!');
+  // 写你的确定之后的逻辑代码...
+});
+document.getElementById('test').onclick = function(){
+  mydialog.show();
+}

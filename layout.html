@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>各类布局</title>
+	<style type="text/css">
+		body{
+			padding:0;
+			margin:0;
+		}
+		#container{
+			background: purple;
+			padding:0;
+			padding:0 100px;
+			height: 100%;
+		}
+		#container div{
+			float:left;
+			position: relative;
+			height: 100%;
+		}
+		#main{
+			background: red;
+			width:100%;
+		}
+		#left{
+			background:yellow;
+			width:100px;
+			margin-left:-100%;
+			left:-100px;
+		}
+		#right{
+			background:blue;
+			width:100px;
+			margin-left:-100px;
+			right:-100px;
+		}
+		.grid-s5m0e5 { 
+			width:100%;
+		}
+		.grid-s5m0e5 .col-main { 
+			float:left; 
+			width:100%; 
+			min-height:30px;
+		    background:#000;
+		    
+		    /*position: relative; */
+		}
+		.main-wrap{
+			color:#fff;
+		}
+		.col-sub { 
+			float:left; 
+			width:190px; 
+			min-height:30px; 
+			background:#f00; 
+			margin-left:-100%; 
+			/*position: relative;*/
+			/*left:-190px;*/
+			color:#fff;
+		}
+		.col-extra { 
+			float:left; 
+			width:190px; 
+			min-height:30px; 
+			background:#00f; 
+			margin-left:-190px; 
+			/*position: relative;*/
+			/*right:-190px;*/
+			color:#fff;
+		}
+		.step-wrap {
+		  position: relative;
+		  display: table;
+		  table-layout: fixed;
+		  width: 100%;
+		}
+
+		.step-list{
+		  display:table-row;
+		}
+
+		.step {
+		  display: table-cell;
+		  counter-increment: num;
+		}
+
+		.step-info {
+		  display: inline-block;
+		  text-align: center;
+		}
+
+		.step-wrap:after,
+		.step-info:before {
+		  display: inline-block;
+		  border-radius: 100%;
+		  text-align: center;
+		  line-height: 50px;
+		  width: 50px;
+		  height: 50px;
+		  content: counter(num);
+		  border: 1px solid #ad2102;
+		}
+		.step-wrap:after {
+		  position:absolute;
+		  right:0;
+		  top:0;
+		  content:'End';
+		}
+/*		.mainC:after{
+			content:'';
+			height:0;
+			display: block;
+			clear:both;
+		}*/
+
+		/*清楚浮动代码了*/
+		p:after
+		{
+		content:"- 台词";
+		}
+		p:before
+		{
+		content:"-前面元素";
+		}
+		.clearfix:after{
+			content: '';
+			height:0;
+			visibility: hidden;
+			display: block;
+			clear: both;
+		}
+		.clearfix{*+height:1%;}
+		.cf:before,.cf:after {
+		   content:"";
+		   display:table;
+		}
+		.cf:after { clear:both; }
+	</style>
+</head>
+<body>
+	<!-- 圣杯布局 -->
+	<div id="container">
+	    <div id="main" class="col">
+	    #main
+	    </div>
+	    <div id="left" class="col">
+	    #left
+	    </div>
+	    <div id="right" class="col">
+	    #right
+	    </div>
+	</div>
+	<!-- 双飞翼布局 -->
+	<div id="container">
+	    <div id="main" class="col">
+	        <div id="main-wrap">
+	            #main
+	        </div>
+	    </div>
+	    <div id="left" class="col">
+	    #left
+	    </div>
+	    <div id="right" class="col">
+	    #right
+	    </div>
+	</div>
+
+	<!-- 淘宝布局 -->
+	<div class="grid-s5m0e5">
+		<div class="col-main">
+			<div class="main-wrap">
+	            我是主列，出来吧！
+	        </div>
+		</div>
+	　　<div class="col-sub">我是子列</div>
+	　　<div class="col-extra">我是附加列</div>
+	</div>
+	<!-- 淘宝布局结束 -->
+
+	<!-- 等分布局 -->
+	<div class='step-wrap'>
+	  <ul class='step-list'>
+	    <li class='step'>
+	      <div class='step-info'>
+	        <p>
+	          12341234
+	        </p>
+	      </div>
+	    </li>
+	    <li class='step'>
+	      <div class='step-info'>
+	        <p>
+	          12341234
+	        </p>
+	      </div>
+	    </li>
+	    <li class='step'>
+	      <div class='step-info'>
+	        <p>
+	          12341234
+	        </p>
+	      </div>
+	    </li>
+	  </ul>
+	</div>
+	<!-- 清除浮动 -->
+	<!-- <div class="mainC cf" style="background: yellow;">
+		<div class="leftC" style="background: blue; float:left; width:400px">
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+		</div>
+		<div class="rightC" style="background: red; float:left; width:400px">
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+			这咋能法规及鞥看发给大家看给你的
+		</div>
+	</div>
+
+	<p>我是唐老鸭。</p>
+	<p>我住在 Duckburg。</p>
+	<p><b>注释：</b>对于在 IE8 中工作的 :after，必须声明 DOCTYPE。</p> -->
+</body>
+</html>

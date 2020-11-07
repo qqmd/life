@@ -1,0 +1,60 @@
+<!--
+ * @Author: zhangmd
+ * @Date: 2020-08-13 18:50:08
+ * @LastEditors: zhangmd
+ * @LastEditTime: 2020-09-04 09:49:04
+ * @FilePath: /space/快速从巨大数组中获取部分数据.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = []
+        for (var i = 0; i < 10; i++) {
+            arr.push(i)
+        }
+        function shuffle(arr, size) {
+            let result = []
+            for (let i = 0; i < size; i++) {
+                const randomIndex = Math.floor(Math.random() * (arr.length - i))
+                const item = arr[randomIndex]
+                result.push(item)
+                arr[randomIndex] = arr[arr.length - 1 - i]
+                arr[arr.length - 1 - i] = item
+            }
+            return result
+        }
+        var newArr = shuffle(arr, 6);
+        console.log(newArr)
+        console.log(arr)
+//         Array.prototype.shuffle =function () {
+
+// var input =this;
+
+//     for (var i = input.length -1;i>=0;i--){
+
+// var randomIndex = Math.floor(Math.random() * (i +1));
+
+//         var itemAtIndex = input[randomIndex];
+
+//         input[randomIndex] = input[i];
+
+//         input[i] = itemAtIndex;
+
+//     }
+
+// return input;
+
+// };
+
+    </script>
+</body>
+
+</html>

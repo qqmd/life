@@ -1,0 +1,105 @@
+<!-- <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript">
+			;(function(designWidth, maxWidth) {
+	var doc = document,
+	win = window,
+	docEl = doc.documentElement,
+	remStyle = document.createElement("style"),
+	tid;
+
+	function refreshRem() {
+		var width = docEl.getBoundingClientRect().width;
+		maxWidth = maxWidth || 540;
+		width>maxWidth && (width=maxWidth);
+		var rem = width * 100 / designWidth;
+		remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+	}
+
+	if (docEl.firstElementChild) {
+		docEl.firstElementChild.appendChild(remStyle);
+	} else {
+		var wrap = doc.createElement("div");
+		wrap.appendChild(remStyle);
+		doc.write(wrap.innerHTML);
+		wrap = null;
+	}
+	//要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+	refreshRem();
+
+	win.addEventListener("resize", function() {
+		clearTimeout(tid); //防止执行两次
+		tid = setTimeout(refreshRem, 300);
+	}, false);
+
+	win.addEventListener("pageshow", function(e) {
+		if (e.persisted) { // 浏览器后退的时候重新计算
+			clearTimeout(tid);
+			tid = setTimeout(refreshRem, 300);
+		}
+	}, false);
+
+	if (doc.readyState === "complete") {
+		doc.body.style.fontSize = "16px";
+	} else {
+		doc.addEventListener("DOMContentLoaded", function(e) {
+			doc.body.style.fontSize = "16px";
+		}, false);
+	}
+})(750, 750);
+		</script>
+	</head>
+	<body>
+		<div id="" style="width:2rem;height:2rem;font-size:0.14rem; border:1px solid #000000">
+		afhagddkljgdjgkdjasg	
+		</div>
+	</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<div  class="con" style="position:relative;background:#333;width:300px;height:300px;">
+    <div class="body" id="b" style="background: #666;position: relative;width: 200px;height: 200px;top:10px;left:10px;">
+        <div class="body1" id="b1" style="background:red;position:absolute;width:100px;height:100px;top:10px;left:10px;overflow:auto;">
+            <div id="b2" style="height:200px;width:80px;background:yellow;">
+               我独自走过你身旁, 并没有话要对你讲,我不敢抬头看着你的, <!-- 噢......脸庞.你问我要去向何方, 我指着大海的方向,你的惊奇像是给我, 噢......赞扬.你要我留在这地方, 你要我和它们一样,我看着你默默地说, 噢......不能这样,我想要回到老地方, 我想要走在老路上,我明知我已离不开你! 噢......姑娘!我就要回到老地方, 我就要走在老路上,我明知我已离不开你! 噢......姑娘! -->
+            </div>
+ 
+        </div>
+    </div>   
+</div>
+<button onclick="test()">测试</button>
+<p id="top"></p>
+<p id="posTop"></p>
+<p id="offsetTop"></p>
+<p id="scrollTop-b1"></p>
+ 
+<p id="offsetHeight"></p>
+<p id="scrollHeight"></p>
+<p id="innerOffsetHeight"></p>
+</body>
+<script type="text/javascript">
+    document.getElementById("top").innerHTML="top:"+document.getElementById("b1").style.top;//top:相对于外层元素而言
+    document.getElementById("posTop").innerHTML="posTop:"+document.getElementById("b1").style.posTop;
+     document.getElementById("offsetTop").innerHTML="offsetTop:"+document.getElementById("b1").offsetTop;
+     document.getElementById("offsetHeight").innerHTML="offsetHeight:"+document.getElementById("b1").offsetHeight;
+ 
+ function test(){
+         document.getElementById("scrollTop-b1").innerHTML="scrollTop:"+document.getElementById("b1").scrollTop;
+        
+         document.getElementById("scrollHeight").innerHTML="scrollHeight:"+document.getElementById("b1").scrollHeight;
+         document.getElementById("innerOffsetHeight").innerHTML="内层元素的offsetHeight:"+document.getElementById("b2").offsetHeight;
+     }
+ 
+</script>
+</html>

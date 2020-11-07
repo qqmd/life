@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var blobs = [new Blob(['Hello ']), new Blob(['World'])];
+        var buffers = [];
+        var buffersFilled = 0;
+
+        for (var i = 0; i < blobs.length; i++) {
+            buffers.push(new Uint8Array());
+        }
+
+
+        for (var i = 0; i < blobs.length; i++) {
+            var fileReader = new FileReader();
+
+            fileReader.onload = (function (i, fileReader) {
+                return function () {
+                    buffers[i] = fileReader.result;
+                    isBuffersDone();
+                }
+            })(i, fileReader);
+            fileReader.readAsArrayBuffer(blobs[i]);
+        }
+
+        function isBuffersDone() {
+            buffersFilled++;
+            if (buffersFilled >= blobs.length) {
+                var result = spliceBuffers();
+
+                //*****************
+                // result is the spliced together buffers that could be given to unrar.js
+                console.log(result);
+            }
+        }
+
+        function spliceBuffers() {
+            var tmpResult = new Uint8Array();
+
+            for (var i = 0; i < buffers.length; i++) {
+                tmpResult = appendBuffer(tmpResult, buffers[i]);
+            }
+
+            return tmpResult;
+        }
+
+        function appendBuffer(buffer1, buffer2) {
+            var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+            tmp.set(new Uint8Array(buffer1), 0);
+            tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+            return tmp;
+        };
+    </script>
+</body>
+
+</html>

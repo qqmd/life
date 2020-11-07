@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+    
+  </title>
+</head>
+<body>
+  <script>
+    // funcs = [];
+    // for(var i=0; i<10;i++){
+    //   funcs.push(function(){
+    //     console.info(i);
+    //   })
+    // }
+    // funcs.forEach(function(func){
+    //   func();
+    // });
+    function foo(n) {
+      // if(type n==='number'){
+
+      // }
+      function type(n){
+        var class2type = {};
+        var objs = "Boolean Number String Function Array Date RegExp Null Undefined".split(' ');
+        for(var i=0,l = objs.length; i<l; i++){
+          class2type["[object"  + objs[i] +  "]"]=objs[i].toLowerCase();
+          return class2type[Object.prototype.toString.call(n)];
+        }
+      }
+      var  hh= type(3);
+      console.log(hh);
+    }
+    foo(3);
+  </script>
+</body>
+</html>

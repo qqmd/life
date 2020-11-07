@@ -1,0 +1,26 @@
+{
+  "name": "es6",
+  "version": "1.0.0",
+  "description": "新生活注入\r <a href=\"https://qqmd.github.io/life/\" targe=\"blank\">项目目录</a>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qqmd/life.git"
+  },
+  "keywords": [
+    "zmd13313172513"
+  ],
+  "author": "qqmd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qqmd/life/issues"
+  },
+  "homepage": "https://github.com/qqmd/life#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5"
+  }
+}

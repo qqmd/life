@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+    <title>url</title>  
+    <meta name="description" content="">  
+    <meta name="keywords" content="">  
+    <link href="" rel="stylesheet">  
+</head>
+
+<body>  
+    <!-- <script>  
+        function parseQueryString(url){  
+            var params={};  
+            var arr=url.split("?");    //把一个字符串分割成字符串数组
+            var arr1=arr[1].split("&");  
+            for(var i=0;i<arr1.length;i++){
+                // console.log(arr1[i]);
+                arr2=arr1[i].split('=');
+                // console.log(params[arr2[0]]);
+
+                if(!arr2[1]){
+                    params[arr2[0]]='true';
+                }
+                else{
+                    if(params[arr2[0]]){ 
+                        console.log(params[arr2[0]]);
+                       //huixin  123   456   %E5%8C%
+                        var arr3=[params[arr2[0]]];  
+                        arr3.push(arr2[1]);
+                        params[arr2[0]] = arr3;  
+                    }
+                    else{
+                        console.log(arr2[0]);
+                        params[arr2[0]]=decodeURI(arr2[1]);
+
+                    }   
+                }
+                // if(params[arr2[0]]){
+                //     var arr3=[params[arr2[0]]];
+                //     console.log(arr3);
+                // }
+            }
+            // for(var i=0;i<arr1.length;i++){  
+            //     arr2=arr1[i].split('=');  
+            //     if(!arr2[1]){  
+            //         params[arr2[0]]='true';  
+            //     }else{  
+            //         if(params[arr2[0]]){  
+            //             var arr3=[params[arr2[0]]];  
+            //             arr3.push(arr2[1]);  
+            //             params[arr2[0]] = arr3;  
+            //         } else {  
+            //             params[arr2[0]]=decodeURI(arr2[1]);  
+            //         }  
+            //     }  
+            // }  
+            // console.log(arr1);
+            // console.log(params);  
+        }  
+        var url='http://www.baidu.com/?user=huixin&id=123&id=456&city=%E5%8C%97%E4%BA%AC&enabled';  
+        parseQueryString(url);  
+</script>   -->
+<script src="http://webchat.clink.cn/webchatjs/08546f99706501c54ac89928034c1ef5"></script>
+
+<script>
+    ! function (e, t, n, a, c, d) {
+    e[a] = {
+        entId: d,
+        entUrl: c
+    };
+    var r = "tinet-webchat";
+    var i = t.createElement(r);
+    t.body.appendChild(i);
+    var o = t.createElement(n),
+        s = t.getElementsByTagName(n)[0];
+    o.async = !0, o.charset = "UTF-8", o.src = c + "/" + r + ".js?v=2.2.8", s.parentNode.insertBefore(o, s)
+}(window, document, "script", "_TINET", "http://webchat.clink.cn", "08546f99706501c54ac89928034c1ef5");
+</script>
+</body>  
+</html>                                                                                                                              

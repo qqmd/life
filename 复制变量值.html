@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>复制变量值</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    var obj1 = new Object();
+    var obj2 = obj1;
+    obj2.name = "zhangmeidan2号";
+    obj1.name = "zhangmeidan";
+    console.log(obj2.name);
+    // 参数按值传递
+    function addTen(num) {
+      num += 1;
+      return num;
+    }
+    var count = 20;
+    var result = addTen(count);
+    console.log(count); // 20
+    console.log(result); // 30
+    // 参数按值传递的
+    function setName(obj) {
+      obj.name = "Nicholas";
+      console.log(obj.name);
+      var obj = new Object();
+      obj.name = "Grey";
+      console.log(obj.name);
+    }
+    var person = new Object();
+    setName(person);
+    console.log(person.name);
+  </script>
+</body>
+
+</html>

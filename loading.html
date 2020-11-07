@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas绘制</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid #ccc;"></canvas>
+    <!-- <input type="range" id="range"> -->
+    <script>
+        window.onload=function(){
+            // 进度条绘制
+            var circleD=document.getElementById("myCanvas");
+            // 设置横坐标
+            console.log(circleD.width);
+            const X = circleD.width / 2;
+            // 设置纵坐标    
+            const Y = circleD.height / 2;
+            // 设置半径
+            const r = 75;
+            // 设置圆形的生成方向，false为顺时针
+            const COUNTER_CLOCKWISE = false;
+            // 设置绘制进度条圆形的宽度
+            const PROGRESS_LINE_WIDTH = 6;
+            // 设置边界圆形的宽度
+            const COMMON_LINE_WIDTH = 1;
+            // 设置开始的角度
+            const START_ANGLE = 0;
+            // 设置结束的角度 math.pi(相当于 π)
+            const END_ANGLE = Math.PI * 2;
+
+            // 内边框
+            drawCycle(X,Y,r + PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+            // 外边框
+            drawCycle(X,Y,r - PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+
+            // 开始绘制进度条
+            function drawCycle(positionX, positionY, radius, startAngle, endAngle, couterClockwise, lineWidth) {
+                let cycle = circleD.getContext('2d');
+                cycle.lineWidth = lineWidth;
+                cycle.strokeStyle="#ccc000";  //设置线的颜色
+                cycle.beginPath();
+                cycle.arc(positionX, positionY, radius, startAngle, endAngle, couterClockwise);
+                cycle.stroke();
+            }
+
+            // degrees = radians * 180/Math.PI 
+            // 角度等于弧度乘于180再除于PI
+            // radians = degrees * Math.PI/180
+            // 弧度等于角度度乘于PI再除于180
+            let n=0;
+            let time=setInterval(function(){
+                n++;
+                //实时清空旧的图形
+                let clearRECT = circleD.getContext('2d');
+                clearRECT.clearRect(X - r - PROGRESS_LINE_WIDTH, Y - r - PROGRESS_LINE_WIDTH, r * 2 + PROGRESS_LINE_WIDTH * 2, r * 2 + PROGRESS_LINE_WIDTH * 2);
+                // 绘制文字
+                let textCycle=circleD.getContext('2d');
+                textCycle.font='lighter 38px normal';
+                textCycle.fillStyle="#ccc000";
+                textCycle.textAlign='center';
+                textCycle.textBaseline='middle';
+                textCycle.fillText((Math.ceil(n/360*100)+'%'), X, Y);
+                // 内边框
+//                 drawCycle(X,Y,r + PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+// 
+//                 // 外边框
+//                 drawCycle(X,Y,r - PROGRESS_LINE_WIDTH / 2,START_ANGLE,END_ANGLE,COUNTER_CLOCKWISE,COMMON_LINE_WIDTH);
+// 
+                // 进度条绘制
+				console.log(START_ANGLE+' '+this.value);
+                drawCycle(X,Y,r,START_ANGLE - Math.PI/2,this.value - Math.PI/2,COUNTER_CLOCKWISE,PROGRESS_LINE_WIDTH);
+                
+                drawCycle(X,Y,r,START_ANGLE - Math.PI/2, n*Math.PI / 180 - Math.PI/2,COUNTER_CLOCKWISE,PROGRESS_LINE_WIDTH);
+                if(n>=360){
+                    n=360;
+                    clearInterval(time);
+                }
+　　　　    },10);
+                
+            // rangeElem.oninput=function(){
+            //     // let textCycle=circleD.getContext('2d');
+            //     // textCycle.font="30px Arial";
+            //     // //context.strokeText(text,x,y,maxWidth);
+            //     //  // text  规定在画布上输出的文本。x   开始绘制文本的 x 坐标位置（相对于画布）。y   开始绘制文本的 y 坐标位置（相对于画布）。maxWidth    可选。允许的最大文本宽度，以像素计
+            //     // textCycle.fillStyle = '#f30';
+            //     // textCycle.textBaseline = 'middle';
+            //     // //ctx.textAlign = 'center';
+            //     // textCycle.strokeText(this.value,10,50);
+            //     let contextLetter = circleD.getContext('2d');
+            //     contextLetter.font = '48px serif';
+            //     contextLetter.textAlign = 'center';
+            //     contextLetter.textBaseline = 'middle';
+            //     contextLetter.strokeText((this.value / (2 * Math.PI) * 360 + '').split('.')[0], X, Y);
+            // }
+
+        }
+    </script>
+    
+</body>
+</html>

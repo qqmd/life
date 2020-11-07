@@ -1,47 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>生成li</title>
-</head>
-<body>
-	<ul id="wrapper"></ul>
+	<meta charset="utf-8">
+	<title>Demo</title>
 	<script type="text/javascript">
-		var wrapper = document.getElementById("wrapper");
-
-		var fragment= document.createDocumentFragment();
-		for(var i=0;i<100;i++){
-			var item = document.createElement("li");
-			fragment.appendChild(item);
-
-		}
-		var indexOf=[].indexOf();
-		console.log(indexOf);
-		wrapper.appendChild(fragment);
-		var inArray=function(elem,arr,i){
-			var len,indexOf=[].indexOf();
-			console.log(indexOf);
-			if(arr){
-				if(indexOf){
-					return indexOf.call(arr,elem,i);
-				}
-				len=arr.length;
-				i ? i<0 ? Math.max(0,len+i) : i : 0;
-				for(;i<len;i++){
-					if(i in arr && arr[i]===elem){
-						return i;
-					}
-				}
+		window.onload = function () {
+			var btn = document.getElementsByTagName('button')[0];
+			var flt = document.getElementsByTagName('div')[0];
+			btn.onclick = function () {
+				event.cancelBubble = true;
+				var x = btn.offsetLeft - 15 + 'px';
+				var y = btn.offsetTop - 100 + 'px';
+				flt.style.top = y;
+				flt.style.left = x;
+				flt.style.display = 'block';
 			}
-			return -1;
-			
-		}
-		var list = wrapper.getElementsByTagName("li");
-		wrapper.addEventListener('click',function(e){
-			var target = e.target;
-			if(target.nodeName === "LI"){
-				console.log(inArray(target,list));
+			document.onclick = function () {
+				flt.style.display = 'none';
 			}
-		})
+		}
 	</script>
+	<style type="text/css">
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		div {
+			width: 60px;
+			height: 100px;
+			background: #33ccff;
+			display: none;
+			position: absolute;
+		}
+
+		div ul {
+			text-align: center;
+		}
+
+		div li {
+			list-style-type: none;
+		}
+
+		button {
+			top: 300px;
+			left: 400px;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<button id="btn">Click</button>
+	<div>
+		<ul id="nav">
+			<li class="item1"><a href="">Demo 1</a></li>
+			<li class="item2"><a href="">Demo 2</a></li>
+			<li class="item3"><a href="">Demo 3</a></li>
+			<li class="item4"><a href="">Demo 4</a></li>
+			<li class="item5"><a href="">Demo 5</a></li>
+		</ul>
+	</div>
 </body>
+
 </html>

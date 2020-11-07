@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #box {
+        width: 500px;
+        height: 500px;
+        background: #0a67fb;
+        margin: 100px auto;
+        position: relative;
+    }
+
+    #inner-box {
+        width: 400px;
+        height: 600px;
+        background: #00F7DE;
+        position: absolute;
+        top: 50px;
+        left: 320px;
+        visibility: hidden;
+    }
+</style>
+<body>
+<div id="box">
+    <div id="inner-box">
+    </div>
+</div>
+<script>
+    var box = document.querySelector('#box');
+    var innerbox = document.querySelector('#inner-box');
+
+    box.onmouseenter = function (e) {
+        var wrapperBoxWidth = box.offsetWidth;// 获取父容器宽度
+        var wrapperBoxHeight = box.offsetHeight;// 获取父容器高度
+
+        var innerBoxWidth = innerbox.offsetWidth;// 获取弹框宽度
+        var innerBoxHeight = innerbox.offsetHeight;// 获取弹框高度
+        var innerBoxLeft = innerbox.offsetLeft;// 获取弹框距离左侧宽度
+        var innerBoxTop = innerbox.offsetTop;// 获取弹框距离顶部高度
+
+        innerbox.style.visibility = 'visible'  // 鼠标移入时显示弹框
+        
+        // 如果弹框宽度+距离左侧宽度大于外部元素的宽度，则右侧溢出
+        if (innerBoxLeft + innerBoxWidth > wrapperBoxWidth) {
+            innerbox.style.left = 'auto'
+            innerbox.style.right = '10px'
+        }
+
+        // 如果弹框高度+距离顶部高度大于外部元素的高度，则底部溢出
+        if (innerBoxTop + innerBoxHeight > wrapperBoxHeight) {
+            innerbox.style.top = 'auto'
+            innerbox.style.bottom = '10px'
+        }
+    }
+    box.onmouseleave = function () {
+        innerbox.style.visibility = 'hidden' // 鼠标移开时隐藏弹框
+    }
+</script>
+</body>
+</html>

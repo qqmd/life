@@ -1,0 +1,78 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>标题</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<style>
+		.wrap1{
+			padding-bottom:75%;
+			/* padding: 37.5% 50%; */
+			background:url(public/img/414.png) 0 0 no-repeat;
+			background-size:100% 100%;
+		}
+ 
+		.wrap2{
+			display:table;
+			width:100%;
+		}
+		.wrap2 div{
+			display:table-cell;
+			padding:0 0 37.5% 50%; 
+			background:url(public/img/414.png) 0 0 no-repeat;
+			background-size:100% 100%;
+		}
+ 
+		.wrap3{
+			/* display:table; */
+			overflow:hidden;
+			width:80%;
+			margin:0 10%;
+		}
+		.wrap3 div{
+			padding:0 0 33.75% 45%; 
+			/* display:table-cell; */
+			float:left;
+			background:url(public/img/414.png) 0 0 no-repeat;
+			background-size:100% 100%;
+			margin:10px 0;
+		}
+		.inner+.inner{
+			margin-left:10%;
+		}
+		.wrap4{
+			padding-bottom:75%;
+			position:relative;
+		}
+		img{
+			width:100%;
+			height:100%;
+			position:absolute;
+			left:0;
+			top:0;
+		}
+	</style>
+</head>
+<body>
+	<!-- 一张图片宽高比4:3自适应 -->
+	<div class="wrap1">
+		
+	</div>
+	<!-- 两张张图片宽高比4:3自适应 -->
+	<div class="wrap2">
+		<div>
+			
+		</div>
+		<div>
+			
+		</div>
+	</div>
+	<!-- 两张张图片宽高比4:3自适应，且中间有固定边距 -->
+	<div class="wrap3">
+		<div class="inner">
+		</div>
+		<div class="inner">
+		</div>
+	</div>

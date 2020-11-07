@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+</head>
+
+<body>
+    <input type="text" id="lastname">
+    <script>
+        $(function () {
+            $("#lastname").keydown(function (event) {
+                var tobj = document.getElementById("lastname");
+                var start = event.target.selectionStart;
+                if (event.keyCode == 39) {
+                    /* event.keyCode==39判断键盘是按下了左方向键 */
+                    tobj.setSelectionRange(start + 1, start + 1);
+                }
+                if (event.keyCode == 37) {
+                    /* event.keyCode==37判断键盘是按下了右方向键 */
+                    tobj.setSelectionRange(start - 1, start - 1);
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

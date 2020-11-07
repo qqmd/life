@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>life is well</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='public/css/nprogress.css' rel='stylesheet' />
+  <!-- <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <script src='public/js/nprogress.js'></script> -->
+</head>
+
+<body>
+  <script>
+    // (function (){
+
+    // })();
+    // alert(d);
+    // alert(c);
+    function test(a, b) {
+      console.log(a);
+      c = 0;
+      var c;
+      a = 3;
+      b = 2;
+      console.log(b);
+
+      function b() {}
+
+      function d() {}
+      console.log(b);
+    }
+    test(1);
+var id = 'Global';
+let fun1 = () => {
+    console.log(this.id)
+};
+fun1();
+fun1.call({id: 'Obj'});  
+fun1.apply({id: 'Obj'}); 
+fun1.bind({id: 'Obj'})(); 
+  </script>
+</body>
+
+</html>

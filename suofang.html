@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>图片缩放</title>
+    <link rel="stylesheet" href="public/js/scale.css" type="text/css" />
+
+</head>
+<body>
+    <div class="list">
+    		<!--<div class="open">打开</div>-->
+         <img src="public/img/1.png" style="width:30px;height:30px;"/>
+    </div>
+    <section class="imgzoom_pack">
+        <div class="imgzoom_x">X</div>
+        <div class="imgzoom_img"><img src="" /></div>
+    </section>
+    <script type="text/javascript" src="public/js/scale.js"></script>
+    
+    <!--<script src="js/scale.js"></script>-->
+    <script>
+    		
+    			document.addEventListener("DOMContentLoaded", function(event){
+//  				alert(44);
+//  				document.getElementsByClassName("open")[0].addEventListener('onclick',function(){
+		            ImagesZoom.init({
+		                "elem": ".list"
+		            });
+//		         })
+//		            });
+		        }, false);
+    		
+
+    </script>
+</body>
+</html>

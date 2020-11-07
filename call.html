@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>call跟apply</title>
-    <script type="text/javascript" src="jquery.js"></script>
+	<title>call跟apply</title>
+	<script type="text/javascript" src="jquery.js"></script>
 </head>
+
 <body>
 	<p>fun.call(thisArg,arg1, arg2)；</p>
 	<p>描述：可以让call()中的 对象 调用 当前对象所拥有的function。可以实现继承。
-	可以使用call()来实现继承：写一个方法(fun)，然后让另外一个新的对象(thisArg)来继承它（而不是在新对象中再写一次这个方法）。</p>
-	<p>thisArg在fun函数运行时指定的this值。需要注意的是，指定的this值并不一定是该函数执行时真正的this值，如果这个函数处于非严格模式下，则指定为null和undefined的this值会自动指向全局对象(浏览器中就是window对象)，同时值为原始值(数字，字符串，布尔值)的this会指向该原始值的自动包装对象。</p>
+		可以使用call()来实现继承：写一个方法(fun)，然后让另外一个新的对象(thisArg)来继承它（而不是在新对象中再写一次这个方法）。</p>
+	<p>
+		thisArg在fun函数运行时指定的this值。需要注意的是，指定的this值并不一定是该函数执行时真正的this值，如果这个函数处于非严格模式下，则指定为null和undefined的this值会自动指向全局对象(浏览器中就是window对象)，同时值为原始值(数字，字符串，布尔值)的this会指向该原始值的自动包装对象。
+	</p>
 	<p>arg1, arg2, ...指定的参数列表。</p>
-    <script type="text/javascript">
+	<script type="text/javascript">
 		function Product(name, price) {
-		    this.name = name;
-		    this.price = price;
-
-		    if (price < 0) {
-		    	throw RangeError('Cannot create product ' +
-		                      this.name + ' with a negative price');
-		  	}
+			console.log('name', this)
+			this.name = name;
+			this.price = price;
 		}
 
-		function Food() {
-			//this则代表着food，用food去调用product这个function
-
-			// 第一种调用方法
-		  	Product.call(this, name, price);   //call()中的对象（food构造函数）调用当前对象（Product构造函数）所拥有的function
-		  	// Product.call
-		  	this.category = 'food';
+		function Food(name, price) {
+			console.log(Product.call(this, name, price));
+			this.category = 'food';
 		}
-		// //等同于
+
+		console.log(new Food('cheese', 5).name);
+
+
+		//等同于
 		// function Food(name, price) { 
 		//     this.name = name;
 		//     this.price = price;
@@ -41,16 +41,126 @@
 		//     this.category = 'food'; 
 		// }
 
-		//function Toy 同上
-		function Toy(name, price) {
-		  	Product.call(this, name, price);
-		  	this.category = 'toy';
-		}
+		// function Toy 同上
+		// function Toy(name, price) {
+		// 	Product.call(this, name, price);
+		// 	this.category = 'toy';
+		// }
 
-		var cheese = new Food();
-		var fun = new Toy('robot', 40);
-		// 第二种调用方法
-		Product.call(cheese,'feta',5);
-    </script>
+		// var cheese = new Food();
+		// var fun = new Toy('robot', 40);
+		// // 第二种调用方法
+		// Product.call(cheese, 'feta', 5);
+
+		// function fruits() {}
+
+		// fruits.prototype = {
+		// 	color: "red",
+		// 	say: function () {
+		// 		// console.log("My color is " + this.color);
+		// 	}
+		// }
+		// banana = {
+		// 	color: "yellow"
+		// }
+		// var apple = new fruits;
+		// apple.say(); //My color is red
+
+		// apple.say.call(banana)
+		// console.table(banana)
+
+		// var array1 = [12, "foo", {
+		// 	name: "Joe"
+		// }, -2458];
+		// var array2 = ["Doe", 555, 100];
+		// Array.prototype.push.apply(array1, array2)
+		// console.log(array1, array2)
+
+
+		// var animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+		// var newAnimals = animals.slice(2);
+		// newAnimals[0] = 'sss'
+		// console.log(animals, newAnimals)
+
+
+		// function log() {
+		// 	var args = Array.prototype.slice.call(arguments);
+		// 	args.unshift('(app)');
+
+		// 	console.log.apply(console, args);
+		// };
+		// log('hello world')
+
+
+		// var name = '李四'
+		// var foo = {
+		// 	name: "张三",
+		// 	logName: function (age) {
+		// 		console.log(this.name, age);
+		// 	}
+		// }
+		// var fooNew = foo.logName;
+		// foo.logName(10);
+		//  var fooNewBind = foo.logName.bind(foo);
+		//  fooNew(10)//李四,10
+		//  fooNewBind(11)//张三,11  因为bind改变了fooNewBind里面的this指向
+
+
+		// Function.prototype.mycall = function (context) {
+		// 	if (typeof this !== 'function') {
+		// 		throw new TypeError('not funciton')
+		// 	}
+		// 	context = context || window
+		// 	context.fn = this
+		// 	let arg = [...arguments].slice(1)
+		// 	let result = context.fn(...arg)
+		// 	delete context.fn
+		// 	return result
+		// }
+		// Function.prototype.newCall = function (context, ...parameter) {
+		// 	if (typeof context === 'object' || typeof context === 'function') {
+		// 		context = context || window
+		// 	} else {
+		// 		context = Object.create(null)
+		// 	}
+		// 	context.fn = this
+		// 	console.log('parameter', parameter)
+		// 	const res = context.fn(...parameter)
+		// 	// var arg = [...arguments].slice(1)
+		// 	// var result = context.fn(...arg)
+		// 	delete context.fn;
+		// 	return res
+		// }
+		// var person = {
+		// 	name: 'Abiel'
+		// }
+
+		// function sayHi(age, sex) {
+		// 	// console.log(this.name, age, sex);
+		// }
+		// sayHi.newCall(person, 25, '男'); // Abiel 25 男
+		// Function.prototype.newApply = function(context, arguments){
+		// 	console.log(Object.create(null))
+		// 	if(typeof context === 'object' || typeof context === 'function'){
+		// 		context = context || window
+		// 	} else{
+		// 		context = Object.create(null)
+		// 	}
+		// 	context.fn = this
+		// 	var res = context.fn(arguments)
+		// 	delete context.fn
+		// 	return res
+		// }
+		//
+		// Function.prototype.bind = function(context, ...params) {
+		// 	const me = this // 调用bind的方法
+		// 	return function(...finalyArgs){
+		// 		return me.call(context, ...params, ...finalyArgs)
+		// 	}
+		// }
+		// sayHi.bind(person, 'zhangmd', 25)
+	</script>
 </body>
+
 </html>

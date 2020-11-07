@@ -1,0 +1,294 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .boxParent{
+        display:flex;
+        width:1200px;
+        height:800px;
+        border: 1px solid yellow;
+        margin: 0 auto;
+    }
+    .divider{
+        flex-basis: 8px;
+        border-right: 1px solid #ccc;
+        background:#ccc;
+        cursor: ew-resize
+    }
+    .left{
+        padding: 16px;
+        flex-basis: 300px;
+        overflow: auto;
+        background: #fff;
+        max-height: 100%
+    }
+</style>
+<body>
+<div class="boxParent">
+    <div id="gridMove" class="left">
+        左侧目录文件
+    </div>
+    <div
+        class="divider"
+        id="divider"
+        >
+    </div>
+    <div class="right">
+        <div>
+            右侧文件内容
+        </div>
+    </div>
+</div>
+<script>
+    var moveWidth = 300;
+    var startPageX=0;
+    var startAsideWidth=0;
+    var divider=document.getElementById("divider");
+    var gridMove=document.getElementById("gridMove");
+    divider.ondragstart=function(e){
+        startPageX = e.pageX;
+        startAsideWidth = moveWidth;
+    };
+    divider.ondrag=function(e){
+        if (e.pageX) {
+            const offset = e.pageX - startPageX;
+            let width = startAsideWidth + offset;
+            if (width !== moveWidth) {
+                moveWidth = width;
+                if (width < 100) {
+                    width = 100;
+                }
+                gridMove.style.flexBasis= width + 'px';
+            }
+        }
+    }
+</script>
+</body>
+</html>
+
+
+/*
+ * Common header classes & IDs
+ * Do not remove this
+ */
+@import "../../../assets/less/mixin.less";
+@import "../../../assets/less/variables";
+
+.success-snack {
+  background: #009688;
+}
+
+#header {
+  z-index: 99;
+  position: fixed;
+  background: #fff;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  border-width: 0;
+  border-radius: 0;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  height: @header-height;
+  display: flex;
+
+  .navbar-brand {
+    font-size: 28px;
+    overflow: hidden;
+    width: 70px;
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    img {
+      width: 40px;
+      vertical-align: middle;
+    }
+    .iblock{
+      display:inline-block;
+      height:100%;
+      width:0;
+      vertical-align:middle
+    }
+  }
+  .navbar-open-brand {
+    font-size: 25px;
+    overflow: hidden;
+    height: 100%;
+    width: 180px;
+    display: inline-block;
+    text-align: center;
+    img {
+      width: 140px;
+      vertical-align:middle;
+    }
+    .iblock{
+      display:inline-block;
+      height:100%;
+      width:0;
+      vertical-align:middle
+    }
+  } -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>demo</title>
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 14px/1.5 Arial;
+            color: #666;
+        }
+
+        #box {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            border: 2px solid #000;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+
+        #box ul {
+            list-style-position: inside;
+            margin: 10px;
+        }
+
+        #top,
+        #bottom {
+            color: #FFF;
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        #top {
+            background: green;
+            float: left
+        }
+
+        #bottom {
+            background: skyblue;
+            float: right
+        }
+
+        #line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 4px;
+            overflow: hidden;
+            background: red;
+            cursor: w-resize;
+        }
+    </style>
+    <script>
+        function $(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function () {
+            var oBox = $("box"),
+                oTop = $("top"),
+                oBottom = $("bottom"),
+                oLine = $("line");
+            oLine.onmousedown = function (e) {
+                // e 当前鼠标所在的位置
+                var disX = (e || event).clientX;  // 鼠标距离屏幕左侧边缘的距离 
+                oLine.left = oLine.offsetLeft;  // 距离父元素的左侧距离
+                console.log(oLine.offsetWidth)
+                // console.log(oLine.getBoundingClientRect().left)  
+                document.onmousemove = function (e) {
+                    var iT = oLine.left + ((e || event).clientX - disX);
+                    var e = e || window.event;
+                    var maxT = oBox.clientWidth - oLine.offsetWidth; // 最大的宽度
+                    oLine.style.margin = 0;
+                    iT < 0 && (iT = 0);
+                    iT > maxT && (iT = maxT);
+                    oLine.style.left = oTop.style.width = iT + "px";
+                    oBottom.style.width = oBox.clientWidth - iT + "px";
+                    // $("msg").innerText = 'top.width:' + oLine.style.width + '---bottom.width:' + oBottom
+                    //     .style.width + '---oLine.offsetLeft:' + oLine.offsetLeft + '---disX:' + disX +
+                    //     '---tarnameb:' + tarnameb.tagName;
+                    return false
+                };
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    oLine.releaseCapture && oLine.releaseCapture()
+                };
+                oLine.setCapture && oLine.setCapture();
+                return false
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <center>左右拖动红条可改变显示区域宽度<span id="msg"></span></center>
+    <div id="box">
+        <div id="top">
+            左
+        </div>
+        <div id="bottom">
+            右
+        </div>
+        <div id="line"></div>
+    </div>
+</body>
+
+</html>
+
+
+<!-- <html>
+<head>
+  <title>鼠标捕捉示例</title>
+  <style type="text/css">
+    #myButton {
+      border: solid black 1px;
+      color: black;
+      padding: 2px;
+      -moz-box-shadow:black 2px 2px;
+    }
+  </style>
+  
+  <script type="text/javascript">
+    function init() {
+      var btn = document.getElementById("myButton");
+      btn.addEventListener("mousedown", mouseDown, false);
+      btn.addEventListener("mouseup", mouseUp, false);
+    }
+    
+    function mouseDown(e) {
+        // 鼠标按下的时候触发
+        e.target.setCapture && e.target.setCapture(true);
+      e.target.addEventListener("mousemove", mouseMoved, false);
+    }
+    
+    function mouseUp(e) {
+      e.target.removeEventListener("mousemove", mouseMoved, false);
+    }
+    
+    function mouseMoved(e) {
+      var output = document.getElementById("output");
+      output.innerHTML = "鼠标的当前位置: " + e.clientX + ", " + e.clientY;
+    }
+  </script>
+</head>
+<body onload="init()">
+  <p>这是一个关于如何在 Gecko 2.0 中针对元素使用鼠标捕捉的示例。</p>
+  <p id="myButton">ddddddddddddddddd<a>点我并且按住鼠标滑动</a></p>
+  <div id="output">还没有任何事件哦！</div>
+</body>
+</html> -->

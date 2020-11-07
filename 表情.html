@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+   
+        <div >
+        <table border=0 cellpadding=0 cellspacing=0 style="border-collapse: collapse" width=600 id=AutoNumber1 height=26>
+          <tr>
+            <td width=100% height=26>
+            <p align=center><font face=黑体 size=5 color=#FF0000>GB2312 UNICODE 转换工具</font></p>
+            <p>使用方法：</p>
+            <p>　　在下面的文本框中输入中文文字，按“TO UNICODE”，即可将其转化为UNICODE字符。</p>
+            <p>　　再按“TO GB2312”，即可将其还原为简体中文。</td>
+          </tr>
+        </table>
+        </div>
+        <p >
+        <textarea cols=82 rows=10 id=code>
+        </textarea> </p>
+        <p>
+        <input type=button onclick=encode(code,this) value="TO UNICODE">
+        <script>
+        var mode="zhuan";
+        function encode(obj,btn){
+           if(mode=="zhuan"){
+               obj.value=obj.value.replace(/[^\u0000-\u00FF]/g,function($0){return escape($0).replace(/(%u)(\w{4})/gi,"&#x$2;")});
+               btn.value="TO GB2312";
+               mode="huan";
+               console.log(obj.value)
+           }else{
+               obj.value=unescape(obj.value.replace(/&#x/g,'%u').replace(/;/g,''));
+               btn.value="TO UNICODE";
+               mode="zhuan";
+               console.log(obj.value)
+           }
+        }
+        </script>
+</body>
+</html>

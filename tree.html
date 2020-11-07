@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <ul id="ulBox">
+
+    </ul>
+    <!--<ul class="ulBox">-->
+    <!--<li>
+				内容1
+				<ul>
+					<li>
+						内容11
+						<ul>
+							<li>
+								内容111
+								<ul>
+									<li>内容1111</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				内容2
+				<ul>
+					<li>内容21</li>
+				</ul>
+			</li>-->
+    <!--</ul>-->
+    <script type="text/javascript">
+        var data = [{
+            'title': '一级1',
+            'child': [{
+                'title': '二级1',
+                'child': [{
+                    'title': '三级1'
+                }, {
+                    'title': '三级2'
+                }, {
+                    'title': '三级3'
+                }],
+            },{
+				'title': '二级2'
+			}]
+        }, {
+            'title': '一级2'
+        }];
+        var ulBox = document.getElementById('ulBox');
+        var str = '';
+        var childrendd = '';
+        var fun = function (data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].title);
+				if(data[i].child){
+					for (var j = 0; j < data[i].child.length; j++) {
+						console.log(data[i].child[j].title);
+					}
+				} else {
+					return fun(data[i].child);
+				}
+                
+				// return fun(data[i].child);
+
+            }
+        }
+        // console.log(data[i]);
+        // 					str + = '<li><span>'+data[i].title+'</span><ul>'+childrendd+'</ul></li>';
+        // 					if(data[i].child.length != 0) {
+        // // 						str += '<li><span>'+data[i].title+'</span><ul>'+data[i].children+'</ul></li>'
+        // // 						return fun(data[i].children);
+        // 						childrendd = '<ul><li><span>'+data[i].child.title+'</span><ul>'+data[i].child.child+'</ul></li></ul>';
+        // 						return fun(data.child);
+        // 					} else {
+        // 						return false;
+        // 					}
+        fun(data);
+        ulBox.innerHTML = str;
+    </script>
+</body>
+
+</html>

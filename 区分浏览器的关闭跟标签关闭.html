@@ -1,0 +1,52 @@
+<!--
+ * @Author: zhangmd
+ * @Date: 2020-09-07 16:25:18
+ * @LastEditors: zhangmd
+ * @LastEditTime: 2020-09-07 18:23:29
+ * @FilePath: /space/区分浏览器的关闭跟标签关闭.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    let _beforeUnload_time = 0,
+        _gap_time = 0;
+    window.onunload = function () {
+        _gap_time = new Date().getTime() - _beforeUnload_time;
+        if (_gap_time <= 5) {
+            // 刷新时onbeforeunload与onunload的时间差一般都远大于5
+            // 浏览器关闭
+            console.log('我要关闭了')
+            sessionStorage.clear()
+        } else {
+            console.log('这是刷新的')
+            // 浏览器刷新
+        }
+    }
+    window.onbeforeunload = function () {
+        // 刷新或关闭页面都会执行，且先于onunload执行
+        _beforeUnload_time = new Date().getTime();
+    };
+</script>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>citic-robot-ui</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- <script>
+        let _beforeUnload_time = 0,
+            _gap_time = 0,
+            _load_time = 0,
+            unload_time = 0;
+        window.onunload = function () {
+            unload_time = new Date().getTime()
+            localStorage.setItem('unload_time', unload_time);
+        }
+    </script> -->
+</body>
+
+</html>

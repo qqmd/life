@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button onclick="numbers.forEach(myFunction)">点我</button>
+	<p id="demo"></p>
+	<script type="text/javascript">
+		var a=[1,3,4,7,1,1,9,14,12,1,41,3,71];
+		var b=[4,71,12,1,1,1,3,71];
+		var arr=[];
+		var m=[]
+		function Mixed(a,b){
+			for(var i=0; i<b.length;i++){
+				if(a.indexOf(b[3])>=0){
+					arr.push(b[i]);
+				}
+			}
+
+			// //去重办法第一种  先排序再相邻去重
+			// c.sort();   //[4, 71, 12, 1, 1, 3, 71]
+			// var re=[c[0]]; 
+			// for(var j=0;j<c.length;j++){
+			// 	// 排序
+			// 	if(c[j] !== c[j+1]){
+			// 		m.push(c[j]);
+			// 	}
+			// 	// 第二种比较方法
+			// }
+
+			// //第二种办法去重  先排序再对比去重
+			// arr.sort();  
+	  //       var re=[arr[0]];  //re[1]  
+	  //       console.log(re);
+	  //       for(var i=1;i<arr.length;i++){  
+	  //           if(arr[i]!==re[re.length-1]){  
+	  //               re.push(arr[i]);  
+	  //           }  
+	  //       }  
+	  //       return re;
+	        //第三种办法去重  利用map
+	        var obj={},mapArr=[];
+	        console.log(arr);
+	        arr.map(function(x){
+	        	if(obj[x]===1){
+	        		mapArr.push(x);
+	        	}
+	        	else{
+	        		obj[x]=(obj[x] || 0)+1;
+	        	}
+	        })
+	        return mapArr;
+
+		}
+
+		console.log(Mixed(a,b));
+
+
+
+		//找出数组中重复出现过的元素  
+		var reArr1=[1,2,4,4,4,3,3,1,5,3];
+		function repeat1(reArr1){
+			var arr={};
+			var arr2=[];
+			for(var i=0; i<reArr1.length; i++){
+				if(arr[reArr1[i]]){
+					console.log(reArr1[i]);
+					arr[reArr1[i]]=1;
+				}
+			}
+			return arr2;
+		}
+		console.log(repeat1(reArr1));
+
+		// reduce跟reduceRight();
+		var redArr=[1,2,1,7];
+		var redArr1=redArr.reduce(function(x,y){
+			console.log(x);
+			return x*y;
+		});
+		var redArr2=redArr.reduceRight(function(x,y){
+			console.log(x);
+			return x*y;
+		});
+		console.log(redArr2);
+		// every()跟some()
+		var eveArr=[8,7,4,1,6];
+		var eveArr1=eveArr.every(function(x){
+			console.log(x);
+			return x<7;
+		})
+		var someArr=eveArr.some(function(x){
+			console.log(x);
+			return x<7;
+		})
+		console.log(someArr);
+		// map()跟filter()
+		var mapArr=eveArr.map(function(x){
+			return x+2;
+		});
+		console.log(mapArr);
+		var filter=eveArr.filter(function(x){
+			return x>4;
+		})
+		console.log(filter);
+		// forEach()
+
+
+		demoP = document.getElementById("demo");
+		var numbers = [4, 9, 16, 25];
+ 
+		function myFunction(item, index) {
+			// console.log(item);
+			console.log(index);
+			//item数组中的元素
+			//index索引值
+    		demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>"; 
+		}
+		// slice和 splice 
+		var splice=eveArr.splice(1,1,"2");
+		console.log(splice);
+	</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="height:1000px"></div>
+  <script>
+    // function throttle(func, delay) {
+    //   console.log('0000')
+    //   let timer = null;
+    //   return () => {
+    //     if (!timer) {
+    //       timer = setTimeout(() => {
+    //         func.apply(this, arguments);
+    //         timer = null;
+    //       }, delay);
+    //     }
+    //   };
+    // };
+
+    // function handle() {
+    //   console.log(Math.random());
+    // }
+    // window.addEventListener("scroll", throttle(handle, 1000)); //事件处理函数
+
+
+
+    // function debounce(fn, wait) {
+    //   var timeout = null;
+    //   return function () {
+    //     if (timeout !== null) clearTimeout(timeout); //如果多次触发将上次记录延迟清除掉
+    //     timeout = setTimeout(() => {
+    //       fn.apply(this, arguments);
+    //       timeout = null;
+    //     }, wait);
+    //   };
+    // }
+    // // 处理函数
+    // function handle() {
+    //   console.log(Math.random());
+    // }
+    // // 滚动事件
+    // window.addEventListener("scroll", debounce(handle, 1000));
+    // function throttle(fn, deply) {
+    //   let timer = null
+    //   return () => {
+    //     if (!timer) {
+    //       timer = setTimeout(function () {
+    //         console.log(this)
+    //         fn()
+    //         timer = null
+    //       }, deply)
+    //     }
+    //   }
+    // }
+
+    // function handle() {
+    //   console.log('内容')
+    // }
+    // window.addEventListener('scroll', throttle(handle, 1000))
+
+
+    let debounce = function(fn, deply){
+      var timer = null
+      return () => {
+        if(timer){
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn.apply(this)
+          timer = null
+        }, deply)
+      }
+    }
+    function handle(){
+      console.log('内容')
+    }
+    window.addEventListener('scroll', debounce(handle, 1000))
+  </script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+
+<html>
+
+<style>
+	
+
+</style>
+
+<body >  
+	<button  onclick="warp_test()" >点击</button>
+</body>
+
+<script>
+
+const throttle = (func,wait) =>{
+	let context, args , prevArgs, argsChanged,result;
+	let previous = 0
+	return function (){
+		let now,remainning;
+		if(wait){
+			now = Date.now();
+			remaining = wait - (now - previous);
+		}
+		context = this;
+		args = arguments;
+		argsChanged = JSON.stringify(args) != JSON.stringify(prevArgs)
+		prevArgs = {...args}
+    console.log(2323)
+		if(argsChanged || wait && (remaining <=0 || remaining > wait)){
+			if(wait){
+				previous = now ;
+			}
+			result = func.apply(context,args);
+			context = args = null;
+		}
+		return result
+	}
+
+}
+
+function test(){
+  console.log(3)
+}
+
+const warp_test = throttle(test,2000)
+
+</script>
+
+</html>

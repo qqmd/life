@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe src="" class="placeholder" frameborder="0"></iframe>
+    <script>
+        var html =
+            '<table class="keyvalue-table" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt"> <tbody><tr> <th style="color: #707070; font: normal 14px/20px Arial, sans-serif; text-align: left; vertical-align: top; padding: 2px 0">更改者:</th> <td style="padding: 0px; border-collapse: collapse; font: normal 14px/20px Arial, sans-serif; padding: 2px 0 2px 5px; vertical-align: top"> <a class="user-hover" rel="wangll" id="email_wangll" href="http://task.tinetcloud.com/secure/ViewProfile.jspa?name=wangll" style="color:#0052cc;; color: #3b73af; text-decoration: none">王立力</a> </td> </tr> <tr> <th style="color: #707070; font: normal 14px/20px Arial, sans-serif; text-align: left; vertical-align: top; padding: 2px 0">经办人:</th> <td style="padding: 0px; border-collapse: collapse; font: normal 14px/20px Arial, sans-serif; padding: 2px 0 2px 5px; vertical-align: top"> <span class="diffremovedchars" style="background-color:#ffe7e7;text-decoration:line-through;">王立力</span> <span class="diffaddedchars" style="background-color:#ddfade;">张美单</span> </td> </tr> </tbody></table>'
+        const iframe = document.getElementsByClassName('placeholder')[0]
+        const iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+        iframedoc.children[0].innerHTML = html // 事先拿到的html
+    </script>
+</body>
+
+</html>

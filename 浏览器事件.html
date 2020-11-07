@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  canvas {
+    border: 1px solid black;
+    width: 560px;
+    height: 360px;
+  }
+</style>
+
+<body>
+
+
+
+
+  <h1>Drawing with mouse events</h1>
+  <canvas id="myPics" width="560" height="360"></canvas>
+  <script>
+    // document.addEventListener('mouseup', function (e) {
+    //   if (e.clientX > window.innerWidth || e.clientY < 0 || e.clientX < 0 || e.clientY > window.innerHeight) {
+    //     //在这加入你想执行的代码，此条件下鼠标已经在浏览器外
+    //     console.log(23)
+    //   }
+    // })
+
+    window.onunload = unloadPage;
+
+    function unloadPage() {
+      //  alert("unload event detected!");
+      // console.log(2)
+      document.addEventListener('mousemove', e => {
+        localStorage.setItem('a', '9');
+      });
+    }
+
+    // When true, moving the mouse draws on the canvas
+    let isDrawing = false;
+    let x = 0;
+    let y = 0;
+
+    const myPics = document.getElementById('myPics');
+    const context = myPics.getContext('2d');
+
+    // The x and y offset of the canvas from the edge of the page
+    const rect = myPics.getBoundingClientRect();
+
+    // Add the event listeners for mousedown, mousemove, and mouseup
+    myPics.addEventListener('mousedown', e => {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+      isDrawing = true;
+    });
+
+    myPics.addEventListener('mousemove', e => {
+      if (isDrawing === true) {
+        drawLine(context, x, y, e.clientX - rect.left, e.clientY - rect.top);
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+      }
+    });
+
+    window.addEventListener('mouseup', e => {
+      if (isDrawing === true) {
+        drawLine(context, x, y, e.clientX - rect.left, e.clientY - rect.top);
+        x = 0;
+        y = 0;
+        isDrawing = false;
+      }
+    });
+
+    function drawLine(context, x1, y1, x2, y2) {
+      context.beginPath();
+      context.strokeStyle = 'black';
+      context.lineWidth = 1;
+      context.moveTo(x1, y1);
+      context.lineTo(x2, y2);
+      context.stroke();
+      context.closePath();
+    }
+  </script>
+</body>
+
+</html>

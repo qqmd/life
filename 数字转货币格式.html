@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var num = 123456789
+        function change(number){
+            number = number || 0;
+            var i = parseInt(number) + "",
+                j = i.length > 3 ?  i % 3 : 0;
+                return (j ? i.substr(0, j) + ',' : "" + i.substr(j).replace(/(\b{3}(?=\d))/g, "$1+''") 
+            //  = num.toString();
+            // const num1 = number.replace(/(\d\)/g, "$1 + ',"));
+        }
+
+       change(num);
+        // function formatMoney(number, places, symbol) {
+        //     number = number || 0;
+        //     // Math.abs 绝对值
+        //     places = !isNaN(places = Math.abs(places)) ? places : 2;
+        //     symbol = symbol !== undefined ? symbol : "￥";
+        //     var negative = number < 0 ? "-" : "",
+        //         i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+        //         j = (j = i.length) > 3 ? j % 3 : 0;
+        //     return symbol + negative + (j ? i.substr(0, j) + "," : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" +
+        //         ",") + (places ? "." + Math.abs(number - i).toFixed(places).slice(2) : "");
+        // };
+
+        // formatMoney(number, places,symbol) //number为数字类型，是需要转格式的数字，places为数字类型，小数点保留的位数，不传默认为2，symbol为字符串类型，是货币单位符号，默认为"￥"
+        const number = formatMoney(1234567.50, 0, "$") //得到$123,456
+        console.log(number)
+    </script>
+</body>
+
+</html>

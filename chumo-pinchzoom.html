@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    	 <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,height=device-height, user-scalable=0,initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<title>Touch Test</title>
+		</head>
+		<!--<script type="text/javascript" src="public/js/jquery.js"></script>-->
+	<style type="text/css">
+		body{
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			bottom:0;
+			overflow: hidden;
+		}
+		.pinch-zoom-container{
+			height:100%;
+		}
+		.pinch-zoom{
+			text-align: center;
+		}
+		.pinch-zoom,.pinch-zoom img{
+            width: 100%;
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            -ms-user-drag: none;
+            user-drag: none;
+        }
+	</style>
+	<script type="text/javascript" src="public/js/jquery.js"></script>
+	<script type="text/javascript" src="public/js/pinchzoom.js"></script>
+    <body>
+    	
+<!--        <canvas id="canvas" width="600" height="600" style="border:solid black 1px;">
+          Your browser does not support canvas element.
+        </canvas>
+        <br>
+        <br>
+        Log: <pre id="log" style="border: 1px solid #ccc;"></pre> -->
+		<button type="button" id="button">打开</button>
+		<div id="shadow" style="display: none;background:#000; width:100%; height:100%; position:fixed; top:0; left:0; text-align: center;">
+			<div class="pinch-zoom">
+				<img src="public/img/gun.png" style="vertical-align: middle;display: inline-block;background: white;">
+			</div>
+			<p id="log" style="position: fixed;top: 0;line-height: normal;color: #fff; height: 100%; overflow: auto;"></p>
+		</div>
+        <script type="text/javascript">
+		var _height = document.body.clientHeight;
+        	
+        	$(".pinch-zoom").css({"line-height":_height+"px"});
+        	$(function () {
+	        $('div.pinch-zoom').each(function () {
+	            new RTP.PinchZoom($(this), {});
+	        });
+	    })
+//			var aaa = 0,finger,touch1,touch2,pageX,pageY,startTouch1,startTouch2,oldR=1,r = 0, n =0,getX,getY,oldX1=0,oldY1=0,leftX1,leftY1,
+//			basicPoint = {
+//				pageX:'',
+//				pageY:''
+//			},
+//			nextPoint = {
+//				pageX:'',
+//				pageY:''
+//			},
+//			originPoint = {
+//				pageX:'',
+//				pageY:''
+//			};
+//			
+//			var _width = document.body.clientWidth;
+
+//			var shadow = document.getElementById("shadow");
+			var img = document.getElementsByTagName("img")[0];
+//			shadow.style.lineHeight = _height + "px";
+			// img.style.transform = 'scale('+r+')';
+//			img.style.width=_width+"px";
+//			img.addEventListener('touchstart',handlerStart,false);
+//			img.addEventListener('touchmove',handlerMove,false);
+//			img.addEventListener('touchend',handlerEnd,false);
+			document.getElementById("button").onclick=function(){
+				shadow.style.display="block";
+				getX = img.getBoundingClientRect().left;
+				getY = img.getBoundingClientRect().top;
+			}
+			
+//			// 刚触发的时候
+//			function handlerStart(event){
+//				event.preventDefault();
+//				// 当前手指
+//				startTouch1 = event.targetTouches[0];
+//				startTouch2 = event.targetTouches[1];
+//				leftX1 = (img.getBoundingClientRect().width-_width)/2;
+//				// rightX1 = img.getBoundingClientRect().width+leftX1-_width;
+//// 				if(oldX1!=0){
+//// 					startTouch1.pageX = oldX1;
+//// 				}
+//// 				if(oldY1!=0){
+//// 					startTouch1.pageY = oldY1;
+//// 				}
+//				var imgTop = img.getBoundingClientRect().top;				
+//				var imgLeft = img.getBoundingClientRect().left;
+//				finger = event.touches.length;
+//				
+//				// img.style.transform ="scale(2)";
+//
+//				// console.log((touch1.pageX + touch2.pageX)/2-getX);
+//				console.log(startTouch1.pageX,startTouch1.pageY,imgLeft,imgTop);
+//				if(finger > 1){
+//					// 多指
+//					if(touch1 && touch2){
+//						// alert(1);
+//						// log(touch1.pageX+' '+touch2.pageX);
+//						aaa = 1;
+//						// xin8
+//						nextPoint.pageX = (startTouch1.pageX + startTouch2.pageX)/2-getX;
+//						nextPoint.pageY = (startTouch1.pageY + startTouch2.pageY)/2-getY;
+//						
+//						//jiu8
+//						originPoint.pageX = (nextPoint.pageX - basicPoint.pageX)/r+basicPoint.pageX;
+//						originPoint.pageY = (nextPoint.pageY - basicPoint.pageY)/r+basicPoint.pageY;
+//						
+//						//xin8 jiu8 距离
+//						x1 = nextPoint.pageX - originPoint.pageX;
+//						y1 = nextPoint.pageY - originPoint.pageY;
+//						
+//						img.style.transformOrigin=""+originPoint.pageX+"px "+originPoint.pageY+"px";
+//
+//						img.style.transform="matrix("+r+",0,0,"+r+","+x1+","+y1+")";
+//						// img.style.transform="matrix(2,0,0,2,"+x1+","+y1+")";
+//						// img.style.transform ="scale(r)";
+//
+//					}
+//					
+//					
+//				} else if(finger == 1){
+//					//单指
+//					// img.style.transformOrigin = '0px 0px';
+//					singleTouch(event);
+//				}
+//				// console.log(touch1);
+//				
+//				
+//			}
+//			//移动过程中
+//			function handlerMove(event){
+//				
+//				if(finger >1 ){
+//						MultiTouch(event);
+//
+//				} else{
+//					
+//					singleTouch(event);
+//				}
+//				
+//			}
+//			//移除手指时
+//			function handlerEnd(event){
+//				event.preventDefault();
+//				// oldR = 0;
+//				
+//			
+//				if(r<1){
+//					img.style.transformOrigin="center";
+//// 					img.style.transform="scale(1)";
+//					r = 1;
+//					x1 = 0;
+//					y1 = 0;
+//				} else if(r>=1){
+//					// img.style.transformOrigin=""+basicPoint.pageX+"px "+basicPoint.pageY+"px";
+//					// img.style.transform="matrix("+r+"px 0 0 "+r+"px "+x1+" "+y1+")";
+//// 					img.style.transform="scale("+r+")";
+//					oldR = r;
+//					if(finger ==1){
+//						oldX1 = x1;
+//						oldY1 = y1;
+//					} else{
+//// 						x1 = 0;
+//// 						y1 = 0;
+//						if(x1<=leftX1&&x1>=-leftX1){
+//					
+//						} else if(x1>leftX1){
+//							//x1>103
+//							// x1 = Math.abs(leftX1);
+//							x1=leftX1;
+//							
+//						} else if(x1<-leftX1){
+//							//x1<-103
+//							x1 = -leftX1;
+//						}
+//							}
+//						}
+//				// console.log(oldX1,oldY1);
+//				// 获取origin
+//				
+//				img.style.transform="matrix("+r+",0,0,"+r+","+x1+","+y1+")";
+//			}
+//			function log(msg){
+//				var p = document.getElementById("log");
+//				p.innerHTML=  msg+"</br>";
+//			}
+//			// 多指触摸
+//			function MultiTouch (event){
+//				// alert(aaa)
+//				
+//				event.preventDefault();
+//				touch1 = event.targetTouches[0];
+//				touch2 = event.targetTouches[1];
+//				pageX = touch1.pageX;
+//				pageY = touch1.pageY;
+//				x1 = touch1.pageX - startTouch1.pageX;
+//				y1 = touch1.pageY - startTouch1.pageY;
+//				x2 = touch2.pageX - startTouch2.pageX;
+//				y2 = touch2.pageY = startTouch2.pageY;
+//				// log(getX+' '+getY);
+//				// log(img.getBoundingClientRect().top+' '+img.getBoundingClientRect().left);
+//				basicPoint.pageX = (startTouch1.pageX + startTouch2.pageX)/2-getX;
+//				basicPoint.pageY = (startTouch1.pageY + startTouch2.pageY)/2-getY;
+//				newDistance = Math.sqrt(Math.abs(touch2.pageX-touch1.pageX)* Math.abs(touch2.pageX-touch1.pageX)+Math.abs(touch2.pageY-touch1.pageY)* Math.abs(touch2.pageY-touch1.pageY));
+//				oDistance =  Math.sqrt(Math.abs(startTouch2.pageX-startTouch1.pageX)* Math.abs(startTouch2.pageX-startTouch1.pageX)+Math.abs(startTouch2.pageY-startTouch1.pageY)* Math.abs(startTouch2.pageY-startTouch1.pageY));
+//				r = newDistance / oDistance * oldR;
+//				if(aaa ===1){
+//					return;
+//				}
+//				img.style.transformOrigin=""+basicPoint.pageX+"px "+basicPoint.pageY+"px";
+//				// img.style.transform="scale("+r+")";
+//				img.style.transform="matrix("+r+",0,0,"+r+",0,0)";
+//				// log("matrix("+r+",0,0,"+r+" "+x1+"px "+y1+"px)");
+//				log(touch1.pageX+' '+touch2.pageX);
+//			}
+//			//单指触摸
+//			function singleTouch(event){
+//				if(r>1){
+//					
+//					// console.log(leftX1,rightX1);
+//					touch1 = event.targetTouches[0];
+//					x1 = touch1.pageX - startTouch1.pageX+oldX1;
+//					y1 = touch1.pageY - startTouch1.pageY+oldY1;
+//					console.log(x1,y1);
+//					
+//					img.style.transform="matrix("+r+",0,0,"+r+","+x1+","+y1+")";
+//					
+//// 					oldX1 = touch1.pageX;
+//// 					oldY1 = touch1.pageY;
+//				}
+//			}
+//             document.body.onload = startup; //文档加载完毕触发
+//  
+//             var ongoingTouches = new Array(); //用来保存跟踪正在发送的触摸事件
+//  
+//             //设置事件处理程序
+//             function startup() {
+//               var el = document.getElementsByTagName("canvas")[0];
+//               el.addEventListener("touchstart", handleStart, false);
+//               el.addEventListener("touchend", handleEnd, false);
+//               el.addEventListener("touchcancel", handleCancel, false);
+//               el.addEventListener("touchleave", handleEnd, false);
+//               el.addEventListener("touchmove", handleMove, false);
+//               log("initialized.");
+//             }
+//  
+//             //处理触摸开始事件
+//             function handleStart(evt) {
+//               evt.preventDefault(); //阻止事件的默认行为
+//               log("touchstart.");
+//               var el = document.getElementsByTagName("canvas")[0];
+//               var ctx = el.getContext("2d");
+//               var touches = evt.changedTouches;
+//                      
+//               for (var i=0; i < touches.length; i++) {
+//                 log("touchstart:"+i+"...");
+//                 ongoingTouches.push(copyTouch(touches[i]));
+//                 var color = colorForTouch(touches[i]);
+//                 ctx.beginPath();
+//                 ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0,2*Math.PI, false);  // a circle at the start
+//                 ctx.fillStyle = color;
+//                 ctx.fill();
+//                 log("touchstart:"+i+".");
+//               }
+//             }
+//  
+//             //处理触摸移动事件
+//             function handleMove(evt) {
+//               evt.preventDefault();
+//               var el = document.getElementsByTagName("canvas")[0];
+//               var ctx = el.getContext("2d");
+//               var touches = evt.changedTouches;
+//  
+//               for (var i=0; i < touches.length; i++) {
+//                 var color = colorForTouch(touches[i]);
+//                 var idx = ongoingTouchIndexById(touches[i].identifier);
+//  
+//                 if(idx >= 0) {
+//                   log("continuing touch "+idx);
+//                   ctx.beginPath();
+//                   log("ctx.moveTo("+ongoingTouches[idx].pageX+", "+ongoingTouches[idx].pageY+");");
+//                   ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+//                   log("ctx.lineTo("+touches[i].pageX+", "+touches[i].pageY+");");
+//                   ctx.lineTo(touches[i].pageX, touches[i].pageY);
+//                   ctx.lineWidth = 4;
+//                   ctx.strokeStyle = color;
+//                   ctx.stroke();
+//  
+//                   ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
+//                   log(".");
+//                 } else {
+//                   log("can't figure out which touch to continue");
+//                 }
+//               }
+//             }
+//  
+//             //处理触摸结束事件
+//             function handleEnd(evt) {
+//               evt.preventDefault();
+//               log("touchend/touchleave.");
+//               var el = document.getElementsByTagName("canvas")[0];
+//               var ctx = el.getContext("2d");
+//               var touches = evt.changedTouches;
+//  
+//               for (var i=0; i < touches.length; i++) {
+//                 var color = colorForTouch(touches[i]);
+//                 var idx = ongoingTouchIndexById(touches[i].identifier);
+//  
+//                 if(idx >= 0) {
+//                   ctx.lineWidth = 4;
+//                   ctx.fillStyle = color;
+//                   ctx.beginPath();
+//                   ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+//                   ctx.lineTo(touches[i].pageX, touches[i].pageY);
+//                   ctx.fillRect(touches[i].pageX-4, touches[i].pageY-4, 8, 8);  // and a square at the end
+//                   ongoingTouches.splice(idx, 1);  // remove it; we're done
+//                 } else {
+//                   log("can't figure out which touch to end");
+//                 }
+//               }
+//             }
+//  
+//             //处理触摸对出事件
+//             function handleCancel(evt) {
+//               evt.preventDefault();
+//               log("touchcancel.");
+//               var touches = evt.changedTouches;
+//                
+//               for (var i=0; i < touches.length; i++) {
+//                 ongoingTouches.splice(i, 1);  // remove it; we're done
+//               }
+//             }
+//  
+//             //选择颜色
+//             function colorForTouch(touch) {
+//               var r = touch.identifier % 16;
+//               var g = Math.floor(touch.identifier / 3) % 16;
+//               var b = Math.floor(touch.identifier / 7) % 16;
+//               r = r.toString(16); // make it a hex digit
+//               g = g.toString(16); // make it a hex digit
+//               b = b.toString(16); // make it a hex digit
+//               var color = "#" + r + g + b;
+//               log("color for touch with identifier " + touch.identifier + " = " + color);
+//               return color;
+//             }
+//  
+//             //拷贝一个触摸对象
+//             function copyTouch(touch) {
+//               return { identifier: touch.identifier, pageX: touch.pageX, pageY: touch.pageY };
+//             }
+//  
+//             //找出正在进行的触摸
+//             function ongoingTouchIndexById(idToFind) {
+//               for (var i=0; i < ongoingTouches.length; i++) {
+//                 var id = ongoingTouches[i].identifier;
+//                  
+//                 if (id == idToFind) {
+//                   return i;
+//                 }
+//               }
+//               return -1;    // not found
+//             }
+//  
+//             //记录日志
+//             function log(msg) {
+//               var p = document.getElementById('log');
+//               p.innerHTML = msg + "\n" + p.innerHTML;
+//             }
+
+
+// 			var touchScale = function(seletor, bg) {
+//                 var startX, endX, scale, x1, x2, y1, y2, imgLeft, imgTop, imgWidth, imgHeight,
+//                     one = false, 
+//                     $touch = $(seletor),
+//                     originalWidth = $touch.width(),
+//                     originalHeight = $touch.height(),
+//                     baseScale = parseFloat(originalWidth/originalHeight),
+//                     imgData = [],
+//                     bgTop = parseInt($(bg).css('top'));
+//                 function siteData(name) {
+//                     imgLeft = parseInt(name.css('left'));
+//                     imgTop = parseInt(name.css('top'));
+//                     imgWidth = name.width();
+//                     imgHeight = name.height();
+//                 }
+//                 $(document).on('touchstart touchmove touchend', $(seletor).parent().selector, function(event){
+//                     var $me = $(seletor),
+//                         touch1 = event.originalEvent.targetTouches[0],  // 第一根手指touch事件
+//                         touch2 = event.originalEvent.targetTouches[1],  // 第二根手指touch事件
+//                         fingers = event.originalEvent.touches.length;   // 屏幕上手指数量
+//                     //手指放到屏幕上的时候，还没有进行其他操作
+//                     if (event.type == 'touchstart') {
+//                         if (fingers == 2) {
+//                             // 缩放图片的时候X坐标起始值
+//                             startX = Math.abs(touch1.pageX - touch2.pageX);
+//                             one = false;
+//                         }
+//                         else if (fingers == 1) {
+//                             x1 = touch1.pageX;
+//                             y1 = touch1.pageY;
+//                             one = true;
+//                         }
+//                         siteData($me);
+//                     }
+//                     //手指在屏幕上滑动
+//                     else if (event.type == 'touchmove') {
+//                         if (fingers == 2) {
+//                             // 缩放图片的时候X坐标滑动变化值
+//                             endX = Math.abs(touch1.pageX - touch2.pageX);
+//                             scale = endX - startX;
+//                             $me.css({
+//                                 'width' : originalWidth + scale,
+//                                 'height' : (originalWidth + scale)/baseScale,
+//                                 'left' : imgLeft,
+//                                 'top' : imgTop
+//                             });
+//                             
+//                         }else if (fingers == 1) {
+//                             x2 = touch1.pageX;
+//                             y2 = touch1.pageY;
+//                             if (one) {
+//                                 $me.css({
+//                                     'left' : imgLeft + (x2 - x1),
+//                                     'top' : imgTop + (y2 - y1)
+//                                 });
+//                             }
+//                         }
+//                     }
+//                     //手指移开屏幕
+//                     else if (event.type == 'touchend') {
+//                         // 手指移开后保存图片的宽
+//                         originalWidth = $touch.width(),
+//                         siteData($me);
+//                         imgData = [[imgLeft, imgTop-bgTop, imgWidth, imgHeight],[0, 0, 640, 640]];
+//                     }
+//                 });
+//                 var getData = function(){
+//                     return imgData;
+//                 };
+//                 return {
+//                     imgData : getData
+//                 }
+//             };
+//             touchScale(img,shadow);
+        </script>
+    </body>
+</html>

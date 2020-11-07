@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>图片缩放</title>
+    <style>
+    	body{
+    		height:100%;
+    	}
+  .page{
+    		height:667px;
+    	}
+        .pinch-zoom,.pinch-zoom img{
+            width: 100%;
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            -ms-user-drag: none;
+            user-drag: none;
+            /*vertical-align: middle;*/
+        }
+
+        .pinch-zoom{
+        		height:348.73px;
+        		margin-top:150px;
+        }
+                .pinch-zoom-container{
+			height: 667px!important;
+			line-height: 667px;
+    			/*height:100%;*/
+        }
+    </style>
+</head>
+<body>
+	<button id="open">打开</button>
+<div class="page" style="display:none;  width:100%; background:#000;">
+    <div class="pinch-zoom">
+        <img src="public/img/1.png"/>
+    </div>
+</div>
+<script src="public/js/jquery.js"></script>
+<script src="public/js/pinchzoom.js"></script>
+<script type="text/javascript">
+    $(function () {
+    	$("#open").click(function(){
+    		$(".page").show();
+    		$('div.pinch-zoom').each(function () {
+            new RTP.PinchZoom($(this), {});
+        });
+//      $(".pinch-zoom-container").height("667px");
+    	})
+        
+    })
+</script>
+</body>

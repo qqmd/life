@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        html {
+          height: 100%;
+          border: 1px solid;
+        }
+      </style>
+      <!-- 注意这里,先加载了一个无声音频 -->
+      <audio controls src="./public/test.mp3"></audio> 
+      <script>
+        const audioEl = document.querySelector("audio");
+        const documentEl = document.documentElement; 
+        documentEl.addEventListener("click", () => {
+            console.log('dddd')
+          audioEl.play(); // 用户点击屏幕后播放空白音频
+          audioEl.pause();  // 然后立刻暂停  
+          audioEl.src= "" // 移除src, 防止之后播放空白音频  
+          setTimeout(() => { // 用setTimeout模拟一个2秒的延迟
+            audioEl.src = "./public/test.mp3"
+            audioEl.play();
+          }, 2000);
+        });
+      </script>
+</body>
+</html>

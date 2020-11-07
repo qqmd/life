@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <title>webchat</title>
+</head>
+<body>
+<script>
+  (function(win, doc, src, opt) {
+		    win[opt] = win[opt] || function () {
+		    win[opt].options = Object.assign((win[opt].options || {}), arguments[0]) };
+		    var script = doc.createElement("script");
+		    script.async = 1;
+		    script.src = src;
+		    doc.body.appendChild(script);
+		  })(window, document, "https://webchat-bj.clink.cn/webchat.js?v="+Date.now(), "clinkWebchatOptions");
+		    clinkWebchatOptions({
+		      accessId: "b54b6901-0d07-4d19-a5f7-71171091db4c"
+		    });
+</script>
+  
+</body> </html>

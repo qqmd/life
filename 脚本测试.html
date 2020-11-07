@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      
+      (function() {
+        window.__devicePixelRatio__ = window.devicePixelRatio || 1;
+        if (localStorage && localStorage.getItem('__webps__') === '1') {
+          window.__webpSupport__ = true;
+          document.documentElement.className += " __webps__";
+          return;
+        }
+        var isSupportWebp = function () {
+          try {
+            return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0;
+          } catch (e) {
+            return false;
+          }
+        };
+        if (isSupportWebp()) {
+          window.__webpSupport__ = true;
+          document.documentElement.className += " __webps__";
+          localStorage && localStorage.setItem('__webps__', '1');
+        }
+      })();
+      
+    </script>
+    <meta charset="utf-8">
+    <meta name="keywords" content="飞书, 办公协同, 企业安全, 移动办公, 移动办公解决方案, 移动办公平台, 移动办公软件, 移动办公系统, 移动审批, 云办公平台, 手机办公, 手机审批">
+    <link rel="shortcut icon" type="image/png" href="https://s16.byteoversea.com/ee/larksuite/faviconv-new.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="飞书是真正的一站式企业沟通与协作平台，整合即时沟通、日历、音视频会议、在线文档、云盘、应用中心等功能于一体，打造高效的办公方式，加速企业成长。">
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='full-screen' content='true' />
+    <meta name='x5-fullscreen' content='true' />
+    <meta name='360-fullscreen' content='true' />
+    <meta name="baidu_union_verify" content="779317377100afb52b7db84a5face1f9">
+    <meta name="360-site-verification" content="3bfbfc4cc66bcd0c9b272aa00cfcc11c" />
+    <title>飞书 - 在飞书，享高效</title>
+    <link href='https://getfeishu.cn/' rel='preconnect' crossorigin>
+    <link href='https://static.zdassets.com/' rel='preconnect' crossorigin>
+    <link href='https://p19.zdassets.com/' rel='preconnect' crossorigin>
+    <link href='https://theme.zdassets.com/' rel='preconnect' crossorigin>
+    <link href='https://larksuite.zendesk.com/' rel='preconnect' crossorigin>
+    <link href='https://www.googletagmanager.com/' rel='preconnect' crossorigin>
+    <link href='https://assets.adobedtm.com/' rel='preconnect' crossorigin>
+    <link rel="dns-prefetch" href="https://getfeishu.cn/" />
+    <link rel="dns-prefetch" href="https://static.zdassets.com/" />
+    <link rel="dns-prefetch" href="https://p19.zdassets.com/" />
+    <link rel="dns-prefetch" href="https://theme.zdassets.com/" />
+    <link rel="dns-prefetch" href="https://larksuite.zendesk.com/" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com/" />
+    <link rel="dns-prefetch" href="https://assets.adobedtm.com/" />
+  <link href="https://s1.pstatp.com/ee/feishu_website/static/css/21.7b04c138.css" rel="stylesheet"></head>
+  <body>
+    <div id="root">
+        <div class="root-wrap">
+            <div class="spinner -js-spinner">
+                <div class="bounce bounce1"></div>
+                <div class="bounce bounce2"></div>
+                <div class="bounce bounce3"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+      
+      
+        (function() {
+          window.__langRegion__ = "zh_cn";
+          
+          
+          
+          window.__i18nTechType__ = "useRemoteJs";
+          
+          window.intl = function(key) {
+            if (!window.TTI18N) {
+              return key;
+            }
+            return window.TTI18N[key] || key;
+          };
+
+          setTimeout(function () {
+            var loadingEle = document.querySelector('#root .-js-spinner');
+            if (!loadingEle) {
+              return;
+            }
+            loadingEle.style.opacity = 1;
+          }, 300);
+          if (!navigator.serviceWorker) {
+            return;
+          }
+          var ua = navigator.userAgent || '';
+          ua = ua.toLowerCase();
+          if (/safari/.test(ua) && !/chrome/.test(ua) || location.pathname.indexOf('webinar') !== -1) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+              for (var registration of registrations) {
+                registration.unregister();
+              }
+            });
+            return;
+          }
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function (registration) {
+              if (navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage('pageBegin');
+              }
+            })
+            .catch(function (e) {
+              console.error(e);
+            });
+          navigator.serviceWorker.addEventListener('message', function (event) {
+            if (event.data === 'event_cached') {
+              if (!window.Slardar) {
+                return;
+              }
+              if (window.__hasSlardarViewTypeChanged) {
+                return;
+              }
+              window.Slardar('config', { context: { viewType: 'cached' } });
+              window.__hasSlardarViewTypeChanged = true;
+            }
+            if (event.data === 'html_fetch_network' || event.data === 'html_fetch_cached_success' ||
+              event.data === 'html_fetch_cached_not_exist') {
+              if (!window.Slardar) {
+                return;
+              }
+              if (window.__hasSlardarHtmlFetchTypeChanged) {
+                return;
+              }
+              window.Slardar('config', { context: { htmlFetchType: event.data } });
+              window.__hasSlardarHtmlFetchTypeChanged = true;
+            }
+          });
+        })();
+      
+    </script>
+    
+      
+        <script src="https://lf3-ttcdn-tos.pstatp.com/obj/ee-i18n/FeishuWebsite_zh-CN_1.0.380_2dad24fed29474160fc53cffb380b73b.js"></script>
+      
+    
+  <script type="text/javascript" src="https://s1.pstatp.com/ee/feishu_website/static/js/runtime.8a8a30f5.js"></script><script type="text/javascript" src="https://s1.pstatp.com/ee/feishu_website/static/js/vendor.c670459b.js"></script>
+<script>
+  
+</script></body>
+</html>

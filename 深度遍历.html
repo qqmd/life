@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var tree = [{
+      id: '01000000',
+      text: '北京',
+      children: [{
+        id: '01001000',
+        text: '北京市',
+        children: [{
+          id: '01001001',
+          text: '西城区',
+          children: null
+        }, {
+          id: 12,
+          text: '东城区',
+          children: null
+        }]
+      }]
+    }, {
+      id: '02000000',
+      text: '上海',
+      children: [{
+        id: '02001000',
+        text: '上海市',
+        children: [{
+          id: '02001001',
+          text: '黄浦区',
+          children: null
+        }]
+      }]
+    }];
+    // 递归实现
+    // function deepSearch(tree) {
+    //   for (var i = 0; i < tree.length; i++) {
+    //     console.log(tree[i]);
+    //     if (tree[i].children && tree[i].children.length > 0) {
+    //       deepSearch(tree[i].children);
+    //     }
+    //   }
+    // }
+    // deepSearch(tree)
+    // 非递归
+    // function deepSearch(tree) {
+    //     var stark = [];
+
+    //     stark = stark.concat(tree);
+
+    //     while(stark.length) {
+    //         var temp = stark.shift();
+    //         if(temp.children) {
+    //             // 当前节点有子节点时，将子节点放到当前的栈的前面
+    //             stark = temp.children.concat(stark);
+    //         }
+    //         console.log(temp);
+    //     }
+    // }
+    function deepQuery(tree, id) {
+      var isGet = false;
+      var retNode = null;
+      function deepSearch(tree, id) {
+        for (var i = 0; i < tree.length; i++) {
+          if (tree[i].children && tree[i].children.length > 0) {
+            deepSearch(tree[i].children, id);
+          }
+          if (id === tree[i].id || isGet) {
+            isGet || (retNode = tree[i]);
+            isGet = true;
+            break;
+          }
+        }
+      }
+      deepSearch(tree, id);
+      return retNode;
+    }
+    let text = deepQuery(tree, '02001000')
+    console.log(text)
+  </script>
+</body>
+
+</html>

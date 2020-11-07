@@ -114,6 +114,23 @@
     oReser.onclick=function(){
         nSort();
     }
+
+
+
+    class Store {
+        myFn() {
+        function demo(this){
+            
+            return this;
+            console.log("this",this);
+        }
+
+        demo(this);
+      }
+    }
+    var s = new Store();
+    s.myFn();
+
 </script>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPEhtml >
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Document</title>
+    </head>
+    <body>
+      <script>
+        function assembleTree(nodes, parent, depth) {
+  if (!depth) depth = 0
+  nodes.forEach(n => {
+          let path = parent ? parent + '#' + n.path : n.path  //path     a,
+    n.meta = {title: n.title, role: n.path, path: path } // {title: a,role:a,path:a}
+    if (n.children && n.children instanceof Array) {
+          assembleTree(n.children, path, depth) // 
+        }
+        })
+  if (depth === 0) {
+    return nodes
+      }
+      depth++
+    }
+    
+    const nodes = [
+  {title: 'a', path: 'a', children: [{title: 'a1', path: 'a1' }, {title: 'a2', path: 'a2' }] },
+  {title: 'c', path: 'c' },
+      ]
+      console.log(assembleTree(nodes))
+  </script>
+    </body>
+  </html>

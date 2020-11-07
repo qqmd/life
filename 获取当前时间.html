@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>获取当前时间</title>
+	<script type="text/javascript" src="http://static.gaokaoq.com/wap3/js/zepto.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var data= new Date();	
+		var year=data.getFullYear();
+		var month=data.getMonth();
+		var date= data.getDate();
+		var hours=data.getHours();
+		var minute=data.getMinutes();
+		var miao=data.getSeconds();
+		var two=data.getYear();
+		var time=data.getTime();
+		console.log(two);
+		console.log(year+"-"+month+"-"+date+" "+hours+":"+minute+":"+miao);
+		console.log(data.getTime());  //从1970.1.1开始的毫秒数
+		console.log(data.toLocaleString());        //获取日期与时间  2018/3/24 下午2:47:46
+		var mytime=time/1000/60/60/24/365;
+		var myyear=1970+mytime+'';
+		var myMonth=myyear.split(".")[1]/24;
+		// indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+		console.log(myMonth);
+		console.log(time);
+		// 时间戳转时间
+        function timestampToTime(time){
+        	var fundate = new Date(time);
+			Y = fundate.getFullYear() + '-';
+			M = (fundate.getMonth()+1 < 10 ? '0' + (fundate.getMonth()+1) : (fundate.getMonth()+1))+'-';
+			D = fundate.getDate();
+			h = fundate.getHours() + ':';
+	        m = fundate.getMinutes() + ':';
+	        s = fundate.getSeconds();
+	        return Y+M+D+' '+h+m+s;
+        }
+        console.log(timestampToTime(time));
+
+        // 时间转时间戳
+        var date = new Date('2014-04-2 18:55:49:123');
+	    // 有三种方式获取
+	    var time1 = date.getTime();
+	    var time2 = date.valueOf();
+	    var time3 = Date.parse(date);
+	    console.log(time1);//1398250549123
+	    console.log(time2);//1398250549123
+	    console.log(time3);//1398250549000
+	    console.log(data.toLocaleDateString());     //获取当前日期
+		console.log(data.toLocaleTimeString());     //获取当前时间
+		console.log(data.toLocaleString());        //获取日期与时间
+
+
+
+		var startTime = new Date();
+	    startTime.setFullYear(2016, 4, 19);
+	    startTime.setHours(23);
+	    startTime.setMinutes(59);
+	    startTime.setSeconds(59);
+	    startTime.setMilliseconds(999);
+	    var EndTime=startTime.getTime();
+	    function GetRTime(){
+	        var NowTime = new Date();
+	        var nMS = EndTime - NowTime.getTime();
+	        var nD = Math.floor(nMS/(1000 * 60 * 60 * 24));
+	        var nH = Math.floor(nMS/(1000*60*60)) % 24;
+	        var nM = Math.floor(nMS/(1000*60)) % 60;
+	        var nS = Math.floor(nMS/1000) % 60;
+	        return nMS+nD+nH+nM+nS;
+	    }
+	    var timer_rt = window.setInterval("GetRTime()", 1000);
+	    console.log(timer_rt);
+
+
+	    function getLocalTime(nS) {       
+		    return  new Date(parseInt(nS) * 1000).Format("yyyy-MM-dd hh:mm");    
+		 }       
+		Date.prototype.Format = function (fmt) { //author: meizz   
+	        var o = {  
+	            "M+": this.getMonth() + 1, //月份   
+	            "d+": this.getDate(), //日   
+	            "h+": this.getHours(), //小时   
+	            "m+": this.getMinutes(), //分   
+	            "s+": this.getSeconds(), //秒   
+	            "q+": Math.floor((this.getMonth() + 3) / 3), //季度   
+	            "S": this.getMilliseconds() //毫秒   
+	        };  
+	        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));  
+	        for (var k in o)  
+	        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));  
+	        return fmt;  
+	    }  
+
+
+	    var obj = new Object();
+	    console.log(obj);
+	    console.log(Object.prototype);
+		// $.ajax({
+	 //        type:"get",
+	 //        url:"public/json/html.html",
+	 //        dataType:'html',
+	 //        success:function(data){
+	 //            window.history.replaceState(data,);
+	 //        },
+	 //        complete:function(){
+	 //            // $('#ulList').pullRefresh().endPullupToRefresh(nn);
+	 //        },
+	 //        error:function(){
+	 //            // alert("鏁版嵁鍔犺浇澶辫触");
+	 //        }
+	 //    });
+	    function ClearAllTextBox() {
+	        // var obj = window.document.forms[0];
+	        // console.log(obj);
+	        // for (i = 0; i < obj.elements.length; i++) {
+	        //     var elem = obj.elements[i];
+	        //     if (elem) {
+	        //         if (elem.type == "text" || elem.type == "textarea") {
+	        //             elem.value = "";
+	        //         }
+	        //     }
+	        // }
+	        var tags = document.getElementsByTagName('*');  
+	        console.log(tags);
+	        for(var i=0; i<tags.length; i++){
+	        	tags[i].remove();
+	        }
+	    }  
+	    ClearAllTextBox();
+	</script>
+</body>
+</html>

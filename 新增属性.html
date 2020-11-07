@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var list = [{
+      clientHidden: 0,
+      clientReadonly: 0,
+      createTime: "2019-02-21T11:31:50.535+0800",
+      updateTime: "2019-09-23T18:08:35.517+0800"
+    }, {
+      clientHidden: 0,
+      clientReadonly: 0,
+      createTime: "2019-02-21T11:31:50.535+0800",
+      updateTime: "2019-09-23T18:08:35.517+0800"
+    }];
+    console.log(JSON.stringify(list))
+    var lists = JSON.parse(JSON.stringify(list).replace(/}/g, ', "checked": true}'))
+    console.log(lists)
+  </script>
+</body>
+
+</html>

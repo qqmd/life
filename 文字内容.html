@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 此span作为对比 -->
+    <!-- <span id="test" style="display: inline-block;font-size:20px;font-family: arial;">abcdefg</span> -->
+    <input type="text" id="input">
+    <script src="jquery.min.js"></script>
+    <script>
+        function textSize(fontSize, fontFamily, text) {
+            var span = document.createElement("span");
+            var result = {};
+            result.width = span.offsetWidth;
+            result.height = span.offsetHeight;
+            span.style.visibility = "hidden";
+            span.style.fontSize = fontSize;
+            span.style.fontFamily = fontFamily;
+            span.style.display = "inline-block";
+            document.body.appendChild(span);
+            if (typeof span.textContent != "undefined") {
+                span.textContent = text;
+            } else {
+                span.innerText = text;
+            }
+            result.width = parseFloat(window.getComputedStyle(span).width) - result.width;
+            result.height = parseFloat(window.getComputedStyle(span).height) - result.height;
+            return result;
+        }
+        setTimeout(() => {
+            console.log(textSize("20px", "Arial", document.getElementById('input').innertext));
+
+        }, 10000)
+    </script>
+</body>
+
+</html>

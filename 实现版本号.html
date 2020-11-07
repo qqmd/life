@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function toNum(a) {
+            var a = a.toString();
+            var c = a.split(/\./);
+            var num_place = ["", "0", "00", "000", "0000"],
+                r = num_place.reverse();
+            for (var i = 0; i < c.length; i++) {
+                var len = c[i].length;
+                c[i] = r[len] + c[i];
+            }
+            var res = c.join('');
+            return res;
+        }
+        /**
+         * 判断版本号
+         */
+        function cpr_version(a, b) {
+            var _a = this.toNum(a),
+                _b = this.toNum(b);
+            if (_a >= _b) {
+                console.log(1)
+                return true;
+            }
+        }
+        cpr_version('5.1.9','6.0.1')
+    </script>
+</body>
+
+</html>

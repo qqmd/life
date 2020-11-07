@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>上下文的指向问题</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//c()是个属性，调用者是obj.c[0]，obj.c[0]这是个对象，调用是谁。this就指向谁
+		// function fn(){
+		// 	console.log(this);
+		// 	alert(this.a);
+		// }
+		// var obj={
+		// 	"a":1,
+		// 	"b":2,
+		// 	"c":[{
+		// 		"a":3,
+		// 		"b":4,
+		// 		"c":fn
+		// 	}]
+		// }
+		// var a=5;
+		// obj.c[0].c();
+		//对  象.方法()
+
+
+		//
+		// function fun(a,b,c,d,q,r){
+		// 	alert(this.length);
+		// }
+		// function f(a,b){
+		// 	arguments[0](9,10,11,12);
+		// 	var args = Array.prototype.slice.call(arguments);
+		// 	// console.log(args);
+			
+		// 	console.log(args.slice(1));
+		// }
+		// f(fun,5,6,7,8);
+
+		
+		
+		// var args = [].slice.call(arguments);
+		  var a = 9;
+			(function(){
+				// var a = 5;
+				function a(){
+				}
+				alert(a);
+			})();
+	</script>
+</body>
+</html>

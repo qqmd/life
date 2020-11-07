@@ -29,13 +29,12 @@
 </head>
 <body>
 	<div class="ct"></div>
-	<script type="text/javascript" src="public/js/barrel.js"></script>
+	<!-- <script type="text/javascript" src="public/js/barrel.js"></script> -->
 	<script type="text/javascript">
 	var rowHeight="300px";
-	var ct=document.querySelector(".ct");
-	console.log(ct);
-	var width=ct.width;
-	var imgArr=[];
+	// var ct=document.querySelector(".ct");
+	// var width=ct.width;
+	// var imgArr=[];
 	// 构造函数 变量的定义
 	function Barrel(ct,imgNum,height){
 		this.ct=ct;// 木桶布局容器的DOM节点
@@ -132,8 +131,8 @@
 
 	// 渲染图片队列 改变图片的比例大小，计算一行可以放置多少个图片
 	// 放置图片位置 将改变完大小的图片放置到页面上，append到对应的DOM元素节点上
-		// let ct=document.querySelector(".ct");
-		// let barrel=new Barrel(ct,100,100);  //100张图片数量， 指定每行的初始行高为100 
+		let ct=document.querySelector(".ct");
+		let barrel=new Barrel(ct,100,100);  //100张图片数量， 指定每行的初始行高为100 
 	</script>
 </body>
 </html>

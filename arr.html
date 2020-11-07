@@ -37,10 +37,38 @@
 			background: url(public/img/3.jpg) no-repeat;
 
 		}
+		.tran{
+			
+            display: inline-block;
+            border-top: 10px solid #ccc;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            line-height: normal;
+            vertical-align: middle;
+            height: 0;
+            display: inline-block;
+			position:relative;
+            transform: rotate(180deg);
+		}
+		.tran:after{
+			content: '';
+			display: inline-block;
+			font-weight: bold;
+			vertical-align: middle;
+			position: absolute;
+			top: -10px;
+			left: -7px;
+			border-top: 9px solid #fff;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
 	</style>
 </head>
 <body>
 <h5>逢十进一</h5>
+<div class="tran">
+	
+</div>
 <script type="text/javascript">
 	window.onload=function(){
 		var oList=document.getElementById("list");

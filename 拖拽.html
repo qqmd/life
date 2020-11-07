@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>拖动</title>
+    <link href="css/main.css" rel="stylesheet" />
+    <script src="js/drag.js"></script>
+</head>
+<body>
+	<p>拖拽链接https://www.2cto.com/kf/201706/649661.html</p>
+    <p class="loginPanel" id="loginPanel">
+         <p>
+            <p class="ui_boxyClose" id="ui_boxyClose"></p>
+        </p>
+        <p class="login_logo_webqq"></p>
+        <p class="inputs">
+            <p class="sign-input"><span>帐　号：</span><span><input autocomplete="on" name="u" id="u" type="text" class="input01" tabindex="1" value="QQ号码或Email帐号" onFocus="if (value =='QQ号码或Email帐号'){value =''}" onBlur="if (value ==''){value='QQ号码或Email帐号';}" /></span></p>
+            <p class="sign-input"><span>密　码：</span><span><input name="p" id="p" maxlength="16" type="password" class="input01" tabindex="2" /></span></p>
+        </p>
+  
+        <p class="bottomDiv">
+            <p class="btn"></p>
+            <p>
+                <p id="loginState" class="login-state-trigger login-state-trigger2 login-state" title="选择在线状态">
+                    <p id="loginStateShow" class="login-state-show online">状态</p>
+                    <p class="login-state-down">下</p>
+                    <p class="login-state-txt" id="login2qq_state_txt">在线</p>
+       <ul id="loginStatePanel" class="statePanel login-state">
+        <li id="online" class="statePanel_li">
+            <p class="stateSelect_icon online"></p>
+            <p class="stateSelect_text">我在线上</p>
+        </li>
+        <li id="callme" class="statePanel_li">
+            <p class="stateSelect_icon callme"></p>
+            <p class="stateSelect_text">Q我吧</p>
+        </li>
+        <li id="away" class="statePanel_li">
+            <p class="stateSelect_icon away"></p>
+            <p class="stateSelect_text">离开</p>
+        </li>
+        <li id="busy" class="statePanel_li">
+            <p class="stateSelect_icon busy"></p>
+            <p class="stateSelect_text">忙碌</p>
+        </li>
+        <li id="silent" class="statePanel_li">
+            <p class="stateSelect_icon silent"></p>
+            <p class="stateSelect_text">请勿打扰</p>
+        </li>
+        <li id="hidden" class="statePanel_li">
+            <p class="stateSelect_icon hidden"></p>
+            <p class="stateSelect_text">隐身</p>
+        </li>
+    </ul>
+                </p>
+            </p>
+        </p>
+    </p>
+	<script type="text/javascript">
+		//因为html中基本都是使用的class所以我们封装一个使用类名取出元素的方法。getElementsByClassName()在ie10一下都不能用，所以我们自己封装。
+function getByClass(clsname,parent){
+  var par,arr,eles=[];
+  if(parent){
+    par=document.getElementById(parent);
+  }else{
+    par=document;
+  }
+  arr=par.getElementsByTagName('*');
+  //console.log(arr);
+  for(var i=0;i<p>接着我们来进行拖拽功能的实现：我们想要实现地是当用户在标题区域login_logo_webqq按下鼠标不释放的在页面拖动时候面板跟着移动的效果。 
+ 
+在这里说一下面板要想被拖动的条件：任何能够跟着鼠标移动的东西 都要有一个前提：绝对定位。所以面板必须被绝对定位。还有拖动的意思其实就是面板跟着光标走，光标去哪里，面板就去哪里，所以我们就可以简单的按照下面实现：</p><pre class="brush:sql;">indow.onload=drag;
+function drag(){
+  //获取鼠标被按住就能被拖动的区域：标题
+  var title= getByClass("login_logo_webqq","loginPanel")[0];
+  //console.log(title);
+  //给标题区域加上按下鼠标事件
+  title.onmousedown=fdown;
+}
+function fdown(){
+  //希望面板跟着光标走，下面需要获得面板
+  var panel=document.getElementById("loginPanel");
+  console.log(panel);
+  //当按下鼠标就应该加上在元素内部移动的事件了也就是move,因为是在整个页面移动所以是document
+  document.onmousemove=function(event){
+     event = event || window.event;
+     panel.style.left=event.clientX +'px';
+     panel.style.top=event.clientY +'px';
+  }  
+ 
+}
+</pre>
+<p>这是最简单的情况，但是我们发现这样写是有错的，就是当我们在标题区域按下鼠标打算移动的时候，那个鼠标都会跑到左上角去，其实这是正常的，因为计算坐标值的时候都是用左上角作为参考，那怎么让鼠标留在原位置不跑去左上角呢? 那我们的鼠标的left, top需要在原来左上角的位置右移，下移。那面板需要左移上移。所以鼠标的left, top在原来的基础上减去一个按下鼠标的位置相对面板的left，top.所以重点是求按下鼠标的位置相对面板的left，top。这也很好求是鼠标的坐标-面板相对浏览器的left,top.</p>
+<pre class="brush:sql;">window.onload=drag;
+function drag(){
+  //获取鼠标被按住就能被拖动的区域：标题
+  var title= getByClass("login_logo_webqq","loginPanel")[0];
+  //console.log(title);
+  //给标题区域加上按下鼠标事件
+  title.onmousedown=fdown;
+}
+//fdown的event是鼠标按下的事件
+function fdown(event){
+  //希望面板跟着光标走，下面需要获得面板
+  var panel=document.getElementById("loginPanel");
+  //console.log(panel);
+  //光标按下时，光标和面板的相对距离
+  event = event || window.event;
+  var reX=event.clientX-panel.offsetLeft;
+  var reY=event.clientY-panel.offsetTop;
+  console.log(reX);
+  //当按下鼠标就应该加上在元素内部移动的事件了也就是move,因为是在整个页面移动所以是document
+  //这里的event是面板移动时候的事件
+  document.onmousemove=function(event){
+     event = event || window.event;
+     panel.style.left=(event.clientX-reX) +'px';
+     panel.style.top=(event.clientY-reY) +'px';
+  }  
+ 
+}</pre>
+<p>最后一个不足就是拖拽过程中，不能出去屏幕，我们可以这样解决：<br>
+我们水平的left的范围：0到（浏览器宽度-面板宽度）<br>
+我们垂直的top的范围：0到（浏览器高度-面板高度）<br>
+这里还有一点需要特别注意，那就是样式表里面有没有top,left的设置，如果有会影响到left的范围，我们这里就有，这样的话需要先把css中设置的top,left先处理掉。</p>
+<pre class="brush:sql;">window.onload=drag;
+function drag(){
+  //获取鼠标被按住就能被拖动的区域：标题
+  var title= getByClass("login_logo_webqq","loginPanel")[0];
+  //console.log(title);
+  //给标题区域加上按下鼠标事件
+  title.onmousedown=fdown;
+ 
+}
+//fdown的event是鼠标按下的事件
+function fdown(event){
+  //希望面板跟着光标走，下面需要获得面板
+  var panel=document.getElementById("loginPanel");
+  //console.log(panel);
+  //光标按下时，光标和面板的相对距离
+  event = event || window.event;
+  var reX=event.clientX-panel.offsetLeft;
+  var reY=event.clientY-panel.offsetTop;
+  //console.log(reX);
+  //当按下鼠标就应该加上在元素内部移动的事件了也就是move,因为是在整个页面移动所以是document
+  //这里的event是面板移动时候的事件
+  //获得left和top的最大值
+  var MX=(document.documentElement.clientWidth || document.body.clientWidth)-panel.offsetWidth;
+  var MY=(document.documentElement.clientHeight || document.body.clientHeight)-panel.offsetHeight;
+  console.log(MX);
+  document.onmousemove=function(event){
+     event = event || window.event;
+     var X=event.clientX-reX;
+     var Y=event.clientY-reY;
+     if(X<0){
+      X=0;
+     }else if(X>MX){
+       X=MX;
+     }
+     if(Y<0){
+      Y=0;
+     }else if(Y>MY){
+       Y=MY;
+     }
+     panel.style.left=X +'px';
+     panel.style.top=Y +'px';
+  }  
+   // 释放鼠标
+  document.onmouseup=function(){
+    document.onmousemove=null;
+  }
+ 
+}</pre>
+</arr.length;i++){>
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>理解原型跟原生链</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj={};
+		var obj1=function Obb(){
+		}
+		var proto = {};
+		var obj2 = Object.create(proto);
+		console.log(Object.getPrototypeOf(obj2));
+		console.log(Object.getPrototypeOf(obj));  //object
+		console.log(Object.getPrototypeOf(obj1));  //ƒ () { [native code] }
+		// obj是对象，返回当前对象的原型，如果没有继承属性，则返回 null 。
+
+	</script>
+</body>
+</html>
